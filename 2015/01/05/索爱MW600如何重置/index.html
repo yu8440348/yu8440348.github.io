@@ -4,16 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>安装MySql经GUI客户端MySql-Workbench | 一个程序员</title>
+    <title>索爱MW600如何重置 | 一个程序员</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="yuhaitao">
     
-    <meta name="description" content="一.mysql安装
-1　　sudo apt-get install mysql-server mysql-client
-
-(安装过程有窗口弹出询问 mysql root 用户密码)  
-一旦安装完成，MySQL 服务器应该自动启动。您可以在终端提示符后运行以下命令来检查 MySQL 服务器是否正在运">
+    <meta name="description" content="先关机，再长按开关键，进入配对等待状态（LED出现旋转小圆圈的标志），然后再同时按下接听键+开关键，两个键一起按住约十秒，然后MW600会自动关机，再开机，搞定！">
     
     
     
@@ -70,15 +66,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/01/05/安装MySql经GUI客户端MySql-Workbench/" title="安装MySql经GUI客户端MySql-Workbench" itemprop="url">安装MySql经GUI客户端MySql-Workbench</a>
+      <a href="/2015/01/05/索爱MW600如何重置/" title="索爱MW600如何重置" itemprop="url">索爱MW600如何重置</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yu8440348.github.io" title="yuhaitao">yuhaitao</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-01-05T06:13:16.000Z" itemprop="datePublished">2015-01-05</time>
-    更新日期:<time datetime="2015-01-05T06:23:07.000Z" itemprop="dateModified">2015-01-05</time>
+    <time datetime="2015-01-05T07:00:10.000Z" itemprop="datePublished">2015-01-05</time>
+    更新日期:<time datetime="2015-01-05T07:04:47.000Z" itemprop="dateModified">2015-01-05</time>
     
   </p>
 </header>
@@ -87,37 +83,17 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-mysql安装"><span class="toc-number">1.</span> <span class="toc-text">一.mysql安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一旦安装完成，MySQL_服务器应该自动启动。您可以在终端提示符后运行以下命令来检查_MySQL_服务器是否正在运行"><span class="toc-number">1.1.</span> <span class="toc-text">一旦安装完成，MySQL 服务器应该自动启动。您可以在终端提示符后运行以下命令来检查 MySQL 服务器是否正在运行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如果服务器不能正常运行，您可以通过下列命令启动它："><span class="toc-number">1.2.</span> <span class="toc-text">如果服务器不能正常运行，您可以通过下列命令启动它：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#让MySQL数据库能被远程访问"><span class="toc-number">1.3.</span> <span class="toc-text">让MySQL数据库能被远程访问</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-workbench"><span class="toc-number">2.</span> <span class="toc-text">二.workbench</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#装完后，在菜单_应用程序_|_编程_下面会有_Mysql_Workbench"><span class="toc-number">2.1.</span> <span class="toc-text">装完后，在菜单 应用程序 | 编程 下面会有 Mysql Workbench</span></a></li></ol></li></ol>
+		
 		</div>
 		
-		<h3 id="一-mysql安装">一.mysql安装</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">　　<span class="built_in">sudo</span> apt-get install mysql-server mysql-client</div></pre></td></tr></table></figure>
-
-<p><strong>(安装过程有窗口弹出询问 mysql root 用户密码)  </strong></p>
-<h4 id="一旦安装完成，MySQL_服务器应该自动启动。您可以在终端提示符后运行以下命令来检查_MySQL_服务器是否正在运行">一旦安装完成，MySQL 服务器应该自动启动。您可以在终端提示符后运行以下命令来检查 MySQL 服务器是否正在运行</h4>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">sudo</span> netstat -tapln | grep mysql  </div><div class="line">tcp <span class="number">0</span> <span class="number">0</span> <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">3306</span> <span class="number">0.0</span>.<span class="number">0.0</span>:* LISTEN <span class="number">1293</span>/mysqld</div></pre></td></tr></table></figure>
-
-<h4 id="如果服务器不能正常运行，您可以通过下列命令启动它：">如果服务器不能正常运行，您可以通过下列命令启动它：</h4>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">　　<span class="built_in">sudo</span> /etc/init.d/mysql restart</div></pre></td></tr></table></figure>
-
-<h4 id="让MySQL数据库能被远程访问">让MySQL数据库能被远程访问</h4>
-<p>　　在Ubuntu下MySQL缺省是只允许本地访问的，如果你要其他机器也能远程够访问这台Mysql数据库的话，需要设置一些东西，下面我们一步步地来： </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">sudo</span> gedit /etc/mysql/my.cnf</div></pre></td></tr></table></figure>
-
-
-<p>将bind-address=127.0.0.1改成 bind-address= 你机器的IP 这样就可以允许其他机器访问MySQ,或者直接注释掉也可</p>
-<h3 id="二-workbench">二.workbench</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">sudo</span> apt-get install mysql-workbench</div></pre></td></tr></table></figure>
-
-
-<h4 id="装完后，在菜单_应用程序_|_编程_下面会有_Mysql_Workbench">装完后，在菜单 应用程序 | 编程 下面会有 Mysql Workbench</h4>
+		<p>先关机，再长按开关键，进入配对等待状态（LED出现旋转小圆圈的标志），然后再同时按下接听键+开关键，两个键一起按住约十秒，然后MW600会自动关机，再开机，搞定！</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Ubuntu/">Ubuntu</a>
+  <span></span> <a href="/tags/日志/">日志</a>
   </div>
 
 
@@ -125,7 +101,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yu8440348.github.io/2015/01/05/安装MySql经GUI客户端MySql-Workbench/" data-title="安装MySql经GUI客户端MySql-Workbench | 一个程序员" data-tsina="null" class="share clearfix">
+  <div data-url="http://yu8440348.github.io/2015/01/05/索爱MW600如何重置/" data-title="索爱MW600如何重置 | 一个程序员" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -134,19 +110,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/01/05/ubuntu下Tomcat的安装/" title="ubuntu下Tomcat的安装">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  ubuntu下Tomcat的安装</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/01/05/Ubuntu14安装jdk/"  title="Ubuntu14安装jdk">
+<a href="/2015/01/05/ubuntu下Tomcat的安装/"  title="ubuntu下Tomcat的安装">
  <strong>NEXT:</strong><br/> 
- <span>Ubuntu14安装jdk
+ <span>ubuntu下Tomcat的安装
 </span>
 </a>
 </div>
@@ -159,7 +127,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-mysql安装"><span class="toc-number">1.</span> <span class="toc-text">一.mysql安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一旦安装完成，MySQL_服务器应该自动启动。您可以在终端提示符后运行以下命令来检查_MySQL_服务器是否正在运行"><span class="toc-number">1.1.</span> <span class="toc-text">一旦安装完成，MySQL 服务器应该自动启动。您可以在终端提示符后运行以下命令来检查 MySQL 服务器是否正在运行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如果服务器不能正常运行，您可以通过下列命令启动它："><span class="toc-number">1.2.</span> <span class="toc-text">如果服务器不能正常运行，您可以通过下列命令启动它：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#让MySQL数据库能被远程访问"><span class="toc-number">1.3.</span> <span class="toc-text">让MySQL数据库能被远程访问</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-workbench"><span class="toc-number">2.</span> <span class="toc-text">二.workbench</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#装完后，在菜单_应用程序_|_编程_下面会有_Mysql_Workbench"><span class="toc-number">2.1.</span> <span class="toc-text">装完后，在菜单 应用程序 | 编程 下面会有 Mysql Workbench</span></a></li></ol></li></ol>
+  
   </div>
 
 <div id="asidepart">
