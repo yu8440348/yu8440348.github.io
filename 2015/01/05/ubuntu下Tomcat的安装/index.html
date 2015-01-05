@@ -108,9 +108,8 @@ apache-tomcat-7.0.5.tar.gz
 apache-tomcat-<span class="number">7</span>.<span class="number">0</span>.<span class="number">5</span>.tar.gz
 </code></pre><p>方法/步骤</p>
 <p><strong>1. 去apache官方下载tomcat服务器软件。版本为apache-tomcat-7.0.5.tar.gz</strong></p>
-<p><strong>2. 将下载的apache-tomcat-7.0.5.tar.gz解压放在某个文件夹内，重命名为tomcat7</strong></p>
-<pre><code>解压文件包，需要管理员权限用户。
-</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">sudo</span> tar zxvf  apache-tomcat-<span class="number">7.0</span>.<span class="number">5</span>.tar.gz</div><div class="line"><span class="built_in">sudo</span> mv apache-tomcat-<span class="number">7.05</span> tomcat7</div></pre></td></tr></table></figure>
+<p><strong>2. 将下载的apache-tomcat-7.0.5.tar.gz解压放在某个文件夹内，重命名为tomcat7</strong><br>解压文件包，需要管理员权限用户。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">sudo</span> tar zxvf  apache-tomcat-<span class="number">7.0</span>.<span class="number">5</span>.tar.gz</div><div class="line"><span class="built_in">sudo</span> mv apache-tomcat-<span class="number">7.05</span> tomcat7</div></pre></td></tr></table></figure>
 
 <p><strong>3. 在终端进入tomcat7下的bin文件</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> tomcat7/bin</div><div class="line"><span class="built_in">sudo</span> gedit catalina.sh</div></pre></td></tr></table></figure>
@@ -124,14 +123,12 @@ apache-tomcat-<span class="number">7</span>.<span class="number">0</span>.<span 
 
 
 <p><strong>6. tomcat7.0.5的端口（一般tomcat7.0.5的端口默认为8080），如果发生冲突，则可以在以下文件修改。</strong><br> tomcat7/conf/server.xml 文件里的：</p>
-<blockquote>
-<p>Connector port=”8888” protocol=”HTTP/1.1”  connectionTimeout=”20000”  redirectPort=”8443”<br>改成8888，或者其它均可（这里用8888吧）。<br><strong>7.  进入tomcat7/bin文件夹。</strong></p>
-</blockquote>
+<pre><code>Connector <span class="variable">port=</span><span class="string">"8888"</span> <span class="variable">protocol=</span><span class="string">"HTTP/1.1"</span>  <span class="variable">connectionTimeout=</span><span class="string">"20000"</span>  <span class="variable">redirectPort=</span><span class="string">"8443"</span>   
+</code></pre><p>改成8888，或者其它均可（这里用8888吧）。<br><strong>7.  进入tomcat7/bin文件夹。</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">sudo</span> ./startup.sh</div></pre></td></tr></table></figure>
 
 
-<pre><code>启动Tomcat7。
-</code></pre><p><strong>8.在浏览器中输入：<a href="http://localhost:8888" target="_blank" rel="external">http://localhost:8888</a></strong></p>
+<p>启动Tomcat7。<br><strong>8.在浏览器中输入：<a href="http://localhost:8888" target="_blank" rel="external">http://localhost:8888</a></strong></p>
 
       
     </div>
