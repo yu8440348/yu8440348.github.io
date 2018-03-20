@@ -11,18 +11,18 @@
     
 
     
-    <meta name="description" content="部署activemq下载apache-activemq-5.13.3部署到服务器中 部署dzen后台程序复制监控文件 将libsigar-amd64-linux.so文件复制到系统的 /usr/lib目录中，此文件主要用于调用系统的硬件信息，实现系统监控。   若是Windows系统将sigar-amd64-winnt.dll复制到JDK安装目录的bin目录中。   将dzen后台文件上传到服务器">
+    <meta name="description" content="部署activemq下载apache-activemq-5.13.3，部署到服务器中 部署dzen后台程序复制监控文件 将libsigar-amd64-linux.so文件复制到系统的 /usr/lib目录中，此文件主要用于调用系统的硬件信息，实现系统监控。   若是Windows系统将sigar-amd64-winnt.dll复制到JDK安装目录的bin目录中。   将dzen后台文件上传到服务">
 <meta name="keywords" content="Java开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="dzen部署手册">
 <meta property="og:url" content="http://kuailelai.com/2016/08/17/DZEN部署手册/index.html">
 <meta property="og:site_name" content="一个程序员">
-<meta property="og:description" content="部署activemq下载apache-activemq-5.13.3部署到服务器中 部署dzen后台程序复制监控文件 将libsigar-amd64-linux.so文件复制到系统的 /usr/lib目录中，此文件主要用于调用系统的硬件信息，实现系统监控。   若是Windows系统将sigar-amd64-winnt.dll复制到JDK安装目录的bin目录中。   将dzen后台文件上传到服务器">
+<meta property="og:description" content="部署activemq下载apache-activemq-5.13.3，部署到服务器中 部署dzen后台程序复制监控文件 将libsigar-amd64-linux.so文件复制到系统的 /usr/lib目录中，此文件主要用于调用系统的硬件信息，实现系统监控。   若是Windows系统将sigar-amd64-winnt.dll复制到JDK安装目录的bin目录中。   将dzen后台文件上传到服务">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2016-08-17T10:17:36.000Z">
+<meta property="og:updated_time" content="2018-03-20T05:40:17.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="dzen部署手册">
-<meta name="twitter:description" content="部署activemq下载apache-activemq-5.13.3部署到服务器中 部署dzen后台程序复制监控文件 将libsigar-amd64-linux.so文件复制到系统的 /usr/lib目录中，此文件主要用于调用系统的硬件信息，实现系统监控。   若是Windows系统将sigar-amd64-winnt.dll复制到JDK安装目录的bin目录中。   将dzen后台文件上传到服务器">
+<meta name="twitter:description" content="部署activemq下载apache-activemq-5.13.3，部署到服务器中 部署dzen后台程序复制监控文件 将libsigar-amd64-linux.so文件复制到系统的 /usr/lib目录中，此文件主要用于调用系统的硬件信息，实现系统监控。   若是Windows系统将sigar-amd64-winnt.dll复制到JDK安装目录的bin目录中。   将dzen后台文件上传到服务">
 
     
     <link rel="alternative" href="/atom.xml" title="一个程序员" type="application/atom+xml">
@@ -97,14 +97,7 @@
 </header>
 	<div class="article-content">
 		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#部署activemq"><span class="toc-number">1.</span> <span class="toc-text">部署activemq</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署dzen后台程序"><span class="toc-number">2.</span> <span class="toc-text">部署dzen后台程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#复制监控文件"><span class="toc-number">2.1.</span> <span class="toc-text">复制监控文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#将dzen后台文件上传到服务器中，"><span class="toc-number">2.2.</span> <span class="toc-text">将dzen后台文件上传到服务器中，</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改dzen-properties配置文件"><span class="toc-number">2.3.</span> <span class="toc-text">修改dzen.properties配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行dzen-sh-启动服务"><span class="toc-number">2.4.</span> <span class="toc-text">运行dzen.sh 启动服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DZENweb端程序部署"><span class="toc-number">3.</span> <span class="toc-text">DZENweb端程序部署</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#启动tomcat"><span class="toc-number">3.1.</span> <span class="toc-text">启动tomcat</span></a></li></ol></li></ol>
-		
-		</div>
-		
-		<h3 id="部署activemq"><a href="#部署activemq" class="headerlink" title="部署activemq"></a>部署activemq</h3><p>下载apache-activemq-5.13.3部署到服务器中</p>
+		<h3 id="部署activemq"><a href="#部署activemq" class="headerlink" title="部署activemq"></a>部署activemq</h3><p>下载apache-activemq-5.13.3，部署到服务器中</p>
 <h3 id="部署dzen后台程序"><a href="#部署dzen后台程序" class="headerlink" title="部署dzen后台程序"></a>部署dzen后台程序</h3><h4 id="复制监控文件"><a href="#复制监控文件" class="headerlink" title="复制监控文件"></a>复制监控文件</h4><blockquote>
 <p>将libsigar-amd64-linux.so文件复制到系统的 /usr/lib目录中，此文件主要用于调用系统的硬件信息，实现系统监控。</p>
 </blockquote>
@@ -168,13 +161,6 @@
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#部署activemq"><span class="toc-number">1.</span> <span class="toc-text">部署activemq</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署dzen后台程序"><span class="toc-number">2.</span> <span class="toc-text">部署dzen后台程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#复制监控文件"><span class="toc-number">2.1.</span> <span class="toc-text">复制监控文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#将dzen后台文件上传到服务器中，"><span class="toc-number">2.2.</span> <span class="toc-text">将dzen后台文件上传到服务器中，</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改dzen-properties配置文件"><span class="toc-number">2.3.</span> <span class="toc-text">修改dzen.properties配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行dzen-sh-启动服务"><span class="toc-number">2.4.</span> <span class="toc-text">运行dzen.sh 启动服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DZENweb端程序部署"><span class="toc-number">3.</span> <span class="toc-text">DZENweb端程序部署</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#启动tomcat"><span class="toc-number">3.1.</span> <span class="toc-text">启动tomcat</span></a></li></ol></li></ol>
- 
-  </div>
-
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
 <aside class="clearfix">
@@ -217,11 +203,11 @@
 			
 		
 			
-				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>3</sup></a></li>
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
 			
 		
 			
@@ -366,8 +352,6 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
