@@ -382,7 +382,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/01/12/Eclipse安装Freemarker插件/" title="Eclipse安装Freemarker插件" itemprop="url">Eclipse安装Freemarker插件</a>
+      <a href="/2015/01/12/BAE部署javaweb项目/" title="BAE部署javaweb项目" itemprop="url">BAE部署javaweb项目</a>
   </h1>
   <p class="article-author">By
        
@@ -395,19 +395,14 @@
 </header>
     <div class="article-content">
         
-        <p>步骤</p>
+        <p>用户可以上传多个WAR包或目录，java-jetty的主域名使用<strong>root.war</strong>，java-tomcat的主域名使用ROOT.war，其他WAR包或目录的访问需要在主域名后加上代码目录的路径，如code.war或code目录的访问：xxx.duapp.com/code/</p>
+<p>本地开发：</p>
 <ol>
-<li>Help -&gt; Software updates -&gt; Find and install。</li>
-<li>New Remote Site </li>
-<li>Name：Jboss   URL：<a href="http://download.jboss.org/jbosstools/updates/JBossTools-3.0.3.GA" target="_blank" rel="noopener">http://download.jboss.org/jbosstools/updates/JBossTools-3.0.3.GA</a></li>
-<li>Next.。</li>
-<li>搜索后，可以找到Freemarker</li>
-<li>安装<br>window –&gt; Preferences 左边的树形栏里出现FreeMarker Editor一项新的内容<br><strong> 在html和htm支持Freemarker的识别 </strong></li>
-<li>window –&gt; Preferences </li>
-<li>eneral –&gt; Editors –&gt; File Associations下</li>
-<li>为<em>.html和</em>.htm文件添加（add）FreeMarker Editor 作他们关联的编辑器（associated editors)。</li>
-<li>这样在编辑混合有HTML和FreeMarker标记的文件时，可以选择右击文件 –&gt; Open with HTML Editor 或者 Open with FreeMarker Editor。</li>
+<li>使用eclipse开发<br>下载eclipse： <a href="http://www.eclipse.org/downloads/" target="_blank" rel="noopener">http://www.eclipse.org/downloads/</a><br>打开eclipse，新建Dynamic Web Project<br>开发完成后，打成WAR包，File-&gt;Export-&gt;WAR file, 保存为root.war（java-jetty）或ROOT.war（java-tomcat），通过SVN或GIT上传到BAE<br>或者将root.war或ROOT.war解压到root或<strong>ROOT</strong>目录下，然后删除原svn中的root.war或ROOT.war，再将root或<strong>ROOT目录</strong>通过SVN或者GIT上传到BAE.</li>
 </ol>
+<blockquote>
+<p>BAE 上传路径中只有根目录能放jsp文件，或者新建一个jsp文件夹来放文件。静态文件必须先建立static文件夹，然后再将静态文件拷贝到static目录，否则再bae中无法访问资源。<br>也可以建立一个bae云存储，将静态文件放到云存储中，然后设为公开文件，然后再项目中引用云存储的文件。</p>
+</blockquote>
 
         
         
@@ -449,7 +444,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/01/12/BAE部署javaweb项目/" title="BAE部署javaweb项目" itemprop="url">BAE部署javaweb项目</a>
+      <a href="/2015/01/12/Eclipse安装Freemarker插件/" title="Eclipse安装Freemarker插件" itemprop="url">Eclipse安装Freemarker插件</a>
   </h1>
   <p class="article-author">By
        
@@ -462,14 +457,19 @@
 </header>
     <div class="article-content">
         
-        <p>用户可以上传多个WAR包或目录，java-jetty的主域名使用<strong>root.war</strong>，java-tomcat的主域名使用ROOT.war，其他WAR包或目录的访问需要在主域名后加上代码目录的路径，如code.war或code目录的访问：xxx.duapp.com/code/</p>
-<p>本地开发：</p>
+        <p>步骤</p>
 <ol>
-<li>使用eclipse开发<br>下载eclipse： <a href="http://www.eclipse.org/downloads/" target="_blank" rel="noopener">http://www.eclipse.org/downloads/</a><br>打开eclipse，新建Dynamic Web Project<br>开发完成后，打成WAR包，File-&gt;Export-&gt;WAR file, 保存为root.war（java-jetty）或ROOT.war（java-tomcat），通过SVN或GIT上传到BAE<br>或者将root.war或ROOT.war解压到root或<strong>ROOT</strong>目录下，然后删除原svn中的root.war或ROOT.war，再将root或<strong>ROOT目录</strong>通过SVN或者GIT上传到BAE.</li>
+<li>Help -&gt; Software updates -&gt; Find and install。</li>
+<li>New Remote Site </li>
+<li>Name：Jboss   URL：<a href="http://download.jboss.org/jbosstools/updates/JBossTools-3.0.3.GA" target="_blank" rel="noopener">http://download.jboss.org/jbosstools/updates/JBossTools-3.0.3.GA</a></li>
+<li>Next.。</li>
+<li>搜索后，可以找到Freemarker</li>
+<li>安装<br>window –&gt; Preferences 左边的树形栏里出现FreeMarker Editor一项新的内容<br><strong> 在html和htm支持Freemarker的识别 </strong></li>
+<li>window –&gt; Preferences </li>
+<li>eneral –&gt; Editors –&gt; File Associations下</li>
+<li>为<em>.html和</em>.htm文件添加（add）FreeMarker Editor 作他们关联的编辑器（associated editors)。</li>
+<li>这样在编辑混合有HTML和FreeMarker标记的文件时，可以选择右击文件 –&gt; Open with HTML Editor 或者 Open with FreeMarker Editor。</li>
 </ol>
-<blockquote>
-<p>BAE 上传路径中只有根目录能放jsp文件，或者新建一个jsp文件夹来放文件。静态文件必须先建立static文件夹，然后再将静态文件拷贝到static目录，否则再bae中无法访问资源。<br>也可以建立一个bae云存储，将静态文件放到云存储中，然后设为公开文件，然后再项目中引用云存储的文件。</p>
-</blockquote>
 
         
         
@@ -769,12 +769,6 @@
   <div class="linkslist">
   <p class="asidetitle">友情链接</p>
     <ul>
-        
-          <li>
-            
-            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
-            
-          </li>
         
           <li>
             

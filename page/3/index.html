@@ -287,67 +287,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/01/08/java-list三种遍历方法性能比较/" title="java list三种遍历方法性能比较" itemprop="url">java list三种遍历方法性能比较</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
-		
-  <p class="article-time">
-    <time datetime="2015-01-08T06:35:00.000Z" itemprop="datePublished"> 发表于 2015-01-08</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.hisense.tiger.list;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ListTest</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		<span class="keyword">long</span> t1,t2;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10000000</span>; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			list.add(<span class="string">"aaaaaa"</span> + j);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">"List first visit method:"</span>);</span><br><span class="line">		t1=System.currentTimeMillis();</span><br><span class="line">		<span class="keyword">for</span>(String tmp:list)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//System.out.println(tmp);</span></span><br><span class="line">		&#125;</span><br><span class="line">		t2=System.currentTimeMillis();</span><br><span class="line">		System.out.println(<span class="string">"Run Time:"</span> + (t2 -t1) + <span class="string">"(ms)"</span>);</span><br><span class="line">		System.out.println(<span class="string">"List second visit method:"</span>);</span><br><span class="line">		</span><br><span class="line">		t1=System.currentTimeMillis();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++)</span><br><span class="line">		&#123;</span><br><span class="line">			list.get(i);</span><br><span class="line">			<span class="comment">//System.out.println(list.get(i));</span></span><br><span class="line">		&#125;</span><br><span class="line">		t2=System.currentTimeMillis();</span><br><span class="line">		System.out.println(<span class="string">"Run Time:"</span> + (t2 -t1) + <span class="string">"(ms)"</span>);</span><br><span class="line">		</span><br><span class="line">		System.out.println(<span class="string">"List Third visit method:"</span>);</span><br><span class="line">		Iterator&lt;String&gt; iter = list.iterator();</span><br><span class="line">		</span><br><span class="line">		t1=System.currentTimeMillis();</span><br><span class="line">		<span class="keyword">while</span>(iter.hasNext())</span><br><span class="line">		&#123;</span><br><span class="line">			iter.next();</span><br><span class="line">			<span class="comment">//System.out.println(iter.next());</span></span><br><span class="line">		&#125;</span><br><span class="line">		t2=System.currentTimeMillis();</span><br><span class="line">		System.out.println(<span class="string">"Run Time:"</span> + (t2 -t1) + <span class="string">"(ms)"</span>);</span><br><span class="line">				</span><br><span class="line">		System.out.println(<span class="string">"Finished!!!!!!!!"</span>);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>List first visit method:<br>Run Time:170(ms)<br>List second visit method:<br>Run Time:10(ms)<br>List Third visit method:<br>Run Time:34(ms)<br>Finished!!!!!!!!</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/编程相关/">编程相关</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Java开发/">Java开发</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2015/01/08/java编程规范/" title="java编程规范" itemprop="url">java编程规范</a>
   </h1>
   <p class="article-author">By
@@ -653,39 +592,40 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/01/07/QRSBox使用方法/" title="QRSBox使用方法" itemprop="url">QRSBox使用方法</a>
+      <a href="/2015/01/08/java-list三种遍历方法性能比较/" title="java list三种遍历方法性能比较" itemprop="url">java list三种遍历方法性能比较</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
 		
   <p class="article-time">
-    <time datetime="2015-01-07T14:03:00.000Z" itemprop="datePublished"> 发表于 2015-01-07</time>
+    <time datetime="2015-01-08T06:35:00.000Z" itemprop="datePublished"> 发表于 2015-01-08</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <h4 id="命令行工具使用方法"><a href="#命令行工具使用方法" class="headerlink" title="命令行工具使用方法"></a>命令行工具使用方法</h4><blockquote>
-<p>将hexo生成的文件上传到到七牛后便可以直接访问了</p>
-</blockquote>
-<p>首先，下载 QRSBox 命令行工具，并解压。</p>
-<p>然后，在解压后的文件夹中执行以下命令，进行初始化：<br>
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.hisense.tiger.list;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ListTest</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		<span class="keyword">long</span> t1,t2;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10000000</span>; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			list.add(<span class="string">"aaaaaa"</span> + j);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">"List first visit method:"</span>);</span><br><span class="line">		t1=System.currentTimeMillis();</span><br><span class="line">		<span class="keyword">for</span>(String tmp:list)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//System.out.println(tmp);</span></span><br><span class="line">		&#125;</span><br><span class="line">		t2=System.currentTimeMillis();</span><br><span class="line">		System.out.println(<span class="string">"Run Time:"</span> + (t2 -t1) + <span class="string">"(ms)"</span>);</span><br><span class="line">		System.out.println(<span class="string">"List second visit method:"</span>);</span><br><span class="line">		</span><br><span class="line">		t1=System.currentTimeMillis();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++)</span><br><span class="line">		&#123;</span><br><span class="line">			list.get(i);</span><br><span class="line">			<span class="comment">//System.out.println(list.get(i));</span></span><br><span class="line">		&#125;</span><br><span class="line">		t2=System.currentTimeMillis();</span><br><span class="line">		System.out.println(<span class="string">"Run Time:"</span> + (t2 -t1) + <span class="string">"(ms)"</span>);</span><br><span class="line">		</span><br><span class="line">		System.out.println(<span class="string">"List Third visit method:"</span>);</span><br><span class="line">		Iterator&lt;String&gt; iter = list.iterator();</span><br><span class="line">		</span><br><span class="line">		t1=System.currentTimeMillis();</span><br><span class="line">		<span class="keyword">while</span>(iter.hasNext())</span><br><span class="line">		&#123;</span><br><span class="line">			iter.next();</span><br><span class="line">			<span class="comment">//System.out.println(iter.next());</span></span><br><span class="line">		&#125;</span><br><span class="line">		t2=System.currentTimeMillis();</span><br><span class="line">		System.out.println(<span class="string">"Run Time:"</span> + (t2 -t1) + <span class="string">"(ms)"</span>);</span><br><span class="line">				</span><br><span class="line">		System.out.println(<span class="string">"Finished!!!!!!!!"</span>);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>List first visit method:<br>Run Time:170(ms)<br>List second visit method:<br>Run Time:10(ms)<br>List Third visit method:<br>Run Time:34(ms)<br>Finished!!!!!!!!</p>
+
         
         
         <p class="article-more-link">
-          
-            <a href="/2015/01/07/QRSBox使用方法/#more">Read More</a>
           
        </p>
     </div>
     <footer class="article-footer clearfix">
 <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/编程相关/">编程相关</a>
+</div>
+
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Ubuntu/">Ubuntu</a>
+  <span></span> <a href="/tags/Java开发/">Java开发</a>
   </div>
 
 </div>
@@ -733,6 +673,66 @@
         <p class="article-more-link">
           
             <a href="/2015/01/07/七牛云存储/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Ubuntu/">Ubuntu</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/07/QRSBox使用方法/" title="QRSBox使用方法" itemprop="url">QRSBox使用方法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-07T14:03:00.000Z" itemprop="datePublished"> 发表于 2015-01-07</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h4 id="命令行工具使用方法"><a href="#命令行工具使用方法" class="headerlink" title="命令行工具使用方法"></a>命令行工具使用方法</h4><blockquote>
+<p>将hexo生成的文件上传到到七牛后便可以直接访问了</p>
+</blockquote>
+<p>首先，下载 QRSBox 命令行工具，并解压。</p>
+<p>然后，在解压后的文件夹中执行以下命令，进行初始化：<br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/01/07/QRSBox使用方法/#more">Read More</a>
           
        </p>
     </div>
@@ -1041,12 +1041,6 @@
   <div class="linkslist">
   <p class="asidetitle">友情链接</p>
     <ul>
-        
-          <li>
-            
-            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
-            
-          </li>
         
           <li>
             
