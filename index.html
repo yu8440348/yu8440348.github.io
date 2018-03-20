@@ -1,0 +1,949 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>一个程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="YuHaiTao">
+    
+
+    
+    <meta name="description" content="程序员是值得尊敬的，程序员的双手是魔术师的双手。他们把枯燥无味的代码变成了丰富多彩的软件">
+<meta property="og:type" content="website">
+<meta property="og:title" content="一个程序员">
+<meta property="og:url" content="http://kuailelai.com/index.html">
+<meta property="og:site_name" content="一个程序员">
+<meta property="og:description" content="程序员是值得尊敬的，程序员的双手是魔术师的双手。他们把枯燥无味的代码变成了丰富多彩的软件">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个程序员">
+<meta name="twitter:description" content="程序员是值得尊敬的，程序员的双手是魔术师的双手。他们把枯燥无味的代码变成了丰富多彩的软件">
+
+    
+    <link rel="alternative" href="/atom.xml" title="一个程序员" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="一个程序员" title="一个程序员"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一个程序员">一个程序员</a></h1>
+				<h2 class="blog-motto">程序员是值得尊敬的，程序员的双手是魔术师的双手。他们把枯燥无味的代码变成了丰富多彩的软件</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:kuailelai.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/08/17/DZEN部署手册/" title="dzen部署手册" itemprop="url">dzen部署手册</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2016-08-17T06:38:00.000Z" itemprop="datePublished"> 发表于 2016-08-17</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="部署activemq"><a href="#部署activemq" class="headerlink" title="部署activemq"></a>部署activemq</h3><p>下载apache-activemq-5.13.3部署到服务器中</p>
+<h3 id="部署dzen后台程序"><a href="#部署dzen后台程序" class="headerlink" title="部署dzen后台程序"></a>部署dzen后台程序</h3><h4 id="复制监控文件"><a href="#复制监控文件" class="headerlink" title="复制监控文件"></a>复制监控文件</h4><blockquote>
+<p>将libsigar-amd64-linux.so文件复制到系统的 /usr/lib目录中，此文件主要用于调用系统的硬件信息，实现系统监控。</p>
+</blockquote>
+<blockquote>
+<p>若是Windows系统将sigar-amd64-winnt.dll复制到JDK安装目录的bin目录中。 </p>
+</blockquote>
+<h4 id="将dzen后台文件上传到服务器中，"><a href="#将dzen后台文件上传到服务器中，" class="headerlink" title="将dzen后台文件上传到服务器中，"></a>将dzen后台文件上传到服务器中，</h4><p><strong>文件列表如下</strong></p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">lib</span> --此目录主要包含<span class="title">dzen</span>依赖的<span class="title">jar</span>文件</span></span><br><span class="line">dzen.jar --dzen后台程序入口</span><br><span class="line">drivers.json --插件驱动配置文件，一般不需要修改</span><br><span class="line">dzen.properties --主要配置文件</span><br><span class="line">log4j.properties --日志配置文件</span><br><span class="line">dzen.sh --dzen启动脚本文件</span><br></pre></td></tr></table></figure>
+<h4 id="修改dzen-properties配置文件"><a href="#修改dzen-properties配置文件" class="headerlink" title="修改dzen.properties配置文件"></a>修改dzen.properties配置文件</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># file,database file代表本地模式从本地加载作业配置 database代表数据库模式，从数据库加载配置文件</span></span><br><span class="line">config.<span class="attribute">source</span>=database</span><br><span class="line"><span class="comment"># 数据库配置</span></span><br><span class="line">config.db.<span class="attribute">type</span>=mysql</span><br><span class="line">config.db.<span class="attribute">username</span>=root</span><br><span class="line">config.db.<span class="attribute">password</span>=123456</span><br><span class="line">config.db.<span class="attribute">jdbcUrl</span>=jdbc:mysql://10.177.129.141:3306/dzen?useUnicode=true&amp;characterEncoding=utf8</span><br><span class="line"></span><br><span class="line"><span class="comment">#serverip，本地的IP地址用于web端运行监控显示</span></span><br><span class="line">server.<span class="attribute">ip</span>=10.44.55.32</span><br><span class="line"></span><br><span class="line"><span class="comment"># activemq broker config 消息服务IP地址</span></span><br><span class="line">mq.service.broker.<span class="attribute">url</span>=tcp://127.0.0.1:61616</span><br><span class="line">mq.service.thread.<span class="attribute">count</span>=3</span><br><span class="line">mq.service.retry.<span class="attribute">times</span>=3</span><br><span class="line"><span class="comment"># scheduler config</span></span><br><span class="line">scheduler.job.thread.<span class="attribute">count</span>=20</span><br><span class="line"></span><br><span class="line"><span class="comment"># datasource config</span></span><br><span class="line">datasource.<span class="attribute">maxActive</span>=20</span><br><span class="line">datasource.<span class="attribute">maxIdle</span>=20</span><br><span class="line">datasource.<span class="attribute">minIdle</span>=0</span><br><span class="line">datasource.<span class="attribute">initialSize</span>=30</span><br><span class="line">datasource.<span class="attribute">maxWait</span>=-1</span><br><span class="line">datasource.<span class="attribute">defaultQueryTimeout</span>=172800</span><br><span class="line">datasource.<span class="attribute">removeAbandonedOnMaintenance</span>=<span class="literal">false</span></span><br><span class="line">datasource.<span class="attribute">removeAbandonedOnBorrow</span>=<span class="literal">false</span></span><br><span class="line"><span class="comment">#datasource.removeAbandonedTimeout=300</span></span><br><span class="line"><span class="comment">#datasource.logAbandoned=true</span></span><br><span class="line">datasource.<span class="attribute">testWhileIdle</span>=<span class="literal">true</span></span><br><span class="line">datasource.<span class="attribute">testOnBorrow</span>=<span class="literal">true</span></span><br><span class="line">datasource.<span class="attribute">testOnReturn</span>=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h4 id="运行dzen-sh-启动服务"><a href="#运行dzen-sh-启动服务" class="headerlink" title="运行dzen.sh 启动服务"></a>运行dzen.sh 启动服务</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动</span></span><br><span class="line"><span class="keyword">sh </span>dzen.<span class="keyword">sh </span>start</span><br><span class="line"><span class="comment">#重启</span></span><br><span class="line"><span class="keyword">sh </span>dzen.<span class="keyword">sh </span>restart</span><br><span class="line"><span class="comment">#停止</span></span><br><span class="line"><span class="keyword">sh </span>dzen.<span class="keyword">sh </span>stop</span><br></pre></td></tr></table></figure>
+<h3 id="DZENweb端程序部署"><a href="#DZENweb端程序部署" class="headerlink" title="DZENweb端程序部署"></a>DZENweb端程序部署</h3><blockquote>
+<p>由于使用了websocket技术，请使用tomcat7.0.69以上版本<br>将war包上传到tomcat中，修改以下配置文件</p>
+</blockquote>
+<p><strong>config.properties配置文件中的BROKER_URL</strong></p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#服务器的消息服务地址</span></span><br><span class="line"><span class="attr">BROKER_URL</span>=tcp://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">61616</span></span><br></pre></td></tr></table></figure>
+<p><strong>修改jdbc.properties中的数据库连接</strong></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#database</span> settings</span><br><span class="line">jdbc.driver=com<span class="selector-class">.mysql</span><span class="selector-class">.jdbc</span><span class="selector-class">.Driver</span></span><br><span class="line">jdbc.url=jdbc:mysql:<span class="comment">//192.168.1.251:3306/dzen?useUnicode=true&amp;characterEncoding=utf8</span></span><br><span class="line">jdbc.username=</span><br><span class="line">jdbc.password=</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#hibernate</span> settings</span><br><span class="line">hibernate.dialect=org<span class="selector-class">.hibernate</span><span class="selector-class">.dialect</span><span class="selector-class">.MySQL5Dialect</span></span><br><span class="line">hibernate.show_sql=false</span><br><span class="line">hibernate.format_sql=true</span><br><span class="line">hibernate<span class="selector-class">.hbm2ddl</span><span class="selector-class">.auto</span>=<span class="attribute">none</span></span><br></pre></td></tr></table></figure>
+<h4 id="启动tomcat"><a href="#启动tomcat" class="headerlink" title="启动tomcat"></a>启动tomcat</h4>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Java开发/">Java开发</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/02/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-02T13:46:53.000Z" itemprop="datePublished"> 发表于 2015-12-02</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>欢迎使用 <a href="http://hexo.io/" target="_blank" rel="noopener">Hexo</a>! 这是第一篇文章.查阅 <a href="http://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> 获取更多信息. 有问题请到 <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> 或者问我 <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="新文章"><a href="#新文章" class="headerlink" title="新文章"></a>新文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>更多信息: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="noopener">编写</a></p>
+<h3 id="运行服务端"><a href="#运行服务端" class="headerlink" title="运行服务端"></a>运行服务端</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>更多信息: <a href="http://hexo.io/docs/server.html" target="_blank" rel="noopener">服务端</a></p>
+<h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>更多信息: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="noopener">生成</a></p>
+<h3 id="发布站点"><a href="#发布站点" class="headerlink" title="发布站点"></a>发布站点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>更多信息: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="noopener">发布</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/29/Fedora安装快盘/" title="Fedora安装快盘" itemprop="url">Fedora安装快盘</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-29T07:51:00.000Z" itemprop="datePublished"> 发表于 2015-01-29</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li>进入官网 下载ubuntu版本的客户端（注意系统位数）<br>解压deb包，可看到DEBIAN,etc,usr,opt这几个文件夹（如只看到data.tar压缩包，则解压这个压缩包，可看到这几个文件夹）<br>进入解压后文件夹根目录，将usr,opt文件夹复制到系统根目录下<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> cp -r usr /</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> cp -r opt /</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/01/29/Fedora安装快盘/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/fedora/">fedora</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/27/fodera运行gae缺少ssl解决/" title="fodera运行gae缺少ssl解决" itemprop="url">fodera运行gae缺少ssl解决</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-27T08:34:11.000Z" itemprop="datePublished"> 发表于 2015-01-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>如果运行gae出现以下错误</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[yuhaitao@localhost local]$ sudo python proxy.py</span><br><span class="line">[sudo] password <span class="keyword">for</span> <span class="symbol">yuhaitao:</span></span><br><span class="line">Traceback (most recent call last)<span class="symbol">:</span></span><br><span class="line">  File <span class="string">"proxy.py"</span>, line <span class="number">93</span>, <span class="keyword">in</span> &lt;<span class="class"><span class="keyword">module</span>&gt;</span></span><br><span class="line">    import OpenSSL</span><br><span class="line"><span class="symbol">ImportError:</span> No <span class="class"><span class="keyword">module</span> <span class="title">named</span> <span class="title">OpenSSL</span></span></span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/01/27/fodera运行gae缺少ssl解决/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/">linux</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/27/fedora配置OpenSSH无密码登陆/" title="fedora配置OpenSSH无密码登陆" itemprop="url">fedora配置OpenSSH无密码登陆</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-27T04:58:00.000Z" itemprop="datePublished"> 发表于 2015-01-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p> 最近在搭建Hadoop环境需要设置无密码登陆，所谓无密码登陆其实是指通过证书认证的方式登陆，使用一种被称为”公私钥”认证的方式来进行ssh登录。<br>“ 公私钥”认证方式简单的解释:首先在客户端上创建一对公私钥 （公钥文件：~/.ssh/id_dsa.pub； 私钥文件：~/.ssh/id_dsa）。然后把公钥放到服务器上（~/.ssh/authorized_keys）, 自己保留好私钥.在使用ssh登录时,ssh程序会发送私钥去和服务器上的公钥做匹配.如果匹配成功就可以登录了。<br>具体操作步骤如下：<br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/01/27/fedora配置OpenSSH无密码登陆/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/">linux</a><a href="/tags/fedora/">fedora</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/27/Fedora-下-MySQL-的安装/" title="Fedora 下 MySQL 的安装" itemprop="url">Fedora 下 MySQL 的安装</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-27T03:50:00.000Z" itemprop="datePublished"> 发表于 2015-01-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> community-mysql-<span class="keyword">server</span></span><br></pre></td></tr></table></figure>
+<h3 id="配置数据库"><a href="#配置数据库" class="headerlink" title="配置数据库"></a>配置数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动服务</span></span><br><span class="line">systemctl start mysqld.service</span><br><span class="line">systemctl <span class="built_in">enable</span> mysqld.service</span><br><span class="line"><span class="comment">#以root登陆数据库</span></span><br><span class="line">mysql -u root</span><br><span class="line"><span class="comment">#user列表</span></span><br><span class="line">mysql&gt; select user, host, password from mysql.user;</span><br><span class="line"><span class="comment">#删除空user</span></span><br><span class="line">delete from mysql.user <span class="built_in">where</span> user=<span class="string">''</span>;</span><br><span class="line"><span class="comment">#设置密码</span></span><br><span class="line"><span class="built_in">set</span> password <span class="keyword">for</span> root@localhost=password(<span class="string">'123456'</span>);</span><br><span class="line"><span class="built_in">set</span> password <span class="keyword">for</span> root@rachel=password(<span class="string">'123456'</span>);</span><br><span class="line"><span class="built_in">set</span> password <span class="keyword">for</span> root@<span class="string">'127.0.0.1'</span>=password(<span class="string">'123456'</span>);</span><br><span class="line"><span class="comment">#退出</span></span><br><span class="line">mysql&gt; <span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/">linux</a><a href="/tags/fedora/">fedora</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/27/Fedora安装以后的优化/" title="Fedora安装以后的优化" itemprop="url">Fedora安装以后的优化</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-27T03:38:00.000Z" itemprop="datePublished"> 发表于 2015-01-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h4 id="1-安装gnome-tweak-tool设置工具"><a href="#1-安装gnome-tweak-tool设置工具" class="headerlink" title="1.安装gnome-tweak-tool设置工具"></a>1.安装gnome-tweak-tool设置工具</h4><p>Fedora 19自带的系统设置工具十分简单，一些重要的地方都不能设置。比如窗口默认没有最大化和最化小的按钮。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install gnome-tweak-tool</span><br></pre></td></tr></table></figure>
+<p>然后在左上角的“活动”里找到并打开“优化工具”，在左侧选择“窗口”，在右侧找到“Titlebar Buttons”，把下面的“Maximize”和“Minimize”打开，这样，窗口的右上角就有最大化和最小化按钮了。</p>
+<p>此外，还可以在左侧的“Shell”中，把“在日历中显示星期”打开。</p>
+<p>对于国内用户，肯定不习惯多个桌面的形式，打开“优化工具”，在左侧选择“Workspaces”，把右侧的“Workspaces Creation”设置为“Static”，下面的“Number of Workspaces”设置为1，这样就只有1个桌面了。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/01/27/Fedora安装以后的优化/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/">linux</a><a href="/tags/fedora/">fedora</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/27/geeknote的使用/" title="geeknote的使用" itemprop="url">geeknote的使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-27T03:12:00.000Z" itemprop="datePublished"> 发表于 2015-01-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="GeekNote"><a href="#GeekNote" class="headerlink" title="GeekNote"></a>GeekNote</h3><h4 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h4><p>但是这个世界上就是有很多的和我这样的有这种需求，但比我牛很多的人存在。所以我就受益了(想想不免自卑了)。我发现的这个是在linux中的，叫做geeknote,看名字就知道了。geek范儿的，脱离了界面的支持，这对我这样习惯了linux下命令行的人还是比较喜欢的。好了废话不多说。开始介绍了。<br>安装</p>
+<p>geeknote的官网，我们可以看到一些介绍，安装的步骤还是随大流的安装，但是一点需要注意的就是。Eernote是国外的而印象笔记是国内的，虽然是一家人，但是服务器不一样，账户也是又差别的。因此需要对自己的所使用的账户要有所区分。<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">印象笔记用户：git <span class="keyword">clone</span> <span class="title">git</span>://github.com/gmajian/geeknote.git</span><br><span class="line">Evernote用户：git <span class="keyword">clone</span> <span class="title">git</span>://github.com/VitaliyRodnenko/geeknote.git</span><br></pre></td></tr></table></figure></p>
+<p>这是第一步,这一步很关键的，如果你是印象笔记用户，却下载的Evernote版本的话，那么就用不了。BTW，你的网还要好一点，不然在安装过程中，会有些下载不下来。好比我用的校网死活下不下来，但是chinanet给了我希望^_^.<br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/01/27/geeknote的使用/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/">linux</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/23/hbase伪分布式安装配置/" title="hbase伪分布式安装配置" itemprop="url">hbase伪分布式安装配置</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-23T09:43:00.000Z" itemprop="datePublished"> 发表于 2015-01-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="hbase伪分布式安装配置"><a href="#hbase伪分布式安装配置" class="headerlink" title="hbase伪分布式安装配置"></a>hbase伪分布式安装配置</h2><blockquote>
+<p>java版本：jdk1.7<br>hadoop版本：2.6.0<br>hbase版本：hbase-0.98.9-hadoop2</p>
+</blockquote>
+<h3 id="hbase-env-sh里的配置"><a href="#hbase-env-sh里的配置" class="headerlink" title="hbase-env.sh里的配置"></a>hbase-env.sh里的配置</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># java安装路径</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/usr/app/java/</span><br><span class="line"></span><br><span class="line"><span class="comment"># hadoop配置文件路径</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HBASE_CLASSPATH</span>=/home/yuhaitao/hadoop/etc/hadoop/</span><br><span class="line"></span><br><span class="line"><span class="comment"># The maximum amount of heap to use, in MB. Default is 1000.</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HBASE_HEAPSIZE</span>=1000</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/01/23/hbase伪分布式安装配置/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/hbase/">hbase</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/22/hive与mysql的安装配置/" title="hive与mysql的安装配置" itemprop="url">hive与mysql的安装配置</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-22T09:00:00.000Z" itemprop="datePublished"> 发表于 2015-01-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="hive的安装和配置"><a href="#hive的安装和配置" class="headerlink" title="hive的安装和配置"></a>hive的安装和配置</h2><blockquote>
+<p>java版本：jdk1.7<br>  hadoop版本：2.6.0<br>  Hive版本：0.9.0</p>
+</blockquote>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/01/22/hive与mysql的安装配置/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/hive/">hive</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+  </nav>
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/编程相关/" title="编程相关">编程相关<sup>5</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>17</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java开发/" title="Java开发">Java开发<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/fedora/" title="fedora">fedora<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日志/" title="日志">日志<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hbase/" title="hbase">hbase<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hive/" title="hive">hive<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 生当作人杰 <br/>
+			死亦为鬼雄</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1179900904" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="YuHaiTao">YuHaiTao</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>

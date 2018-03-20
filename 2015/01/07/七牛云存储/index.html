@@ -1,0 +1,701 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Java SDK | 七牛云存储 | 一个程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="YuHaiTao">
+    
+
+    
+    <meta name="description" content="Java SDK 使用指南此SDK适用于Java 6及以上版本。基于 七牛云存储官方API 构建。使用此 SDK 构建您的网络应用程序，能让您以非常便捷地方式将数据安全地存储到七牛云存储上。无论您的网络应用是一个网站程序，还是包括从云端（服务端程序）到终端（手持设备应用）的架构的服务或应用，通过七牛云存储及其 SDK，都能让您应用程序的终端用户高速上传和下载，同时也让您的服务端更加轻盈。 SDK下">
+<meta name="keywords" content="Ubuntu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java SDK | 七牛云存储">
+<meta property="og:url" content="http://kuailelai.com/2015/01/07/七牛云存储/index.html">
+<meta property="og:site_name" content="一个程序员">
+<meta property="og:description" content="Java SDK 使用指南此SDK适用于Java 6及以上版本。基于 七牛云存储官方API 构建。使用此 SDK 构建您的网络应用程序，能让您以非常便捷地方式将数据安全地存储到七牛云存储上。无论您的网络应用是一个网站程序，还是包括从云端（服务端程序）到终端（手持设备应用）的架构的服务或应用，通过七牛云存储及其 SDK，都能让您应用程序的终端用户高速上传和下载，同时也让您的服务端更加轻盈。 SDK下">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2015-12-02T15:59:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java SDK | 七牛云存储">
+<meta name="twitter:description" content="Java SDK 使用指南此SDK适用于Java 6及以上版本。基于 七牛云存储官方API 构建。使用此 SDK 构建您的网络应用程序，能让您以非常便捷地方式将数据安全地存储到七牛云存储上。无论您的网络应用是一个网站程序，还是包括从云端（服务端程序）到终端（手持设备应用）的架构的服务或应用，通过七牛云存储及其 SDK，都能让您应用程序的终端用户高速上传和下载，同时也让您的服务端更加轻盈。 SDK下">
+
+    
+    <link rel="alternative" href="/atom.xml" title="一个程序员" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="一个程序员" title="一个程序员"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一个程序员">一个程序员</a></h1>
+				<h2 class="blog-motto">程序员是值得尊敬的，程序员的双手是魔术师的双手。他们把枯燥无味的代码变成了丰富多彩的软件</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:kuailelai.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/07/七牛云存储/" title="Java SDK | 七牛云存储" itemprop="url">Java SDK | 七牛云存储</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-07T14:03:00.000Z" itemprop="datePublished"> 发表于 2015-01-07</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-SDK-使用指南"><span class="toc-number">1.</span> <span class="toc-text">Java SDK 使用指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-环境准备"><span class="toc-number">1.2.</span> <span class="toc-text">1. 环境准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-初始化"><span class="toc-number">1.3.</span> <span class="toc-text">2.初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-配置密钥"><span class="toc-number">1.3.1.</span> <span class="toc-text">2.1 配置密钥</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-上传下载接口"><span class="toc-number">1.4.</span> <span class="toc-text">3. 上传下载接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-上传流程"><span class="toc-number">1.4.1.</span> <span class="toc-text">3.1 上传流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-生成上传授权uptoken"><span class="toc-number">1.4.2.</span> <span class="toc-text">3.2 生成上传授权uptoken</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-上传代码"><span class="toc-number">1.4.3.</span> <span class="toc-text">3.3 上传代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-断点续上传、分块并行上传"><span class="toc-number">1.4.4.</span> <span class="toc-text">3.4 断点续上传、分块并行上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-上传策略"><span class="toc-number">1.4.5.</span> <span class="toc-text">3.5 上传策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-文件下载"><span class="toc-number">1.4.6.</span> <span class="toc-text">3.6 文件下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-公有资源下载"><span class="toc-number">1.4.7.</span> <span class="toc-text">3.7 公有资源下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-私有资源下载"><span class="toc-number">1.4.8.</span> <span class="toc-text">3.8 私有资源下载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-资源管理接口"><span class="toc-number">1.5.</span> <span class="toc-text">4. 资源管理接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-查看单个文件属性信息"><span class="toc-number">1.5.1.</span> <span class="toc-text">4.1 查看单个文件属性信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-复制单个文件"><span class="toc-number">1.5.2.</span> <span class="toc-text">4.2 复制单个文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-移动单个文件"><span class="toc-number">1.5.3.</span> <span class="toc-text">4.3 移动单个文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-删除单个文件"><span class="toc-number">1.5.4.</span> <span class="toc-text">4.4 删除单个文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-批量操作"><span class="toc-number">1.5.5.</span> <span class="toc-text">4.5 批量操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-1-批量获取文件属性信息"><span class="toc-number">1.5.5.1.</span> <span class="toc-text">4.5.1 批量获取文件属性信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-2-批量复制文件"><span class="toc-number">1.5.5.2.</span> <span class="toc-text">4.5.2 批量复制文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-3-批量移动文件"><span class="toc-number">1.5.5.3.</span> <span class="toc-text">4.5.3 批量移动文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-4-批量删除文件"><span class="toc-number">1.5.5.4.</span> <span class="toc-text">4.5.4 批量删除文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-5-高级批量操作"><span class="toc-number">1.5.5.5.</span> <span class="toc-text">4.5.5 高级批量操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-数据处理接口"><span class="toc-number">1.6.</span> <span class="toc-text">5. 数据处理接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-图像"><span class="toc-number">1.6.1.</span> <span class="toc-text">5.1 图像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-1-查看图像属性"><span class="toc-number">1.6.2.</span> <span class="toc-text">5.1.1 查看图像属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-2-查看图片EXIF信息"><span class="toc-number">1.6.3.</span> <span class="toc-text">5.1.2 查看图片EXIF信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-3-生成图片预览"><span class="toc-number">1.6.4.</span> <span class="toc-text">5.1.3 生成图片预览</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-高级资源管理接口-rsf"><span class="toc-number">1.7.</span> <span class="toc-text">6. 高级资源管理接口(rsf)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-贡献代码"><span class="toc-number">1.8.</span> <span class="toc-text">7. 贡献代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-许可证"><span class="toc-number">1.9.</span> <span class="toc-text">8. 许可证</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Java-SDK-使用指南"><a href="#Java-SDK-使用指南" class="headerlink" title="Java SDK 使用指南"></a>Java SDK 使用指南</h1><p>此SDK适用于Java 6及以上版本。基于 <a href="http://docs.qiniu.com" target="_blank" rel="noopener">七牛云存储官方API</a> 构建。使用此 SDK 构建您的网络应用程序，能让您以非常便捷地方式将数据安全地存储到七牛云存储上。无论您的网络应用是一个网站程序，还是包括从云端（服务端程序）到终端（手持设备应用）的架构的服务或应用，通过七牛云存储及其 SDK，都能让您应用程序的终端用户高速上传和下载，同时也让您的服务端更加轻盈。</p>
+<p>SDK下载地址：<a href="https://github.com/qiniu/java-sdk/tags" target="_blank" rel="noopener">https://github.com/qiniu/java-sdk/tags</a><br><a id="more"></a></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#env_preparation">环境准备</a></li>
+<li><a href="#setup">初始化</a><ul>
+<li><a href="#setup-key">配置密钥</a></li>
+</ul>
+</li>
+<li><a href="#get-and-put-api">上传下载接口</a><ul>
+<li><a href="#io-put-flow">上传流程</a></li>
+<li><a href="#make-uptoken">生成上传授权uptoken</a></li>
+<li><a href="#upload-code">上传代码</a></li>
+<li><a href="#resumable-io-put">断点续上传、分块并行上传</a></li>
+<li><a href="#io-put-policy">上传策略</a></li>
+<li><a href="#public-download">公有资源下载</a></li>
+<li><a href="#private-download">私有资源下载</a></li>
+</ul>
+</li>
+<li><a href="#rs-api">资源管理接口</a><ul>
+<li><a href="#rs-stat">查看单个文件属性信息</a></li>
+<li><a href="#rs-copy">复制单个文件</a></li>
+<li><a href="#rs-move">移动单个文件</a></li>
+<li><a href="#rs-delete">删除单个文件</a></li>
+<li><a href="#batch">批量操作</a><ul>
+<li><a href="#batch-stat">批量获取文件属性信息</a></li>
+<li><a href="#batch-copy">批量复制文件</a></li>
+<li><a href="#batch-move">批量移动文件</a></li>
+<li><a href="#batch-delete">批量删除文件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#fop-api">数据处理接口</a><ul>
+<li><a href="#fop-image">图像</a><ul>
+<li><a href="#fop-image-info">查看图像属性</a></li>
+<li><a href="#fop-exif">查看图片EXIF信息</a></li>
+<li><a href="#fop-image-view">生成图片预览</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#rsf-api">高级资源管理接口</a><ul>
+<li><a href="#rsf-listPrefix">批量获得文件列表</a></li>
+</ul>
+</li>
+<li><a href="#contribution">贡献代码</a></li>
+<li><a href="#license">许可证</a></li>
+</ul>
+<hr>
+<p><a name="env_preparation"></a></p>
+<h2 id="1-环境准备"><a href="#1-环境准备" class="headerlink" title="1. 环境准备"></a>1. 环境准备</h2><p>安装 Maven 的插件：<a href="http://www.eclipse.org/m2e/" target="_blank" rel="noopener">The Maven Integration for Eclipse</a></p>
+<p>添加依赖</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.qiniu&lt;/groupId&gt;
+    &lt;artifactId&gt;sdk&lt;/artifactId&gt;
+    &lt;version&gt;6.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p><a name="setup"></a></p>
+<h2 id="2-初始化"><a href="#2-初始化" class="headerlink" title="2.初始化"></a>2.初始化</h2><p><a name="setup-key"></a></p>
+<h3 id="2-1-配置密钥"><a href="#2-1-配置密钥" class="headerlink" title="2.1 配置密钥"></a>2.1 配置密钥</h3><p>要接入七牛云存储，您需要拥有一对有效的 Access Key 和 Secret Key 用来进行签名认证。可以通过如下步骤获得：</p>
+<ol>
+<li><a href="https://portal.qiniu.com/signup" target="_blank" rel="noopener">开通七牛开发者帐号</a></li>
+<li><a href="https://portal.qiniu.com/setting/key" target="_blank" rel="noopener">登录七牛开发者自助平台，查看 Access Key 和 Secret Key</a> 。</li>
+</ol>
+<p>在获取到 Access Key 和 Secret Key 之后，您可以按照如下方式进行密钥配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import com.qiniu.api.config.Config;</span><br><span class="line"></span><br><span class="line">public class Init &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Config.ACCESS_KEY = &quot;&lt;YOUR APP ACCESS_KEY&gt;&quot;;</span><br><span class="line">		Config.SECRET_KEY = &quot;&lt;YOUR APP SECRET_KEY&gt;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="get-and-put-api"></a></p>
+<h2 id="3-上传下载接口"><a href="#3-上传下载接口" class="headerlink" title="3. 上传下载接口"></a>3. 上传下载接口</h2><p>为了尽可能地改善终端用户的上传体验，七牛云存储首创了客户端直传功能。</p>
+<p>一般云存储的上传流程是：</p>
+<pre><code>客户端（终端用户） =&gt; 业务服务器 =&gt; 云存储服务
+</code></pre><p>这样通过用户自己的业务服务器中转上传至云存储服务端。这种方式存在一些不足：</p>
+<ol>
+<li>多了一次中转的上传过程，同数据存放在用户的业务服务器中相比，会相对慢一些；</li>
+<li>增加了用户业务服务器的负载，消耗了带宽，占用了磁盘，降低了服务能力；</li>
+<li>增加了用户的流量消耗，来自终端用户的上传数据进入业务服务器，然后再次上传至云存储服务，净增一倍流量。</li>
+</ol>
+<p>因此，七牛云存储引入了客户端直传的模式，将整个上传过程调整为：</p>
+<pre><code>客户端（终端用户） =&gt; 七牛 =&gt; 业务服务器
+</code></pre><p>客户端（终端用户）直接上传到七牛的服务器。通过DNS智能解析，七牛会选择到离终端用户最近的ISP服务商节点，速度会相比数据存放在用户自己的业务服务器上的方式更快。而且，七牛云存储可以在用户文件上传成功以后，替用户的客户端向用户的业务服务器发送反馈信息，减少用户的客户端同业务服务器之间的交互。详情请参考<a href="#io-put-policy">上传策略</a></p>
+<p><strong>注意</strong>：如果您只是想要将您电脑上，或者是服务器上的文件上传到七牛云存储，可以直接使用七牛提供的 <a href="http://docs.qiniu.com/tools/qrsync.html" target="_blank" rel="noopener">qrsync</a> 上传工具，而无需额外开发。</p>
+<p>文件上传有两种方式：普通方式，即一次性上传整个文件；断点续上传，即将文件分割成若干小块，分别上传，然后在七牛云存储服务端重新合并成一个文件。一般情况下，用户可以采用普通上传。如果文件较大，或者网络条件不佳，那么可以使用断点续上传，提高上传的速度和成功率。</p>
+<p><a name="io-put-flow"></a></p>
+<h3 id="3-1-上传流程"><a href="#3-1-上传流程" class="headerlink" title="3.1 上传流程"></a>3.1 上传流程</h3><p>在七牛云存储中，整个上传流程大体分为这样几步：</p>
+<ol>
+<li>业务服务器颁发 <a href="#make-uptoken">uptoken（上传授权凭证）</a>给客户端（终端用户）</li>
+<li>客户端凭借 <a href="#make-uptoken">uptoken</a> 上传文件到七牛</li>
+<li><p>在七牛获得完整数据后，根据用户请求的设定执行以下操作：</p>
+<p> a. 如果用户设定了<a href="#io-put-policy">returnUrl</a>，七牛云存储将反馈一个指向returnUrl的HTTP 301，驱动客户端执行跳转；</p>
+<p> b. 如果用户设定了<a href="#io-put-policy">callbackUrl</a>，七牛云存储将向callbackUrl指定的地址发起一个HTTP 请求回调业务服务器，同时向业务服务器发送数据。发送的数据内容由<a href="#io-put-policy">callbackBody</a>指定。业务服务器完成回调的处理后，可以在HTTP Response中放入数据，七牛云存储会响应客户端，并将业务服务器反馈的数据发送给客户端；</p>
+<p> c. 如果两者都没有设置，七牛云存储根据<a href="#io-put-policy">returnBody</a>的设定向客户端发送反馈信息。</p>
+</li>
+</ol>
+<p>需要注意的是，回调到业务服务器的过程是可选的，它取决于业务服务器颁发的 <a href="#make-uptoken">uptoken</a>。如果没有回调，七牛会返回一些标准的信息（比如文件的 hash）给客户端。如果上传发生在业务服务器，以上流程可以自然简化为：</p>
+<ol>
+<li>业务服务器生成 uptoken（不设置回调，自己回调到自己这里没有意义）</li>
+<li>凭借 <a href="#make-uptoken">uptoken</a> 上传文件到七牛</li>
+<li>善后工作，比如保存相关的一些信息</li>
+</ol>
+<p><a name="make-uptoken"></a></p>
+<h3 id="3-2-生成上传授权uptoken"><a href="#3-2-生成上传授权uptoken" class="headerlink" title="3.2 生成上传授权uptoken"></a>3.2 生成上传授权uptoken</h3><p>uptoken是一个字符串，作为http协议Header的一部分（Authorization字段）发送到我们七牛的服务端，表示这个http请求是经过用户授权的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import com.qiniu.api.auth.digest.Mac;</span><br><span class="line">import com.qiniu.api.config.Config;</span><br><span class="line">import com.qiniu.api.rs.PutPolicy;</span><br><span class="line"></span><br><span class="line">public class Uptoken &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws Exception &#123;</span><br><span class="line">		Config.ACCESS_KEY = &quot;&lt;YOUR APP ACCESS_KEY&gt;&quot;;</span><br><span class="line">		Config.SECRET_KEY = &quot;&lt;YOUR APP SECRET_KEY&gt;&quot;;</span><br><span class="line">		Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);</span><br><span class="line">		// 请确保该bucket已经存在</span><br><span class="line">		String bucketName = &quot;Your bucket name&quot;;</span><br><span class="line">		PutPolicy putPolicy = new PutPolicy(bucketName);</span><br><span class="line">		String uptoken = putPolicy.token(mac);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="upload-code"></a></p>
+<h3 id="3-3-上传代码"><a href="#3-3-上传代码" class="headerlink" title="3.3 上传代码"></a>3.3 上传代码</h3><p>上传本地文件。如果用户从自己的计算机或服务器上传文件，可以直接使用七牛云存储提供的<a href="http://docs.qiniu.com/tools/qrsync.html" target="_blank" rel="noopener">qrsync</a>工具。用户也可以自行编写上传程序。</p>
+<p>上传程序大体步骤如下：</p>
+<ol>
+<li>设置AccessKey和SecretKey；</li>
+<li>创建Mac对象；</li>
+<li>创建PutPolicy对象；</li>
+<li>生成UploadToken；</li>
+<li>创建PutExtra对象；</li>
+<li>调用put或putFile方法上传文件；</li>
+</ol>
+<p>具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import java.io.File;</span><br><span class="line"></span><br><span class="line">import com.qiniu.api.auth.digest.Mac;</span><br><span class="line">import com.qiniu.api.config.Config;</span><br><span class="line">import com.qiniu.api.io.IoApi;</span><br><span class="line">import com.qiniu.api.io.PutExtra;</span><br><span class="line">import com.qiniu.api.io.PutRet;</span><br><span class="line">import com.qiniu.api.rs.PutPolicy;</span><br><span class="line"></span><br><span class="line">public class UploadFile &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws Exception &#123;</span><br><span class="line">		Config.ACCESS_KEY = &quot;&lt;YOUR APP ACCESS_KEY&gt;&quot;;</span><br><span class="line">		Config.SECRET_KEY = &quot;&lt;YOUR APP SECRET_KEY&gt;&quot;;</span><br><span class="line">		Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);</span><br><span class="line">		// 请确保该bucket已经存在</span><br><span class="line">		String bucketName = &quot;&lt;Your bucket name&gt;&quot;;</span><br><span class="line">		PutPolicy putPolicy = new PutPolicy(bucketName);</span><br><span class="line">		String uptoken = putPolicy.token(mac);</span><br><span class="line">		PutExtra extra = new PutExtra();</span><br><span class="line">		String key = &quot;&lt;key&gt;&quot;;</span><br><span class="line">		String localFile = &quot;&lt;local file path&gt;&quot;;</span><br><span class="line">		PutRet ret = IoApi.putFile(uptoken, key, localFile, extra);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="resumable-io-put"></a></p>
+<h3 id="3-4-断点续上传、分块并行上传"><a href="#3-4-断点续上传、分块并行上传" class="headerlink" title="3.4 断点续上传、分块并行上传"></a>3.4 断点续上传、分块并行上传</h3><p>与普通上传类似：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">private void uploadFile() throws AuthException, JSONException&#123;</span><br><span class="line">	PutPolicy p = new PutPolicy(bucketName);</span><br><span class="line">	p.returnBody = &quot;&#123;\&quot;key\&quot;: $(key), \&quot;hash\&quot;: $(etag),\&quot;mimeType\&quot;: $(mimeType)&#125;&quot;;</span><br><span class="line">	String upToken = p.token(mac);</span><br><span class="line">	PutRet ret = ResumeableIoApi.put(file, upToken, key, mimeType);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void uploadStream() throws AuthException, JSONException, FileNotFoundException&#123;</span><br><span class="line">	PutPolicy p = new PutPolicy(bucketName);</span><br><span class="line">	String upToken = p.token(mac);</span><br><span class="line">	FileInputStream fis = new FileInputStream(file);</span><br><span class="line">	PutRet ret = ResumeableIoApi.put(fis, upToken, key, mimeType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>key，mimeType 可为null。</p>
+<p><a name="io-put-policy"></a></p>
+<h3 id="3-5-上传策略"><a href="#3-5-上传策略" class="headerlink" title="3.5 上传策略"></a>3.5 上传策略</h3><p><a href="http://docs.qiniu.com/api/put.html#uploadToken" target="_blank" rel="noopener">uptoken</a> 实际上是用 AccessKey/SecretKey 进行数字签名的上传策略(<code>rs.PutPolicy</code>)，它控制则整个上传流程的行为。让我们快速过一遍你都能够决策啥：</p>
+<ul>
+<li><code>expires</code> 指定 <a href="http://docs.qiniu.com/api/put.html#uploadToken" target="_blank" rel="noopener">uptoken</a> 有效时长。单位：秒（s），默认1小时，3600秒。deadline = System.currentTimeMillis() / 1000 + this.expires，不直接指定deadline。一个 <a href="http://docs.qiniu.com/api/put.html#uploadToken" target="_blank" rel="noopener">uptoken</a> 可以被用于多次上传（只要它还没有过期）。</li>
+</ul>
+<p>关于上传策略更完整的说明，请参考 <a href="http://docs.qiniu.com/api/put.html#uploadToken" target="_blank" rel="noopener">uptoken</a>。</p>
+<h3 id="3-6-文件下载"><a href="#3-6-文件下载" class="headerlink" title="3.6 文件下载"></a>3.6 文件下载</h3><p>七牛云存储上的资源下载分为 公有资源下载 和 私有资源下载 。</p>
+<p>私有（private）是 Bucket（空间）的一个属性，一个私有 Bucket 中的资源为私有资源，私有资源不可匿名下载。</p>
+<p>新创建的空间（Bucket）缺省为私有，也可以将某个 Bucket 设为公有，公有 Bucket 中的资源为公有资源，公有资源可以匿名下载。</p>
+<p><a name="public-download"></a></p>
+<h3 id="3-7-公有资源下载"><a href="#3-7-公有资源下载" class="headerlink" title="3.7 公有资源下载"></a>3.7 公有资源下载</h3><p>如果在给bucket绑定了域名的话，可以通过以下地址访问。</p>
+<pre><code>[GET] http://&lt;domain&gt;/&lt;key&gt;
+</code></pre><p>其中\&lt;domain>是bucket所对应的域名。七牛云存储为每一个bucket提供一个默认域名。默认域名可以到<a href="https://portal.qiniu.com/" target="_blank" rel="noopener">七牛云存储开发者平台</a>中，空间设置的域名设置一节查询。用户也可以将自有的域名绑定到bucket上，通过自有域名访问七牛云存储。</p>
+<p><strong>注意： key必须采用utf8编码，如使用非utf8编码访问七牛云存储将反馈错误</strong></p>
+<p><a name="private-download"></a></p>
+<h3 id="3-8-私有资源下载"><a href="#3-8-私有资源下载" class="headerlink" title="3.8 私有资源下载"></a>3.8 私有资源下载</h3><p>私有资源必须通过临时下载授权凭证(downloadToken)下载，如下：</p>
+<pre><code>[GET] http://&lt;domain&gt;/&lt;key&gt;?token=&lt;downloadToken&gt;
+</code></pre><p>注意，尖括号不是必需，代表替换项。  </p>
+<p><code>downloadToken</code> 可以使用 SDK 提供的如下方法生成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import com.qiniu.api.auth.digest.Mac;</span><br><span class="line">import com.qiniu.api.config.Config;</span><br><span class="line">import com.qiniu.api.rs.GetPolicy;</span><br><span class="line">import com.qiniu.api.rs.URLUtils;</span><br><span class="line"></span><br><span class="line">public class DownloadFile &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws Exception &#123;</span><br><span class="line">		Config.ACCESS_KEY = &quot;&lt;YOUR APP ACCESS_KEY&gt;&quot;;</span><br><span class="line">		Config.SECRET_KEY = &quot;&lt;YOUR APP SECRET_KEY&gt;&quot;;</span><br><span class="line">		Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);</span><br><span class="line">		String baseUrl = URLUtils.makeBaseUrl(&quot;&lt;domain&gt;&quot;, &quot;&lt;key&gt;&quot;);</span><br><span class="line">		GetPolicy getPolicy = new GetPolicy();</span><br><span class="line">		String downloadUrl = getPolicy.makeRequest(baseUrl, mac);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="rs-api"></a></p>
+<h2 id="4-资源管理接口"><a href="#4-资源管理接口" class="headerlink" title="4. 资源管理接口"></a>4. 资源管理接口</h2><p>文件管理包括对存储在七牛云存储上的文件进行查看、复制、移动和删除处理。  </p>
+<p><a name="rs-stat"></a></p>
+<h3 id="4-1-查看单个文件属性信息"><a href="#4-1-查看单个文件属性信息" class="headerlink" title="4.1 查看单个文件属性信息"></a>4.1 查看单个文件属性信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import com.qiniu.api.auth.digest.Mac;</span><br><span class="line">import com.qiniu.api.config.Config;</span><br><span class="line">import com.qiniu.api.rs.Entry;</span><br><span class="line">import com.qiniu.api.rs.RSClient;</span><br><span class="line"></span><br><span class="line">public class Stat &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Config.ACCESS_KEY = &quot;&lt;YOUR APP ACCESS_KEY&gt;&quot;;</span><br><span class="line">		Config.SECRET_KEY = &quot;&lt;YOUR APP SECRET_KEY&gt;&quot;;</span><br><span class="line">		Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);</span><br><span class="line">		RSClient client = new RSClient(mac);</span><br><span class="line">		Entry statRet = client.stat(&quot;&lt;bucketName&gt;&quot;, &quot;&lt;key&gt;&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="rs-copy"></a></p>
+<h3 id="4-2-复制单个文件"><a href="#4-2-复制单个文件" class="headerlink" title="4.2 复制单个文件"></a>4.2 复制单个文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import com.qiniu.api.auth.digest.Mac;</span><br><span class="line">import com.qiniu.api.config.Config;</span><br><span class="line">import com.qiniu.api.rs.RSClient;</span><br><span class="line"></span><br><span class="line">public class Copy &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Config.ACCESS_KEY = &quot;&lt;YOUR APP ACCESS_KEY&gt;&quot;;</span><br><span class="line">		Config.SECRET_KEY = &quot;&lt;YOUR APP SECRET_KEY&gt;&quot;;</span><br><span class="line">		Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);</span><br><span class="line">		RSClient client = new RSClient(mac);</span><br><span class="line">		client.copy(&quot;&lt;bucketSrc&gt;&quot;, &quot;&lt;keySrc&gt;&quot;, &quot;&lt;bucketDest&gt;&quot;, &quot;&lt;keyDest&gt;&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="rs-move"></a></p>
+<h3 id="4-3-移动单个文件"><a href="#4-3-移动单个文件" class="headerlink" title="4.3 移动单个文件"></a>4.3 移动单个文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import com.qiniu.api.auth.digest.Mac;</span><br><span class="line">import com.qiniu.api.config.Config;</span><br><span class="line">import com.qiniu.api.rs.RSClient;</span><br><span class="line"></span><br><span class="line">public class Move &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Config.ACCESS_KEY = &quot;&lt;YOUR APP ACCESS_KEY&gt;&quot;;</span><br><span class="line">		Config.SECRET_KEY = &quot;&lt;YOUR APP SECRET_KEY&gt;&quot;;</span><br><span class="line">		Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);</span><br><span class="line">		RSClient client = new RSClient(mac);</span><br><span class="line">		client.move(&quot;&lt;bucketSrc&gt;&quot;, &quot;&lt;keySrc&gt;&quot;, &quot;&lt;bucketDest&gt;&quot;, &quot;&lt;keyDest&gt;&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="rs-delete"></a></p>
+<h3 id="4-4-删除单个文件"><a href="#4-4-删除单个文件" class="headerlink" title="4.4 删除单个文件"></a>4.4 删除单个文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import com.qiniu.api.auth.digest.Mac;</span><br><span class="line">import com.qiniu.api.config.Config;</span><br><span class="line">import com.qiniu.api.rs.RSClient;</span><br><span class="line"></span><br><span class="line">public class Delete &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Config.ACCESS_KEY = &quot;&lt;YOUR APP ACCESS_KEY&gt;&quot;;</span><br><span class="line">		Config.SECRET_KEY = &quot;&lt;YOUR APP SECRET_KEY&gt;&quot;;</span><br><span class="line">		Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);</span><br><span class="line">		RSClient client = new RSClient(mac);</span><br><span class="line">		client.delete(&quot;&lt;bucketName&gt;&quot;, &quot;&lt;key&gt;&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="batch"></a></p>
+<h3 id="4-5-批量操作"><a href="#4-5-批量操作" class="headerlink" title="4.5 批量操作"></a>4.5 批量操作</h3><p>当您需要一次性进行多个操作时, 可以使用批量操作.</p>
+<p><a name="batch-stat"></a></p>
+<h4 id="4-5-1-批量获取文件属性信息"><a href="#4-5-1-批量获取文件属性信息" class="headerlink" title="4.5.1 批量获取文件属性信息"></a>4.5.1 批量获取文件属性信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import com.qiniu.api.auth.digest.Mac;</span><br><span class="line">import com.qiniu.api.config.Config;</span><br><span class="line">import com.qiniu.api.rs.BatchStatRet;</span><br><span class="line">import com.qiniu.api.rs.EntryPath;</span><br><span class="line">import com.qiniu.api.rs.RSClient;</span><br><span class="line"></span><br><span class="line">public class BatchStat &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Config.ACCESS_KEY = &quot;&lt;YOUR APP ACCESS_KEY&gt;&quot;;</span><br><span class="line">		Config.SECRET_KEY = &quot;&lt;YOUR APP SECRET_KEY&gt;&quot;;</span><br><span class="line">		Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);</span><br><span class="line"></span><br><span class="line">		RSClient rs = new RSClient(mac);</span><br><span class="line">		List&lt;EntryPath&gt; entries = new ArrayList&lt;EntryPath&gt;();</span><br><span class="line"></span><br><span class="line">		EntryPath e1 = new EntryPath();</span><br><span class="line">		e1.bucket = &quot;&lt;bucketName&gt;&quot;;</span><br><span class="line">		e1.key = &quot;&lt;key1&gt;&quot;;</span><br><span class="line">		entries.add(e1);</span><br><span class="line"></span><br><span class="line">		EntryPath e2 = new EntryPath();</span><br><span class="line">		e2.bucket = &quot;&lt;bucketName&gt;&quot;;</span><br><span class="line">		e2.key = &quot;&lt;key2&gt;&quot;;</span><br><span class="line">		entries.add(e2);</span><br><span class="line"></span><br><span class="line">		BatchStatRet bsRet = rs.batchStat(entries);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="batch-copy"></a></p>
+<h4 id="4-5-2-批量复制文件"><a href="#4-5-2-批量复制文件" class="headerlink" title="4.5.2 批量复制文件"></a>4.5.2 批量复制文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import com.qiniu.api.auth.digest.Mac;</span><br><span class="line">import com.qiniu.api.config.Config;</span><br><span class="line">import com.qiniu.api.rs.BatchCallRet;</span><br><span class="line">import com.qiniu.api.rs.EntryPath;</span><br><span class="line">import com.qiniu.api.rs.EntryPathPair;</span><br><span class="line">import com.qiniu.api.rs.RSClient;</span><br><span class="line"></span><br><span class="line">public class BatchCopy &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Config.ACCESS_KEY = &quot;&lt;YOUR APP ACCESS_KEY&gt;&quot;;</span><br><span class="line">		Config.SECRET_KEY = &quot;&lt;YOUR APP SECRET_KEY&gt;&quot;;</span><br><span class="line">		Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);</span><br><span class="line">		RSClient rs = new RSClient(mac);</span><br><span class="line">		List&lt;EntryPathPair&gt; entries = new ArrayList&lt;EntryPathPair&gt;();</span><br><span class="line"></span><br><span class="line">		EntryPathPair pair1 = new EntryPathPair();</span><br><span class="line"></span><br><span class="line">		EntryPath src = new EntryPath();</span><br><span class="line">		src.bucket = &quot;&lt;srcBucket&gt;&quot;;</span><br><span class="line">		src.key = &quot;&lt;key1&gt;&quot;;</span><br><span class="line"></span><br><span class="line">		EntryPath dest = new EntryPath();</span><br><span class="line">		dest.bucket = &quot;&lt;destBucket&gt;&quot;;</span><br><span class="line">		dest.key = &quot;&lt;key1&gt;&quot;;</span><br><span class="line"></span><br><span class="line">		pair1.src = src;</span><br><span class="line">		pair1.dest = dest;</span><br><span class="line"></span><br><span class="line">		EntryPathPair pair2 = new EntryPathPair();</span><br><span class="line"></span><br><span class="line">		EntryPath src2 = new EntryPath();</span><br><span class="line">		src2.bucket = &quot;&lt;srcBucket&gt;&quot;;</span><br><span class="line">		src2.key = &quot;&lt;key2&gt;&quot;;</span><br><span class="line"></span><br><span class="line">		EntryPath dest2 = new EntryPath();</span><br><span class="line">		dest2.bucket = &quot;&lt;destBucket&gt;&quot;;</span><br><span class="line">		dest2.key = &quot;&lt;key2&gt;&quot;;</span><br><span class="line"></span><br><span class="line">		pair2.src = src2;</span><br><span class="line">		pair2.dest = dest2;</span><br><span class="line"></span><br><span class="line">		entries.add(pair1);</span><br><span class="line">		entries.add(pair2);</span><br><span class="line"></span><br><span class="line">		BatchCallRet ret = rs.batchCopy(entries);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="batch-move"></a></p>
+<h4 id="4-5-3-批量移动文件"><a href="#4-5-3-批量移动文件" class="headerlink" title="4.5.3 批量移动文件"></a>4.5.3 批量移动文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import com.qiniu.api.auth.digest.Mac;</span><br><span class="line">import com.qiniu.api.config.Config;</span><br><span class="line">import com.qiniu.api.rs.BatchCallRet;</span><br><span class="line">import com.qiniu.api.rs.EntryPath;</span><br><span class="line">import com.qiniu.api.rs.EntryPathPair;</span><br><span class="line">import com.qiniu.api.rs.RSClient;</span><br><span class="line"></span><br><span class="line">public class BatchMove &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Config.ACCESS_KEY = &quot;&lt;YOUR APP ACCESS_KEY&gt;&quot;;</span><br><span class="line">		Config.SECRET_KEY = &quot;&lt;YOUR APP SECRET_KEY&gt;&quot;;</span><br><span class="line">		Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);</span><br><span class="line">		RSClient rs = new RSClient(mac);</span><br><span class="line">		List&lt;EntryPathPair&gt; entries = new ArrayList&lt;EntryPathPair&gt;();</span><br><span class="line"></span><br><span class="line">		EntryPathPair pair1 = new EntryPathPair();</span><br><span class="line"></span><br><span class="line">		EntryPath src = new EntryPath();</span><br><span class="line">		src.bucket = &quot;&lt;srcBucket&gt;&quot;;</span><br><span class="line">		src.key = &quot;&lt;key1&gt;&quot;;</span><br><span class="line"></span><br><span class="line">		EntryPath dest = new EntryPath();</span><br><span class="line">		dest.bucket = &quot;&lt;destBucket&gt;&quot;;</span><br><span class="line">		dest.key = &quot;&lt;key1&gt;&quot;;</span><br><span class="line"></span><br><span class="line">		pair1.src = src;</span><br><span class="line">		pair1.dest = dest;</span><br><span class="line"></span><br><span class="line">		EntryPathPair pair2 = new EntryPathPair();</span><br><span class="line"></span><br><span class="line">		EntryPath src2 = new EntryPath();</span><br><span class="line">		src2.bucket = &quot;&lt;srcBucket&gt;&quot;;</span><br><span class="line">		src2.key =  &quot;&lt;key2&gt;&quot;;</span><br><span class="line"></span><br><span class="line">		EntryPath dest2 = new EntryPath();</span><br><span class="line">		dest2.bucket = &quot;&lt;destBucket&gt;&quot;;</span><br><span class="line">		dest2.key = &quot;&lt;key2&gt;&quot;;</span><br><span class="line"></span><br><span class="line">		pair2.src = src2;</span><br><span class="line">		pair2.dest = dest2;</span><br><span class="line"></span><br><span class="line">		entries.add(pair1);</span><br><span class="line">		entries.add(pair2);</span><br><span class="line"></span><br><span class="line">		BatchCallRet ret = rs.batchMove(entries);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="batch-delete"></a></p>
+<h4 id="4-5-4-批量删除文件"><a href="#4-5-4-批量删除文件" class="headerlink" title="4.5.4 批量删除文件"></a>4.5.4 批量删除文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import com.qiniu.api.auth.digest.Mac;</span><br><span class="line">import com.qiniu.api.config.Config;</span><br><span class="line">import com.qiniu.api.rs.BatchCallRet;</span><br><span class="line">import com.qiniu.api.rs.EntryPath;</span><br><span class="line">import com.qiniu.api.rs.RSClient;</span><br><span class="line"></span><br><span class="line">public class BatchDelete &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Config.ACCESS_KEY = &quot;&lt;YOUR APP ACCESS_KEY&gt;&quot;;</span><br><span class="line">		Config.SECRET_KEY = &quot;&lt;YOUR APP SECRET_KEY&gt;&quot;;</span><br><span class="line">		Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);</span><br><span class="line">		RSClient rs = new RSClient(mac);</span><br><span class="line">		List&lt;EntryPath&gt; entries = new ArrayList&lt;EntryPath&gt;();</span><br><span class="line"></span><br><span class="line">		EntryPath e1 = new EntryPath();</span><br><span class="line">		e1.bucket = &quot;&lt;bucketName&gt;&quot;;</span><br><span class="line">		e1.key = &quot;&lt;key1&gt;&quot;;</span><br><span class="line">		entries.add(e1);</span><br><span class="line"></span><br><span class="line">		EntryPath e2 = new EntryPath();</span><br><span class="line">		e2.bucket = &quot;&lt;bucketName&gt;&quot;;</span><br><span class="line">		e2.key = &quot;&lt;key2&gt;&quot;;</span><br><span class="line">		entries.add(e2);</span><br><span class="line"></span><br><span class="line">		BatchCallRet bret = rs.batchDelete(entries);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参阅: <code>rs.EntryPath</code>, <code>rs.Client.BatchDelete</code></p>
+<p><a name="batch-advanced"></a></p>
+<h4 id="4-5-5-高级批量操作"><a href="#4-5-5-高级批量操作" class="headerlink" title="4.5.5 高级批量操作"></a>4.5.5 高级批量操作</h4><p>批量操作不仅仅支持同时进行多个相同类型的操作, 同时也支持不同的操作.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">to do!</span><br></pre></td></tr></table></figure>
+<p><a name="fop-api"></a></p>
+<h2 id="5-数据处理接口"><a href="#5-数据处理接口" class="headerlink" title="5. 数据处理接口"></a>5. 数据处理接口</h2><p>七牛支持在云端对图像, 视频, 音频等富媒体进行个性化处理</p>
+<p><a name="fop-image"></a></p>
+<h3 id="5-1-图像"><a href="#5-1-图像" class="headerlink" title="5.1 图像"></a>5.1 图像</h3><p><a name="fop-image-info"></a></p>
+<h3 id="5-1-1-查看图像属性"><a href="#5-1-1-查看图像属性" class="headerlink" title="5.1.1 查看图像属性"></a>5.1.1 查看图像属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import com.qiniu.api.fop.ImageInfo;</span><br><span class="line">import com.qiniu.api.fop.ImageInfoRet;</span><br><span class="line"></span><br><span class="line">public class FopImageInfo &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		String url = &quot;&lt;domain&gt;&quot; + &quot;/&quot; + &quot;&lt;key&gt;&quot;;</span><br><span class="line">		ImageInfoRet ret = ImageInfo.call(url);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参阅: <code>fop.ImageInfoRet</code>, <code>fop.ImageInfo</code></p>
+<p><a name="fop-exif"></a></p>
+<h3 id="5-1-2-查看图片EXIF信息"><a href="#5-1-2-查看图片EXIF信息" class="headerlink" title="5.1.2 查看图片EXIF信息"></a>5.1.2 查看图片EXIF信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import com.qiniu.api.fop.ExifRet;</span><br><span class="line">import com.qiniu.api.fop.ImageExif;</span><br><span class="line"></span><br><span class="line">public class FopImageExif &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		String url = &quot;&lt;domain&gt;&quot; + &quot;/&quot; + &quot;&lt;key&gt;&quot;;</span><br><span class="line">		ExifRet ret = ImageExif.call(url);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="fop-image-view"></a></p>
+<h3 id="5-1-3-生成图片预览"><a href="#5-1-3-生成图片预览" class="headerlink" title="5.1.3 生成图片预览"></a>5.1.3 生成图片预览</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import com.qiniu.api.fop.ImageView;</span><br><span class="line">import com.qiniu.api.net.CallRet;</span><br><span class="line"></span><br><span class="line">public class FopImageView &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		String url = &quot;http://domain/key&quot;;</span><br><span class="line">		ImageView iv = new ImageView();</span><br><span class="line">		iv.mode = 1 ;</span><br><span class="line">		iv.width = 100 ;</span><br><span class="line">		iv.height = 200 ;</span><br><span class="line">		iv.quality = 1 ;</span><br><span class="line">		iv.format = &quot;jpg&quot; ;</span><br><span class="line">		CallRet ret = iv.call(url);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="rsf-api"></a></p>
+<h2 id="6-高级资源管理接口-rsf"><a href="#6-高级资源管理接口-rsf" class="headerlink" title="6. 高级资源管理接口(rsf)"></a>6. 高级资源管理接口(rsf)</h2><p><a name="rsf-listPrefix"></a></p>
+<p>批量获取文件列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import com.qiniu.api.auth.digest.Mac;</span><br><span class="line">import com.qiniu.api.config.Config;</span><br><span class="line">import com.qiniu.api.rsf.RSFClient;</span><br><span class="line"></span><br><span class="line">public class ListPrefix &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Config.ACCESS_KEY = &quot;&lt;YOUR APP ACCESS_KEY&gt;&quot;;</span><br><span class="line">		Config.SECRET_KEY = &quot;&lt;YOUR APP SECRET_KEY&gt;&quot;;</span><br><span class="line">		Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);</span><br><span class="line"></span><br><span class="line">		RSFClient client = new RSFClient(mac);</span><br><span class="line">		String marker = &quot;&quot;;</span><br><span class="line"></span><br><span class="line">		List&lt;ListItem&gt; all = new ArrayList&lt;ListItem&gt;();</span><br><span class="line">		ListPrefixRet ret = null;</span><br><span class="line">		while (true) &#123;</span><br><span class="line">			ret = client.listPrifix(bucketName, &quot;&lt;prifix&gt;&quot;, marker, 10);</span><br><span class="line">			marker = ret.marker;</span><br><span class="line">			all.addAll(ret.results);</span><br><span class="line">			if (!ret.ok()) &#123;</span><br><span class="line">				// no more items or error occurs</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (ret.exception.getClass() != RSFEofException.class) &#123;</span><br><span class="line">			// error handler</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="contribution"></a></p>
+<h2 id="7-贡献代码"><a href="#7-贡献代码" class="headerlink" title="7. 贡献代码"></a>7. 贡献代码</h2><ol>
+<li>Fork</li>
+<li>创建您的特性分支 (<code>git checkout -b my-new-feature</code>)</li>
+<li>提交您的改动 (<code>git commit -am &#39;Added some feature&#39;</code>)</li>
+<li>将您的修改记录提交到远程 <code>git</code> 仓库 (<code>git push origin my-new-feature</code>)</li>
+<li>然后到 github 网站的该 <code>git</code> 远程仓库的 <code>my-new-feature</code> 分支下发起 Pull Request</li>
+</ol>
+<p><a name="license"></a></p>
+<h2 id="8-许可证"><a href="#8-许可证" class="headerlink" title="8. 许可证"></a>8. 许可证</h2><p>Copyright (c) 2013 qiniu.com</p>
+<p>基于 MIT 协议发布:</p>
+<ul>
+<li><a href="http://www.opensource.org/licenses/MIT" target="_blank" rel="noopener">www.opensource.org/licenses/MIT</a></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Ubuntu/">Ubuntu</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://kuailelai.com/2015/01/07/七牛云存储/" data-title="Java SDK | 七牛云存储 | 一个程序员" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/01/07/QRSBox使用方法/" title="QRSBox使用方法">
+  <strong>上一篇：</strong><br/>
+  <span>
+  QRSBox使用方法</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/01/07/MyEclipse10的正确破解方法/"  title="MyEclipse10的正确破解方法">
+ <strong>下一篇：</strong><br/> 
+ <span>MyEclipse10的正确破解方法
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-SDK-使用指南"><span class="toc-number">1.</span> <span class="toc-text">Java SDK 使用指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-环境准备"><span class="toc-number">1.2.</span> <span class="toc-text">1. 环境准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-初始化"><span class="toc-number">1.3.</span> <span class="toc-text">2.初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-配置密钥"><span class="toc-number">1.3.1.</span> <span class="toc-text">2.1 配置密钥</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-上传下载接口"><span class="toc-number">1.4.</span> <span class="toc-text">3. 上传下载接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-上传流程"><span class="toc-number">1.4.1.</span> <span class="toc-text">3.1 上传流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-生成上传授权uptoken"><span class="toc-number">1.4.2.</span> <span class="toc-text">3.2 生成上传授权uptoken</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-上传代码"><span class="toc-number">1.4.3.</span> <span class="toc-text">3.3 上传代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-断点续上传、分块并行上传"><span class="toc-number">1.4.4.</span> <span class="toc-text">3.4 断点续上传、分块并行上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-上传策略"><span class="toc-number">1.4.5.</span> <span class="toc-text">3.5 上传策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-文件下载"><span class="toc-number">1.4.6.</span> <span class="toc-text">3.6 文件下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-公有资源下载"><span class="toc-number">1.4.7.</span> <span class="toc-text">3.7 公有资源下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-私有资源下载"><span class="toc-number">1.4.8.</span> <span class="toc-text">3.8 私有资源下载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-资源管理接口"><span class="toc-number">1.5.</span> <span class="toc-text">4. 资源管理接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-查看单个文件属性信息"><span class="toc-number">1.5.1.</span> <span class="toc-text">4.1 查看单个文件属性信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-复制单个文件"><span class="toc-number">1.5.2.</span> <span class="toc-text">4.2 复制单个文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-移动单个文件"><span class="toc-number">1.5.3.</span> <span class="toc-text">4.3 移动单个文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-删除单个文件"><span class="toc-number">1.5.4.</span> <span class="toc-text">4.4 删除单个文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-批量操作"><span class="toc-number">1.5.5.</span> <span class="toc-text">4.5 批量操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-1-批量获取文件属性信息"><span class="toc-number">1.5.5.1.</span> <span class="toc-text">4.5.1 批量获取文件属性信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-2-批量复制文件"><span class="toc-number">1.5.5.2.</span> <span class="toc-text">4.5.2 批量复制文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-3-批量移动文件"><span class="toc-number">1.5.5.3.</span> <span class="toc-text">4.5.3 批量移动文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-4-批量删除文件"><span class="toc-number">1.5.5.4.</span> <span class="toc-text">4.5.4 批量删除文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-5-高级批量操作"><span class="toc-number">1.5.5.5.</span> <span class="toc-text">4.5.5 高级批量操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-数据处理接口"><span class="toc-number">1.6.</span> <span class="toc-text">5. 数据处理接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-图像"><span class="toc-number">1.6.1.</span> <span class="toc-text">5.1 图像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-1-查看图像属性"><span class="toc-number">1.6.2.</span> <span class="toc-text">5.1.1 查看图像属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-2-查看图片EXIF信息"><span class="toc-number">1.6.3.</span> <span class="toc-text">5.1.2 查看图片EXIF信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-3-生成图片预览"><span class="toc-number">1.6.4.</span> <span class="toc-text">5.1.3 生成图片预览</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-高级资源管理接口-rsf"><span class="toc-number">1.7.</span> <span class="toc-text">6. 高级资源管理接口(rsf)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-贡献代码"><span class="toc-number">1.8.</span> <span class="toc-text">7. 贡献代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-许可证"><span class="toc-number">1.9.</span> <span class="toc-text">8. 许可证</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/编程相关/" title="编程相关">编程相关<sup>5</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>17</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java开发/" title="Java开发">Java开发<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/fedora/" title="fedora">fedora<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日志/" title="日志">日志<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hbase/" title="hbase">hbase<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hive/" title="hive">hive<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 生当作人杰 <br/>
+			死亦为鬼雄</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1179900904" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="YuHaiTao">YuHaiTao</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

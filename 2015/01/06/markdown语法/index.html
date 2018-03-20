@@ -1,0 +1,579 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>markdown语法 | 一个程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="YuHaiTao">
+    
+
+    
+    <meta name="description" content="Markdown学习练习笔记/兼文档 哲学 philosophy咳咳。简单说就是“易读”，“易写”。  Markdown is intended to be as easy-to-read and easy-to-write as is feasible.">
+<meta name="keywords" content="markdown">
+<meta property="og:type" content="article">
+<meta property="og:title" content="markdown语法">
+<meta property="og:url" content="http://kuailelai.com/2015/01/06/markdown语法/index.html">
+<meta property="og:site_name" content="一个程序员">
+<meta property="og:description" content="Markdown学习练习笔记/兼文档 哲学 philosophy咳咳。简单说就是“易读”，“易写”。  Markdown is intended to be as easy-to-read and easy-to-write as is feasible.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://kuailelai.com/2015/01/06/img/author.jpg">
+<meta property="og:updated_time" content="2015-05-24T07:14:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="markdown语法">
+<meta name="twitter:description" content="Markdown学习练习笔记/兼文档 哲学 philosophy咳咳。简单说就是“易读”，“易写”。  Markdown is intended to be as easy-to-read and easy-to-write as is feasible.">
+<meta name="twitter:image" content="http://kuailelai.com/2015/01/06/img/author.jpg">
+
+    
+    <link rel="alternative" href="/atom.xml" title="一个程序员" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="一个程序员" title="一个程序员"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一个程序员">一个程序员</a></h1>
+				<h2 class="blog-motto">程序员是值得尊敬的，程序员的双手是魔术师的双手。他们把枯燥无味的代码变成了丰富多彩的软件</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:kuailelai.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/06/markdown语法/" title="markdown语法" itemprop="url">markdown语法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-06T09:57:34.000Z" itemprop="datePublished"> 发表于 2015-01-06</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#哲学-philosophy"><span class="toc-number">1.</span> <span class="toc-text">哲学 philosophy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标题-HEADERS"><span class="toc-number">2.</span> <span class="toc-text">标题 HEADERS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一级标题-H1"><span class="toc-number">2.1.</span> <span class="toc-text">一级标题 H1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二级标题-H2"><span class="toc-number">2.2.</span> <span class="toc-text">二级标题 H2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三级-六级标题"><span class="toc-number">2.3.</span> <span class="toc-text">三级-六级标题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用-Blockquotes"><span class="toc-number">3.</span> <span class="toc-text">引用 Blockquotes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表-LIST"><span class="toc-number">4.</span> <span class="toc-text">列表 LIST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#无序列表-Unordered-lists"><span class="toc-number">4.1.</span> <span class="toc-text">无序列表 Unordered lists</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序列表-Ordered-lists"><span class="toc-number">4.2.</span> <span class="toc-text">有序列表 Ordered lists</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链接"><span class="toc-number">5.</span> <span class="toc-text">链接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#行内式"><span class="toc-number">5.1.</span> <span class="toc-text">行内式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考式"><span class="toc-number">5.2.</span> <span class="toc-text">参考式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码块-CODE-BLOCKS"><span class="toc-number">6.</span> <span class="toc-text">代码块 CODE BLOCKS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加粗-斜体-EMPHASIS"><span class="toc-number">7.</span> <span class="toc-text">加粗/斜体 EMPHASIS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图像-IMAGES"><span class="toc-number">8.</span> <span class="toc-text">图像 IMAGES</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考式-1"><span class="toc-number">8.1.</span> <span class="toc-text">参考式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">9.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#电子邮件-email"><span class="toc-number">9.1.</span> <span class="toc-text">电子邮件 email</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反斜杠"><span class="toc-number">9.2.</span> <span class="toc-text">反斜杠</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>Markdown学习练习笔记/兼文档</p>
+<h2 id="哲学-philosophy"><a href="#哲学-philosophy" class="headerlink" title="哲学 philosophy"></a>哲学 philosophy</h2><p>咳咳。简单说就是“易读”，“易写”。</p>
+<blockquote>
+<p>Markdown is intended to be as easy-to-read and easy-to-write as is feasible.</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="标题-HEADERS"><a href="#标题-HEADERS" class="headerlink" title="标题 HEADERS"></a>标题 HEADERS</h2><h3 id="一级标题-H1"><a href="#一级标题-H1" class="headerlink" title="一级标题 H1"></a>一级标题 H1</h3><pre><code># 这是一个一级标题 header1
+
+这还是一个一级标题 header1
+===========
+</code></pre><h3 id="二级标题-H2"><a href="#二级标题-H2" class="headerlink" title="二级标题 H2"></a>二级标题 H2</h3><pre><code>## 这是一个二级标题 H2
+
+这还是一个二级标题 H2
+--------
+</code></pre><h3 id="三级-六级标题"><a href="#三级-六级标题" class="headerlink" title="三级-六级标题"></a>三级-六级标题</h3><pre><code>### 三级标题 H3
+……
+###### 六级标题 H6
+</code></pre><p>只有一种写法了。</p>
+<h2 id="引用-Blockquotes"><a href="#引用-Blockquotes" class="headerlink" title="引用 Blockquotes"></a>引用 Blockquotes</h2><pre><code>&gt; Smile, breathe and go slowly.
+</code></pre><blockquote>
+<p>Smile, breathe and go slowly.</p>
+</blockquote>
+<h2 id="列表-LIST"><a href="#列表-LIST" class="headerlink" title="列表 LIST"></a>列表 LIST</h2><h3 id="无序列表-Unordered-lists"><a href="#无序列表-Unordered-lists" class="headerlink" title="无序列表 Unordered lists"></a>无序列表 Unordered lists</h3><pre><code>- 第一点
+- 第二点
+</code></pre><ul>
+<li>第一点</li>
+<li>第二点</li>
+</ul>
+<h3 id="有序列表-Ordered-lists"><a href="#有序列表-Ordered-lists" class="headerlink" title="有序列表 Ordered lists"></a>有序列表 Ordered lists</h3><pre><code>3. 第一点
+2. 第二点
+</code></pre><p><em>有趣的是这里前面的数字不重要，无论写什么数字都会生成从1开始递增的有序列表。比如我上面这个例子。会生成。</em></p>
+<ol>
+<li>第一点</li>
+<li>第二点</li>
+</ol>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><h3 id="行内式"><a href="#行内式" class="headerlink" title="行内式"></a>行内式</h3><pre><code>[曼珠沙华](http://blog.wileam.com/ &quot;生活博客&quot;)
+</code></pre><p><a href="http://blog.wileam.com/" title="生活博客" target="_blank" rel="noopener">曼珠沙华</a></p>
+<h3 id="参考式"><a href="#参考式" class="headerlink" title="参考式"></a>参考式</h3><pre><code>[曼珠沙华][1], [技术博客][2]
+[1]: http://blog.wileam.com/ &quot;(此处可选)生活博客&quot;
+[2]: http://code.wileam.com/ &quot;(此处可选)技术博客&quot;
+</code></pre><p>[曼珠沙华][1], [技术博客][2]<br>[1]: <a href="http://blog.wileam.com/" target="_blank" rel="noopener">http://blog.wileam.com/</a> “(此处可选)生活博客”<br>[2]: <a href="http://code.wileam.com/" target="_blank" rel="noopener">http://code.wileam.com/</a> “(此处可选)技术博客”</p>
+<p>注意最下面的参考链接是直接不会出现的。</p>
+<h2 id="代码块-CODE-BLOCKS"><a href="#代码块-CODE-BLOCKS" class="headerlink" title="代码块 CODE BLOCKS"></a>代码块 CODE BLOCKS</h2><p>缩进 4spaces/1Tab。</p>
+<pre><code>&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;span4&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;span8&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><h2 id="加粗-斜体-EMPHASIS"><a href="#加粗-斜体-EMPHASIS" class="headerlink" title="加粗/斜体 EMPHASIS"></a>加粗/斜体 EMPHASIS</h2><pre><code>**加粗**
+*斜体*
+</code></pre><p><strong>加粗</strong><br><em>斜体</em></p>
+<h2 id="图像-IMAGES"><a href="#图像-IMAGES" class="headerlink" title="图像 IMAGES"></a>图像 IMAGES</h2><p>###行内式</p>
+<pre><code>![Avatar](/img/author.jpg &quot;Optional title&quot;)
+</code></pre><p><img src="../img/author.jpg" alt="Avatar" title="Optional title"></p>
+<h3 id="参考式-1"><a href="#参考式-1" class="headerlink" title="参考式"></a>参考式</h3><pre><code>![Avatar-gavatar][3]
+[3]: /img/author.jpg &quot;(optional)avatar-1&quot;
+</code></pre><p>![Avatar-gavatar][3]<br>[3]: /img/author.jpg “(optional)avatar-1”</p>
+<p>目前markdown还不能更改大小，如果需要设置宽高需要写html \ &lt; img \ &gt;代码。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="电子邮件-email"><a href="#电子邮件-email" class="headerlink" title="电子邮件 email"></a>电子邮件 email</h3><pre><code>&lt;abc@gmail.com&gt;
+</code></pre><p><a href="mailto:&#x61;&#x62;&#99;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#109;" target="_blank" rel="noopener">&#x61;&#x62;&#99;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#109;</a></p>
+<h3 id="反斜杠"><a href="#反斜杠" class="headerlink" title="反斜杠"></a>反斜杠</h3><pre><code>\*我就是想显示星号不想斜体\*
+</code></pre><p>*我就是想显示星号不想斜体*</p>
+<hr>
+<p>reference: <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank" rel="noopener">markdown syntax</a><br>本文源码：<a href="https://github.com/wileam/code/blob/master/source/_posts/markdown-syntax.md" target="_blank" rel="noopener">https://github.com/wileam/code/blob/master/source/_posts/markdown-syntax.md</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/markdown/">markdown</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://kuailelai.com/2015/01/06/markdown语法/" data-title="markdown语法 | 一个程序员" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/01/06/Ubuntu上安装hexo/" title="Ubuntu上安装hexo">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Ubuntu上安装hexo</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/01/06/Ubuntu下git-cola的安装/"  title="Ubuntu下git-cola的安装">
+ <strong>下一篇：</strong><br/> 
+ <span>Ubuntu下git-cola的安装
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#哲学-philosophy"><span class="toc-number">1.</span> <span class="toc-text">哲学 philosophy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标题-HEADERS"><span class="toc-number">2.</span> <span class="toc-text">标题 HEADERS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一级标题-H1"><span class="toc-number">2.1.</span> <span class="toc-text">一级标题 H1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二级标题-H2"><span class="toc-number">2.2.</span> <span class="toc-text">二级标题 H2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三级-六级标题"><span class="toc-number">2.3.</span> <span class="toc-text">三级-六级标题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用-Blockquotes"><span class="toc-number">3.</span> <span class="toc-text">引用 Blockquotes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表-LIST"><span class="toc-number">4.</span> <span class="toc-text">列表 LIST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#无序列表-Unordered-lists"><span class="toc-number">4.1.</span> <span class="toc-text">无序列表 Unordered lists</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序列表-Ordered-lists"><span class="toc-number">4.2.</span> <span class="toc-text">有序列表 Ordered lists</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链接"><span class="toc-number">5.</span> <span class="toc-text">链接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#行内式"><span class="toc-number">5.1.</span> <span class="toc-text">行内式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考式"><span class="toc-number">5.2.</span> <span class="toc-text">参考式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码块-CODE-BLOCKS"><span class="toc-number">6.</span> <span class="toc-text">代码块 CODE BLOCKS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加粗-斜体-EMPHASIS"><span class="toc-number">7.</span> <span class="toc-text">加粗/斜体 EMPHASIS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图像-IMAGES"><span class="toc-number">8.</span> <span class="toc-text">图像 IMAGES</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考式-1"><span class="toc-number">8.1.</span> <span class="toc-text">参考式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">9.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#电子邮件-email"><span class="toc-number">9.1.</span> <span class="toc-text">电子邮件 email</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反斜杠"><span class="toc-number">9.2.</span> <span class="toc-text">反斜杠</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/编程相关/" title="编程相关">编程相关<sup>5</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>17</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java开发/" title="Java开发">Java开发<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/fedora/" title="fedora">fedora<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日志/" title="日志">日志<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hbase/" title="hbase">hbase<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hive/" title="hive">hive<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 生当作人杰 <br/>
+			死亦为鬼雄</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1179900904" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="YuHaiTao">YuHaiTao</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

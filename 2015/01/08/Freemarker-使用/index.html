@@ -1,0 +1,796 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Freemarker 使用 | 一个程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="YuHaiTao">
+    
+
+    
+    <meta name="description" content="FreeMarker的模板文件并不比HTML页面复杂多少,FreeMarker模板文件主要由如下4个部分组成:  文本:直接输出的部分 注释:&amp;lt;#– … –&amp;gt;格式部分,不会输出 插值:即${…}或#{…}格式的部分,将使用数据模型中的部分替代输出 FTL指令:FreeMarker指定,和HTML标记类似,名字前加#予以区分,不会输出下面是一个FreeMarker模板的例子,包含了以上所">
+<meta name="keywords" content="Java开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Freemarker 使用">
+<meta property="og:url" content="http://kuailelai.com/2015/01/08/Freemarker-使用/index.html">
+<meta property="og:site_name" content="一个程序员">
+<meta property="og:description" content="FreeMarker的模板文件并不比HTML页面复杂多少,FreeMarker模板文件主要由如下4个部分组成:  文本:直接输出的部分 注释:&amp;lt;#– … –&amp;gt;格式部分,不会输出 插值:即${…}或#{…}格式的部分,将使用数据模型中的部分替代输出 FTL指令:FreeMarker指定,和HTML标记类似,名字前加#予以区分,不会输出下面是一个FreeMarker模板的例子,包含了以上所">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2016-08-17T07:25:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Freemarker 使用">
+<meta name="twitter:description" content="FreeMarker的模板文件并不比HTML页面复杂多少,FreeMarker模板文件主要由如下4个部分组成:  文本:直接输出的部分 注释:&amp;lt;#– … –&amp;gt;格式部分,不会输出 插值:即${…}或#{…}格式的部分,将使用数据模型中的部分替代输出 FTL指令:FreeMarker指定,和HTML标记类似,名字前加#予以区分,不会输出下面是一个FreeMarker模板的例子,包含了以上所">
+
+    
+    <link rel="alternative" href="/atom.xml" title="一个程序员" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="一个程序员" title="一个程序员"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一个程序员">一个程序员</a></h1>
+				<h2 class="blog-motto">程序员是值得尊敬的，程序员的双手是魔术师的双手。他们把枯燥无味的代码变成了丰富多彩的软件</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:kuailelai.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/08/Freemarker-使用/" title="Freemarker 使用" itemprop="url">Freemarker 使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-08T12:33:00.000Z" itemprop="datePublished"> 发表于 2015-01-08</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#FTL指令规则"><span class="toc-number">1.</span> <span class="toc-text">FTL指令规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插值规则"><span class="toc-number">2.</span> <span class="toc-text">插值规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通用插值"><span class="toc-number">2.1.</span> <span class="toc-text">通用插值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数字格式化插值"><span class="toc-number">2.2.</span> <span class="toc-text">数字格式化插值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表达式"><span class="toc-number">3.</span> <span class="toc-text">表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接指定值"><span class="toc-number">3.1.</span> <span class="toc-text">直接指定值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数值"><span class="toc-number">3.2.</span> <span class="toc-text">数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map对象"><span class="toc-number">3.3.</span> <span class="toc-text">Map对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出变量值"><span class="toc-number">4.</span> <span class="toc-text">输出变量值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顶层变量"><span class="toc-number">4.1.</span> <span class="toc-text">顶层变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输出集合元素"><span class="toc-number">4.2.</span> <span class="toc-text">输出集合元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输出Map元素"><span class="toc-number">4.3.</span> <span class="toc-text">输出Map元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串操作"><span class="toc-number">4.4.</span> <span class="toc-text">字符串操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合连接运算符"><span class="toc-number">4.5.</span> <span class="toc-text">集合连接运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map连接运算符"><span class="toc-number">4.6.</span> <span class="toc-text">Map连接运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算术运算符"><span class="toc-number">4.7.</span> <span class="toc-text">算术运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较运算符"><span class="toc-number">4.8.</span> <span class="toc-text">比较运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑运算符"><span class="toc-number">4.9.</span> <span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内建函数"><span class="toc-number">4.10.</span> <span class="toc-text">内建函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空值处理运算符"><span class="toc-number">4.11.</span> <span class="toc-text">空值处理运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运算符的优先级"><span class="toc-number">4.12.</span> <span class="toc-text">运算符的优先级</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeMarker的常用指令"><span class="toc-number">5.</span> <span class="toc-text">FreeMarker的常用指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if指令"><span class="toc-number">5.1.</span> <span class="toc-text">if指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#switch-case-default-break指令"><span class="toc-number">5.2.</span> <span class="toc-text">switch , case , default , break指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#list-break指令"><span class="toc-number">5.3.</span> <span class="toc-text">list, break指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#include指令"><span class="toc-number">5.4.</span> <span class="toc-text">include指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#import指令"><span class="toc-number">5.5.</span> <span class="toc-text">import指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#noparse指令"><span class="toc-number">5.6.</span> <span class="toc-text">noparse指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#escape-noescape指令"><span class="toc-number">5.7.</span> <span class="toc-text">escape , noescape指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#assign指令"><span class="toc-number">5.8.</span> <span class="toc-text">assign指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setting指令"><span class="toc-number">5.9.</span> <span class="toc-text">setting指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#macro-nested-return指令"><span class="toc-number">5.10.</span> <span class="toc-text">macro , nested , return指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">6.</span> <span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#指令"><span class="toc-number">6.1.</span> <span class="toc-text">指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#if-else-elseif"><span class="toc-number">6.1.1.</span> <span class="toc-text">if, else, elseif</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#switch-case-default-break"><span class="toc-number">6.1.2.</span> <span class="toc-text">switch, case, default, break</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#list-break"><span class="toc-number">6.1.3.</span> <span class="toc-text">list, break</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#include"><span class="toc-number">6.1.4.</span> <span class="toc-text">include</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Import"><span class="toc-number">6.1.5.</span> <span class="toc-text">Import</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#compress"><span class="toc-number">6.1.6.</span> <span class="toc-text">compress</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#escape-noescape"><span class="toc-number">6.1.7.</span> <span class="toc-text">escape, noescape</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#assign"><span class="toc-number">6.1.8.</span> <span class="toc-text">assign</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#global"><span class="toc-number">6.1.9.</span> <span class="toc-text">global</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#setting"><span class="toc-number">6.1.10.</span> <span class="toc-text">setting</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#macro-nested-return"><span class="toc-number">6.1.11.</span> <span class="toc-text">macro, nested, return</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#t-lt-rt"><span class="toc-number">6.1.12.</span> <span class="toc-text">t, lt, rt</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些常用方法或注意事项"><span class="toc-number">7.</span> <span class="toc-text">一些常用方法或注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表达式转换类"><span class="toc-number">7.1.</span> <span class="toc-text">表达式转换类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数字循环"><span class="toc-number">7.2.</span> <span class="toc-text">数字循环</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对浮点取整数"><span class="toc-number">7.2.1.</span> <span class="toc-text">对浮点取整数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#给变量默认值"><span class="toc-number">7.2.2.</span> <span class="toc-text">给变量默认值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#判断对象是不是null"><span class="toc-number">7.2.3.</span> <span class="toc-text">判断对象是不是null</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用格式化日期"><span class="toc-number">7.2.4.</span> <span class="toc-text">常用格式化日期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加全局共享变量数据模型"><span class="toc-number">7.2.5.</span> <span class="toc-text">添加全局共享变量数据模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串处理-内置方法"><span class="toc-number">7.3.</span> <span class="toc-text">字符串处理(内置方法)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#substring的用法"><span class="toc-number">7.3.1.</span> <span class="toc-text">substring的用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类似String-split的用法"><span class="toc-number">7.3.2.</span> <span class="toc-text">类似String.split的用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#取得字符串长度"><span class="toc-number">7.3.3.</span> <span class="toc-text">取得字符串长度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#freemarker在web开发中注意事项"><span class="toc-number">8.</span> <span class="toc-text">freemarker在web开发中注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web中常用的几个对象"><span class="toc-number">8.1.</span> <span class="toc-text">web中常用的几个对象</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>FreeMarker的模板文件并不比HTML页面复杂多少,FreeMarker模板文件主要由如下4个部分组成:</p>
+<ol>
+<li>文本:直接输出的部分</li>
+<li>注释:&lt;#– … –&gt;格式部分,不会输出</li>
+<li>插值:即${…}或#{…}格式的部分,将使用数据模型中的部分替代输出</li>
+<li>FTL指令:FreeMarker指定,和HTML标记类似,名字前加#予以区分,不会输出<br>下面是一个FreeMarker模板的例子,包含了以上所说的4个部分<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Welcome!<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">#--</span> 注释部分 <span class="attr">--</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">#--</span> 下面使用插值 <span class="attr">--</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome $&#123;user&#125; !<span class="tag">&lt;/<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>We have these animals:<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">u1</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">#--</span> 使用<span class="attr">FTL</span>指令 <span class="attr">--</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">#list</span> <span class="attr">animals</span> <span class="attr">as</span> <span class="attr">being</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">li</span>&gt;</span>$&#123;being.name&#125; for $&#123;being.price&#125; Euros<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">#list</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">u1</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<a id="more"></a>
+<h2 id="FTL指令规则"><a href="#FTL指令规则" class="headerlink" title="FTL指令规则"></a>FTL指令规则</h2><p>在FreeMarker中,使用FTL标签来使用指令,FreeMarker有3种FTL标签,这和HTML标签是完全类似的.</p>
+<ol>
+<li>开始标签:<code>&lt;#directivename parameter&gt;</code></li>
+<li>结束标签:<code>&lt;/#directivename&gt;</code></li>
+<li>空标签:<code>&lt;#directivename parameter/&gt;</code><blockquote>
+<p>实际上,使用标签时前面的符号#也可能变成@,如果该指令是一个用户指令而不是系统内建指令时,应将#符号改成@符号.<br>使用FTL标签时,应该有正确的嵌套,而不是交叉使用,这和XML标签的用法完全一样.如果全用不存在的指令,FreeMarker不会使用模板输出,而是产生一个错误消息.FreeMarker会忽略FTL标签中的空白字符.值得注意的是&lt; , /&gt; 和指令之间不允许有空白字符.</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="插值规则"><a href="#插值规则" class="headerlink" title="插值规则"></a>插值规则</h2><p>FreeMarker的插值有如下两种类型:1,通用插值${expr};2,数字格式化插值:#{expr}或#{expr;format}</p>
+<h3 id="通用插值"><a href="#通用插值" class="headerlink" title="通用插值"></a>通用插值</h3><p>对于通用插值,又可以分为以下4种情况:</p>
+<ol>
+<li>插值结果为字符串值:直接输出表达式结果</li>
+<li>插值结果为数字值:根据默认格式(由#setting指令设置)将表达式结果转换成文本输出.可以使用内建的字符串函数格式化单个插值,如下面的例子:<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">#settion</span> <span class="attr">number_format</span>=<span class="string">"currency"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">#assign</span> <span class="attr">answer</span>=<span class="string">42/</span>&gt;</span></span><br><span class="line">$&#123;answer&#125;</span><br><span class="line">$&#123;answer?string&#125; <span class="tag">&lt;<span class="name">#--</span> <span class="attr">the</span> <span class="attr">same</span> <span class="attr">as</span> $&#123;<span class="attr">answer</span>&#125; <span class="attr">--</span>&gt;</span></span><br><span class="line">$&#123;answer?string.number&#125;</span><br><span class="line">$&#123;answer?string.currency&#125;</span><br><span class="line">$&#123;answer?string.percent&#125;</span><br><span class="line">$&#123;answer&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>输出结果是:<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">$42</span>.00</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">$42</span>.00</span></span><br><span class="line"><span class="number">42</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">$42</span>.00</span></span><br><span class="line"><span class="number">4</span>,<span class="number">200</span>%</span><br></pre></td></tr></table></figure></p>
+<p>3 插值结果为日期值:根据默认格式(由#setting指令设置)将表达式结果转换成文本输出.可以使用内建的字符串函数格式化单个插值,如下面的例子:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">&#123;lastUpdated?string(<span class="string">"yyyy-MM-dd HH:mm:ss zzzz"</span>)&#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;lastUpdated?string(<span class="string">"EEE, MMM d, ''yy"</span>)&#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;lastUpdated?string(<span class="string">"EEEE, MMMM dd, yyyy, hh:mm:ss a '('zzz')'"</span>)&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>输出结果是:<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2008</span>-<span class="number">04</span>-<span class="number">08</span> <span class="number">08</span>:<span class="number">08</span>:<span class="number">08</span> Pacific Daylight Time</span><br><span class="line"><span class="built_in">Tue,</span> Apr <span class="number">8</span>, '<span class="number">03</span></span><br><span class="line"><span class="built_in">Tuesday,</span> April <span class="number">08</span>, <span class="number">2003</span>, <span class="number">08</span>:<span class="number">08</span>:<span class="number">08</span> PM (PDT)</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>插值结果为布尔值:根据默认格式(由#setting指令设置)将表达式结果转换成文本输出.可以使用内建的字符串函数格式化单个插值,如下面的例子:<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">assign</span> foo=true/&gt;</span><br><span class="line"><span class="symbol">$</span>&#123;foo?string(<span class="string">"yes"</span>, <span class="string">"no"</span>)&#125;</span><br><span class="line">输出结果是:</span><br><span class="line"><span class="keyword">yes</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="数字格式化插值"><a href="#数字格式化插值" class="headerlink" title="数字格式化插值"></a>数字格式化插值</h3><p>数字格式化插值可采用#{expr;format}形式来格式化数字,其中format可以是:<br>mX:小数部分最小X位<br>MX:小数部分最大X位<br>如下面的例子:<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;#assign x=<span class="number">2.582</span>/&gt;</span><br><span class="line">&lt;#assign y=<span class="number">4</span>/&gt;</span><br><span class="line">#&#123;x; M2&#125; &lt;#-- 输出<span class="number">2.58</span> --&gt;</span><br><span class="line">#&#123;y; M2&#125; &lt;#-- 输出<span class="number">4</span> --&gt;</span><br><span class="line">#&#123;x; m2&#125; &lt;#-- 输出<span class="number">2.6</span> --&gt;</span><br><span class="line">#&#123;y; m2&#125; &lt;#-- 输出<span class="number">4.0</span> --&gt;</span><br><span class="line">#&#123;x; m1M2&#125; &lt;#-- 输出<span class="number">2.58</span> --&gt;</span><br><span class="line">#&#123;x; m1M2&#125; &lt;#-- 输出<span class="number">4.0</span> --&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h2><p>表达式是FreeMarker模板的核心功能,表达式放置在插值语法${}之中时,表明需要输出表达式的值;表达式语法也可与FreeMarker标签结合,用于控制输出.实际上FreeMarker的表达式功能非常强大,它不仅支持直接指定值,输出变量值,也支持字符串格式化输出和集合访问等功能.</p>
+<h3 id="直接指定值"><a href="#直接指定值" class="headerlink" title="直接指定值"></a>直接指定值</h3><p>使用直接指定值语法让FreeMarker直接输出插值中的值,而不是输出变量值.直接指定值可以是字符串,数值,布尔值,集合和MAP对象.</p>
+<p>###字符串<br>直接指定字符串值使用单引号或双引号限定,如果字符串值中包含特殊字符需要转义,看下面的例子:<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$&#123;<span class="string">"我的文件保存在C:\\盘"</span>&#125;</span><br><span class="line">$&#123;<span class="string">'我名字是\"annlee\"'</span>&#125;</span><br><span class="line">输出结果是:</span><br><span class="line">我的文件保存在C:<span class="string">\盘</span></span><br><span class="line">我名字是<span class="string">"annlee"</span></span><br><span class="line">FreeMarker支持如下转义字符:</span><br><span class="line"><span class="string">\";双引号(u0022)</span></span><br><span class="line"><span class="string">\';单引号(u0027)</span></span><br><span class="line"><span class="string">\\;反斜杠(u005C)</span></span><br><span class="line"><span class="string">\n;换行(u000A)</span></span><br><span class="line"><span class="string">\r;回车(u000D)</span></span><br><span class="line"><span class="string">\t;Tab(u0009)</span></span><br><span class="line"><span class="string">\b;退格键(u0008)</span></span><br><span class="line"><span class="string">\f;Form</span> feed(u000C)</span><br><span class="line"><span class="string">\l;&lt;</span></span><br><span class="line"><span class="string">\g;&gt;</span></span><br><span class="line"><span class="string">\a;&amp;</span></span><br><span class="line"><span class="string">\&#123;;&#123;</span></span><br><span class="line"><span class="string">\xCode;</span></span><br></pre></td></tr></table></figure></p>
+<p>直接通过4位的16进制数来指定Unicode码,输出该unicode码对应的字符.<br>如果某段文本中包含大量的特殊符号,FreeMarker提供了另一种特殊格式:可以在指定字符串内容的引号前增加r标记,在r标记后的文件将会直接输出.看如下代码:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$&#123;<span class="string">r"$&#123;foo&#125;"</span>&#125;</span><br><span class="line">$&#123;<span class="string">r"C:\foo\bar"</span>&#125;</span><br><span class="line">输出结果是:</span><br><span class="line">$&#123;foo&#125;</span><br><span class="line">C:\foo\bar</span><br></pre></td></tr></table></figure></p>
+<h3 id="数值"><a href="#数值" class="headerlink" title="数值"></a>数值</h3><p>表达式中的数值直接输出,不需要引号.小数点使用”.”分隔,不能使用分组”,”符号.FreeMarker目前还不支持科学计数法,所以”1E3”是错误的.在FreeMarker表达式中使用数值需要注意以下几点:  </p>
+<ol>
+<li>数值不能省略小数点前面的0,所以”.5”是错误的写法</li>
+<li>数值8 , +8 , 8.00都是相同的</li>
+<li>布尔值 直接使用true和false,不使用引号.</li>
+<li>集合</li>
+</ol>
+<p>集合以方括号包括,各集合元素之间以英文逗号”,”分隔,看如下的例子:<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">list</span> [<span class="string">"星期一"</span>, <span class="string">"星期二"</span>, <span class="string">"星期三"</span>, <span class="string">"星期四"</span>, <span class="string">"星期五"</span>, <span class="string">"星期六"</span>, <span class="string">"星期天"</span>] <span class="keyword">as</span> x&gt;</span><br><span class="line"><span class="variable">$&#123;x&#125;</span></span><br><span class="line">&lt;/#<span class="keyword">list</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>输出结果是:<br>星期一<br>星期二<br>星期三<br>星期四<br>星期五<br>星期六<br>星期天<br>除此之外,集合元素也可以是表达式,例子如下:<br>    [2 + 2, [1, 2, 3, 4], “whatnot”]<br>还可以使用数字范围定义数字集合,如2..5等同于[2, 3, 4, 5],但是更有效率.注意,使用数字范围来定义集合时无需使用方括号,数字范围也支持反递增的数字范围,如5..2  </p>
+<h3 id="Map对象"><a href="#Map对象" class="headerlink" title="Map对象"></a>Map对象</h3><p>Map对象使用花括号包括,Map中的key-value对之间以英文冒号”:”分隔,多组key-value对之间以英文逗号”,”分隔.下面是一个例子:<br>{“语文”:78, “数学”:80}<br>Map对象的key和value都是表达式,但是key必须是字符串</p>
+<h2 id="输出变量值"><a href="#输出变量值" class="headerlink" title="输出变量值"></a>输出变量值</h2><p>FreeMarker的表达式输出变量时,这些变量可以是顶层变量,也可以是Map对象中的变量,还可以是集合中的变量,并可以使用点(.)语法来访问Java对象的属性.下面分别讨论这些情况  </p>
+<h3 id="顶层变量"><a href="#顶层变量" class="headerlink" title="顶层变量"></a>顶层变量</h3><p>所谓顶层变量就是直接放在数据模型中的值,例如有如下数据模型:<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Map root = <span class="keyword">new</span> HashMap();   <span class="comment">//创建数据模型</span></span><br><span class="line">root.<span class="built_in">put</span>(<span class="string">"name"</span>,<span class="string">"annlee"</span>);   <span class="comment">//name是一个顶层变量</span></span><br></pre></td></tr></table></figure></p>
+<p>对于顶层变量,直接使用${variableName}来输出变量值,变量名只能是字母,数字,下划线,$,@和#的组合,且不能以数字开头号.为了输出上面的name的值,可以使用如下语法:<br>    ${name}</p>
+<h3 id="输出集合元素"><a href="#输出集合元素" class="headerlink" title="输出集合元素"></a>输出集合元素</h3><p>如果需要输出集合元素,则可以根据集合元素的索引来输出集合元素,集合元素的索引以方括号指定.假设有索引:<br>[“星期一”,”星期二”,”星期三”,”星期四”,”星期五”,”星期六”,”星期天”].该索引名为week,如果需要输出星期三,则可以使用如下语法<br>${week[2]}   //输出第三个集合元素<br>此外,FreeMarker还支持返回集合的子集合,如果需要返回集合的子集合,则可以使用如下语法:<br>week[3..5]   //返回week集合的子集合,子集合中的元素是week集合中的第4-6个元素  </p>
+<h3 id="输出Map元素"><a href="#输出Map元素" class="headerlink" title="输出Map元素"></a>输出Map元素</h3><p>这里的Map对象可以是直接HashMap的实例,甚至包括JavaBean实例,对于JavaBean实例而言,我们一样可以把其当成属性为key,属性值为value的Map实例.为了输出Map元素的值,可以使用点语法或方括号语法.假如有下面的数据模型:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Map root = <span class="keyword">new</span> HashMap();</span><br><span class="line">Book book = <span class="keyword">new</span> Book();</span><br><span class="line">Author author = <span class="keyword">new</span> Author();</span><br><span class="line">author.setName(<span class="string">"annlee"</span>);</span><br><span class="line">author.setAddress(<span class="string">"gz"</span>);</span><br><span class="line">book.setName(<span class="string">"struts2"</span>);</span><br><span class="line">book.setAuthor(author);</span><br><span class="line">root.put(<span class="string">"info"</span>,<span class="string">"struts"</span>);</span><br><span class="line">root.put(<span class="string">"book"</span>, book);</span><br></pre></td></tr></table></figure></p>
+<p>为了访问数据模型中名为struts2的书的作者的名字,可以使用如下语法:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">book.author.name    <span class="comment">//全部使用点语法</span></span><br><span class="line">book[<span class="string">"author"</span>].name</span><br><span class="line">book.author[<span class="string">"name"</span>]    <span class="comment">//混合使用点语法和方括号语法</span></span><br><span class="line">book[<span class="string">"author"</span>][<span class="string">"name"</span>]   <span class="comment">//全部使用方括号语法</span></span><br></pre></td></tr></table></figure></p>
+<p>使用点语法时,变量名字有顶层变量一样的限制,但方括号语法没有该限制,因为名字可以是任意表达式的结果.</p>
+<h3 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h3><p>FreeMarker的表达式对字符串操作非常灵活,可以将字符串常量和变量连接起来,也可以返回字符串的子串等.<br>字符串连接有两种语法:</p>
+<ol>
+<li>使用${..}或#{..}在字符串常量部分插入表达式的值,从而完成字符串连接.</li>
+<li>直接使用连接运算符+来连接字符串<br>例如有如下数据模型:<br><code>Map root = new HashMap(); root.put(&quot;user&quot;,&quot;annlee&quot;);</code><br>下面将user变量和常量连接起来:<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">&#123;<span class="string">"hello, <span class="variable">$&#123;user&#125;</span>!"</span>&#125;   //使用第一种语法来连接</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;<span class="string">"hello, "</span> + user + <span class="string">"!"</span>&#125; //使用+号来连接</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>上面的输出字符串都是hello,annlee!,可以看出这两种语法的效果完全一样.<br>值得注意的是,${..}只能用于文本部分,不能用于表达式,下面的代码是错误的:<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">if</span> $&#123;isBig&#125;&gt;Wow!&lt;/#<span class="keyword">if</span>&gt;</span><br><span class="line">&lt;#<span class="keyword">if</span> <span class="string">"$&#123;isBig&#125;"</span>&gt;Wow!&lt;/#<span class="keyword">if</span>&gt;</span><br><span class="line">应该写成:&lt;#<span class="keyword">if</span> isBig&gt;Wow!&lt;/#<span class="keyword">if</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>截取子串可以根据字符串的索引来进行,截取子串时如果只指定了一个索引值,则用于取得字符串中指定索引所对应的字符;如果指定两个索引值,则返回两个索引中间的字符串子串.假如有如下数据模型:<br><code>Map root = new HashMap(); root.put(&quot;book&quot;,&quot;struts2,freemarker&quot;);</code><br>可以通过如下语法来截取子串:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;book[<span class="number">0</span>]&#125;$&#123;book[<span class="number">4</span>]&#125;   <span class="comment">//结果是su</span></span><br><span class="line">$&#123;book[<span class="number">1.</span><span class="number">.4</span>]&#125;     <span class="comment">//结果是tru</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="集合连接运算符"><a href="#集合连接运算符" class="headerlink" title="集合连接运算符"></a>集合连接运算符</h3><p>这里所说的集合运算符是将两个集合连接成一个新的集合,连接集合的运算符是+,看如下的例子:<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">list</span> [<span class="string">"星期一"</span>,<span class="string">"星期二"</span>,<span class="string">"星期三"</span>] + [<span class="string">"星期四"</span>,<span class="string">"星期五"</span>,<span class="string">"星期六"</span>,<span class="string">"星期天"</span>] <span class="keyword">as</span> x&gt;</span><br><span class="line"><span class="variable">$&#123;x&#125;</span></span><br><span class="line">&lt;/#<span class="keyword">list</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>输出结果是:星期一 星期二 星期三 星期四 星期五 星期六 星期天</p>
+<h3 id="Map连接运算符"><a href="#Map连接运算符" class="headerlink" title="Map连接运算符"></a>Map连接运算符</h3><p>Map对象的连接运算符也是将两个Map对象连接成一个新的Map对象,Map对象的连接运算符是+,如果两个Map对象具有相同的key,则右边的值替代左边的值.看如下的例子:<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">assign</span> scores = &#123;<span class="string">"语文"</span>:<span class="number">86</span>,<span class="string">"数学"</span>:<span class="number">78</span>&#125; + &#123;<span class="string">"数学"</span>:<span class="number">87</span>,<span class="string">"Java"</span>:<span class="number">93</span>&#125;&gt;</span><br><span class="line">语文成绩是<span class="symbol">$</span>&#123;scores.语文&#125;</span><br><span class="line">数学成绩是<span class="symbol">$</span>&#123;scores.数学&#125;</span><br><span class="line">Java成绩是<span class="symbol">$</span>&#123;scores.Java&#125;</span><br><span class="line">输出结果是:</span><br><span class="line">语文成绩是<span class="number">86</span></span><br><span class="line">数学成绩是<span class="number">87</span></span><br><span class="line">Java成绩是<span class="number">93</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><p>FreeMarker表达式中完全支持算术运算,FreeMarker支持的算术运算符包括:+, - , * , / , % 看如下的代码:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;#assign x=5&gt;</span><br><span class="line"><span class="meta">$</span><span class="bash">&#123; x * x - 100 &#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123; x /2 &#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123; 12 %10 &#125;</span></span><br><span class="line">输出结果是:</span><br><span class="line">-75   2.5   2</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>在表达式中使用算术运算符时要注意以下几点:</p>
+<ol>
+<li>运算符两边的运算数字必须是数字</li>
+<li>使用+运算符时,如果一边是数字,一边是字符串,就会自动将数字转换为字符串再连接,如:${3 + “5”},结果是:35<br>使用内建的int函数可对数值取整,如:<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;#assign x=5&gt;</span><br><span class="line"><span class="meta">$</span><span class="bash">&#123; (x/2)?int &#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123; 1.1?int &#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123; 1.999?int &#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123; -1.1?int &#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123; -1.999?int &#125;</span></span><br><span class="line">结果是:2 1 1 -1 -1</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<h3 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h3><p>表达式中支持的比较运算符有如下几个:<br>1.<code>=或者==:判断两个值是否相等.</code></p>
+<ol>
+<li><code>!=:判断两个值是否不等.</code></li>
+<li><code>&gt;或者gt:判断左边值是否大于右边值</code></li>
+<li><code>&gt;=或者gte:判断左边值是否大于等于右边值</code></li>
+<li><code>&lt;或者lt:判断左边值是否小于右边值</code></li>
+<li><code>&lt;=或者lte:判断左边值是否小于等于右边值</code><blockquote>
+<p>注意:=和!=可以用于字符串,数值和日期来比较是否相等,但=和!=两边必须是相同类型的值,否则会产生错误,而且FreeMarker是精确比较,”x”,”x “,”X”是不等的.其它的运行符可以作用于数字和日期,但不能作用于字符串,大部分的时候,使用gt等字母运算符代替&gt;会有更好的效果,因为FreeMarker会把&gt;解释成FTL标签的结束字符,当然,也可以使用括号来避免这种情况,如:<code>&lt;#if (x&gt;y)&gt;</code></p>
+</blockquote>
+</li>
+</ol>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><p>逻辑运算符有如下几个:<br>逻辑与:<code>&amp;&amp;</code><br>逻辑或:<code>||</code><br>逻辑非:<code>!</code><br>逻辑运算符只能作用于布尔值,否则将产生错误  </p>
+<h3 id="内建函数"><a href="#内建函数" class="headerlink" title="内建函数"></a>内建函数</h3><p>FreeMarker还提供了一些内建函数来转换输出,可以在任何变量后紧跟?,?后紧跟内建函数,就可以通过内建函数来轮换输出变量.下面是常用的内建的字符串函数:  </p>
+<ul>
+<li>html:对字符串进行HTML编码</li>
+<li>cap_first:使字符串第一个字母大写</li>
+<li>lower_case:将字符串转换成小写</li>
+<li>upper_case:将字符串转换成大写</li>
+<li>trim:去掉字符串前后的空白字符<br>下面是集合的常用内建函数</li>
+<li>size:获取序列中元素的个数<br>下面是数字值的常用内建函数</li>
+<li>int:取得数字的整数部分,结果带符号<br>例如:  <figure class="highlight plain"><figcaption><span>test</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$&#123;test?html&#125;</span><br><span class="line">$&#123;test?upper_case?html&#125;</span><br><span class="line">结果是:Tom &amp;amp; Jerry   TOM &amp;amp; JERRY</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="空值处理运算符"><a href="#空值处理运算符" class="headerlink" title="空值处理运算符"></a>空值处理运算符</h3><p>FreeMarker对空值的处理非常严格,FreeMarker的变量必须有值,没有被赋值的变量就会抛出异常,因为FreeMarker未赋值的变量强制出错可以杜绝很多潜在的错误,如缺失潜在的变量命名,或者其他变量错误.这里所说的空值,实际上也包括那些并不存在的变量,对于一个Java的null值而言,我们认为这个变量是存在的,只是它的值为null,但对于FreeMarker模板而言,它无法理解null值,null值和不存在的变量完全相同.<br>为了处理缺失变量,FreeMarker提供了两个运算符:  </p>
+<ul>
+<li>!:指定缺失变量的默认值</li>
+<li>??:判断某个变量是否存在<br>其中,!运算符的用法有如下两种:  </li>
+<li>variable!或variable!defaultValue,第一种用法不给缺失的变量指定默认值,表明默认值是空字符串,长度为0的集合,或者长度为0的Map对象.<br>使用!指定默认值时,并不要求默认值的类型和变量类型相同.使用??运算符非常简单,它总是返回一个布尔值,用法为:variable??,如果该变量存在,返回true,否则返回false  </li>
+</ul>
+<h3 id="运算符的优先级"><a href="#运算符的优先级" class="headerlink" title="运算符的优先级"></a>运算符的优先级</h3><p>FreeMarker中的运算符优先级如下(由高到低排列):  </p>
+<ol>
+<li>一元运算符:!</li>
+<li>内建函数:?</li>
+<li>乘除法:*, / , %</li>
+<li>加减法:- , +</li>
+<li>比较:<code>&gt; , &lt; , &gt;= , &lt;= (lt , lte , gt , gte)</code></li>
+<li>相等:== , = , !=</li>
+<li>逻辑与:&amp;&amp;</li>
+<li>逻辑或:||</li>
+<li>数字范围:..  </li>
+</ol>
+<p>实际上,我们在开发过程中应该使用括号来严格区分,这样的可读性好,出错少</p>
+<h2 id="FreeMarker的常用指令"><a href="#FreeMarker的常用指令" class="headerlink" title="FreeMarker的常用指令"></a>FreeMarker的常用指令</h2><p>FreeMarker的FTL指令也是模板的重要组成部分,这些指令可实现对数据模型所包含数据的抚今迭代,分支控制.除此之外,还有一些重要的功能,也是通过FTL指令来实现的.</p>
+<h3 id="if指令"><a href="#if指令" class="headerlink" title="if指令"></a>if指令</h3><p>这是一个典型的分支控制指令,该指令的作用完全类似于Java语言中的if,if指令的语法格式如下:<br><figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="meta">#<span class="meta-keyword">if</span> condition&gt;...</span></span><br><span class="line">&lt;<span class="meta">#<span class="meta-keyword">elseif</span> condition&gt;...</span></span><br><span class="line">&lt;<span class="meta">#<span class="meta-keyword">elseif</span> condition&gt;...</span></span><br><span class="line">&lt;<span class="meta">#<span class="meta-keyword">else</span>&gt; ...</span></span><br><span class="line">&lt;/<span class="meta">#<span class="meta-keyword">if</span>&gt;</span></span><br><span class="line">例子如下:</span><br><span class="line">&lt;<span class="meta">#assign age=23&gt;</span></span><br><span class="line">&lt;<span class="meta">#<span class="meta-keyword">if</span> (age&gt;60)&gt;老年人</span></span><br><span class="line">&lt;<span class="meta">#<span class="meta-keyword">elseif</span> (age&gt;40)&gt;中年人</span></span><br><span class="line">&lt;<span class="meta">#<span class="meta-keyword">elseif</span> (age&gt;20)&gt;青年人</span></span><br><span class="line">&lt;<span class="meta">#<span class="meta-keyword">else</span>&gt; 少年人</span></span><br><span class="line">&lt;/<span class="meta">#<span class="meta-keyword">if</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>输出结果是:青年人</p>
+</blockquote>
+<p>上面的代码中的逻辑表达式用括号括起来主要是因为里面有&gt;符号,由于FreeMarker会将&gt;符号当成标签的结束字符,可能导致程序出错,为了避免这种情况,我们应该在凡是出现这些符号的地方都使用括号.    </p>
+<h3 id="switch-case-default-break指令"><a href="#switch-case-default-break指令" class="headerlink" title="switch , case , default , break指令"></a>switch , case , default , break指令</h3><p>这些指令显然是分支指令,作用类似于Java的switch语句,switch指令的语法结构如下:<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;#switch value&gt;</span><br><span class="line">&lt;#<span class="keyword">case</span> refValue&gt;...&lt;#break&gt;</span><br><span class="line">&lt;#<span class="keyword">case</span> refValue&gt;...&lt;#break&gt;</span><br><span class="line">&lt;#default&gt;...</span><br><span class="line">&lt;/#switch&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="list-break指令"><a href="#list-break指令" class="headerlink" title="list, break指令"></a>list, break指令</h3><p>list指令是一个迭代输出指令,用于迭代输出数据模型中的集合,list指令的语法格式如下:<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;#list sequence <span class="keyword">as</span> item&gt;</span><br><span class="line">...</span><br><span class="line">&lt;/#list&gt;</span><br></pre></td></tr></table></figure></p>
+<p>上面的语法格式中,sequence就是一个集合对象,也可以是一个表达式,但该表达式将返回一个集合对象,而item是一个任意的名字,就是被迭代输出的集合元素.此外,迭代集合对象时,还包含两个特殊的循环变量:  </p>
+<ul>
+<li>item_index:当前变量的索引值</li>
+<li>item_has_next:是否存在下一个对象<br>也可以使用&lt;#break&gt;指令跳出迭代<br>例子如下:  <figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;#list [<span class="string">"星期一"</span>, <span class="string">"星期二"</span>, <span class="string">"星期三"</span>, <span class="string">"星期四"</span>, <span class="string">"星期五"</span>, <span class="string">"星期六"</span>, <span class="string">"星期天"</span>] <span class="keyword">as</span> x&gt;</span><br><span class="line">$&#123;x_index + <span class="number">1</span>&#125;.$&#123;x&#125;&lt;#<span class="keyword">if</span> x_has_next&gt;,&lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">&lt;#<span class="keyword">if</span> x=<span class="string">"星期四"</span>&gt;&lt;#break&gt;&lt;/#<span class="keyword">if</span>&gt;</span><br><span class="line">&lt;/#list&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="include指令"><a href="#include指令" class="headerlink" title="include指令"></a>include指令</h3><p>include指令的作用类似于JSP的包含指令,用于包含指定页.include指令的语法格式如下:<br><code>&lt;#include filename [options]&gt;</code><br>在上面的语法格式中,两个参数的解释如下:  </p>
+<ul>
+<li>filename:该参数指定被包含的模板文件</li>
+<li>options:该参数可以省略,指定包含时的选项,包含encoding和parse两个选项,其中encoding指定包含页面时所用的解码集,而parse指定被包含文件是否作为FTL文件来解析,如果省略了parse选项值,则该选项默认是true.  <h3 id="import指令"><a href="#import指令" class="headerlink" title="import指令"></a>import指令</h3>该指令用于导入FreeMarker模板中的所有变量,并将该变量放置在指定的Map对象中,import指令的语法格式如下:<br><code>&lt;#import &quot;/lib/common.ftl&quot; as com&gt;</code><br>上面的代码将导入/lib/common.ftl模板文件中的所有变量,交将这些变量放置在一个名为com的Map对象中.  <h3 id="noparse指令"><a href="#noparse指令" class="headerlink" title="noparse指令"></a>noparse指令</h3>noparse指令指定FreeMarker不处理该指定里包含的内容,该指令的语法格式如下:<br><code>&lt;#noparse&gt;...&lt;/#noparse&gt;</code><br>看如下的例子:  <figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">#noparse</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">#list</span> <span class="attr">books</span> <span class="attr">as</span> <span class="attr">book</span>&gt;</span></span></span><br><span class="line"><span class="xml">   <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>$</span><span class="template-variable">&#123;book.name&#125;</span><span class="xml"><span class="tag">&lt;<span class="name">td</span>&gt;</span>作者:$</span><span class="template-variable">&#123;book.author&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">#list</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">#noparse</span>&gt;</span></span></span><br><span class="line"><span class="xml">输出如下:</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">#list</span> <span class="attr">books</span> <span class="attr">as</span> <span class="attr">book</span>&gt;</span></span></span><br><span class="line"><span class="xml">   <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>$</span><span class="template-variable">&#123;book.name&#125;</span><span class="xml"><span class="tag">&lt;<span class="name">td</span>&gt;</span>作者:$</span><span class="template-variable">&#123;book.author&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">#list</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="escape-noescape指令"><a href="#escape-noescape指令" class="headerlink" title="escape , noescape指令"></a>escape , noescape指令</h3><p>escape指令导致body区的插值都会被自动加上escape表达式,但不会影响字符串内的插值,只会影响到body内出现的插值,使用escape指令的语法格式如下:<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;#escape identifier <span class="keyword">as</span> expression&gt;...</span><br><span class="line">&lt;#noescape&gt;...&lt;/#noescape&gt;</span><br><span class="line">&lt;/#escape&gt;</span><br></pre></td></tr></table></figure></p>
+<p>看如下的代码:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="comment">#escape x as x?html&gt;</span></span><br><span class="line">First name:<span class="variable">$&#123;firstName&#125;</span></span><br><span class="line">Last name:<span class="variable">$&#123;lastName&#125;</span></span><br><span class="line">Maiden name:<span class="variable">$&#123;maidenName&#125;</span></span><br><span class="line">&lt;/<span class="comment">#escape&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>上面的代码等同于:<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">First</span> name:$&#123;firstName?html&#125;</span><br><span class="line"><span class="keyword">Last</span> name:$&#123;lastName?html&#125;</span><br><span class="line">Maiden name:$&#123;maidenName?html&#125;</span><br></pre></td></tr></table></figure></p>
+<p>escape指令在解析模板时起作用而不是在运行时起作用,除此之外,escape指令也嵌套使用,子escape继承父escape的规则,如下例子:<br><figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="comment">#escape x as x?html&gt;</span></span><br><span class="line">Customer <span class="keyword">Name</span>:<span class="variable">$&#123;customerName&#125;</span></span><br><span class="line">Items to ship<span class="comment">;</span></span><br><span class="line">&lt;<span class="comment">#escape x as itemCodeToNameMap[x]&gt;</span></span><br><span class="line">   <span class="variable">$&#123;itemCode1&#125;</span></span><br><span class="line">   <span class="variable">$&#123;itemCode2&#125;</span></span><br><span class="line">   <span class="variable">$&#123;itemCode3&#125;</span></span><br><span class="line">   <span class="variable">$&#123;itemCode4&#125;</span></span><br><span class="line">&lt;/<span class="comment">#escape&gt;</span></span><br><span class="line">&lt;/<span class="comment">#escape&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>上面的代码类似于:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Customer Name:$&#123;customerName?html&#125;</span><br><span class="line">Items to ship;</span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;itemCodeToNameMap[itemCode1]?html&#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;itemCodeToNameMap[itemCode2]?html&#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;itemCodeToNameMap[itemCode3]?html&#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;itemCodeToNameMap[itemCode4]?html&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>对于放在escape指令中所有的插值而言,这此插值将被自动加上escape表达式,如果需要指定escape指令中某些插值无需添加escape表达式,则应该使用noescape指令,放在noescape指令中的插值将不会添加escape表达式.</p>
+<h3 id="assign指令"><a href="#assign指令" class="headerlink" title="assign指令"></a>assign指令</h3><p>assign指令在前面已经使用了多次,它用于为该模板页面创建或替换一个顶层变量,assign指令的用法有多种,包含创建或替换一个顶层变量,或者创建或替换多个变量等,它的最简单的语法如下:<br><code>&lt;#assign name=value [in namespacehash]&gt;</code><br>这个用法用于指定一个名为name的变量,该变量的值为value,此外,FreeMarker允许在使用assign指令里增加in子句,in子句用于将创建的name变量放入namespacehash命名空间中.<br>assign指令还有如下用法:<code>&lt;#assign name1=value1 name2=value2 ... nameN=valueN [in namespacehash]&gt;</code>,这个语法可以同时创建或替换多个顶层变量,此外,还有一种复杂的用法,如果需要创建或替换的变量值是一个复杂的表达式,则可以使用如下语法格式:<code>&lt;#assign name [in namespacehash]&gt;capture this&lt;/#assign&gt;</code>,在这个语法中,是指将assign指令的内容赋值给name变量.如下例子:<br><figure class="highlight smalltalk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="symbol">#assign</span> x&gt;</span><br><span class="line">&lt;<span class="symbol">#list</span> [<span class="comment">"星期一"</span>, <span class="comment">"星期二"</span>, <span class="comment">"星期三"</span>, <span class="comment">"星期四"</span>, <span class="comment">"星期五"</span>, <span class="comment">"星期六"</span>, <span class="comment">"星期天"</span>] as n&gt;</span><br><span class="line"><span class="string">$&#123;</span>n&#125;</span><br><span class="line">&lt;/<span class="symbol">#list</span>&gt;</span><br><span class="line">&lt;/<span class="symbol">#assign</span>&gt;</span><br><span class="line"><span class="string">$&#123;</span>x&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>上面的代码将产生如下输出:星期一 星期二 星期三 星期四 星期五 星期六 星期天</p>
+</blockquote>
+<p>虽然assign指定了这种复杂变量值的用法,但是我们也不要滥用这种用法,如下例子:<code>&lt;#assign x&gt;Hello ${user}!&lt;/#assign&gt;</code>,以上代码改为如下写法更合适:<code>&lt;#assign x=&quot;Hello ${user}!&quot;&gt;</code></p>
+<h3 id="setting指令"><a href="#setting指令" class="headerlink" title="setting指令"></a>setting指令</h3><p>该指令用于设置FreeMarker的运行环境,该指令的语法格式如下:<code>&lt;#setting name=value&gt;</code>,在这个格式中,name的取值范围包含如下几个:  </p>
+<ul>
+<li>locale:该选项指定该模板所用的国家/语言选项</li>
+<li>number_format:指定格式化输出数字的格式</li>
+<li>boolean_format:指定两个布尔值的语法格式,默认值是true,false</li>
+<li>date_format,time_format,datetime_format:指定格式化输出日期的格式</li>
+<li>time_zone:设置格式化输出日期时所使用的时区<h3 id="macro-nested-return指令"><a href="#macro-nested-return指令" class="headerlink" title="macro , nested , return指令"></a>macro , nested , return指令</h3>macro可以用于实现自定义指令,通过使用自定义指令,可以将一段模板片段定义成一个用户指令,使用macro指令的语法格式如下:  <figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;#macro name param1 param2 ... paramN&gt;</span><br><span class="line">...</span><br><span class="line">&lt;#nested loopvar1, loopvar2, ..., loopvarN&gt;</span><br><span class="line">...</span><br><span class="line">&lt;#return&gt;</span><br><span class="line">...</span><br><span class="line">&lt;/#macro&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在上面的格式片段中,包含了如下几个部分:  </p>
+<ul>
+<li>name:name属性指定的是该自定义指令的名字,使用自定义指令时可以传入多个参数</li>
+<li>paramX:该属性就是指定使用自定义指令时报参数,使用该自定义指令时,必须为这些参数传入值</li>
+<li>nested指令:nested标签输出使用自定义指令时的中间部分</li>
+<li>nested指令中的循环变量:这此循环变量将由macro定义部分指定,传给使用标签的模板</li>
+<li>return指令:该指令可用于随时结束该自定义指令.<br>看如下的例子:  <figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">macro</span> book&gt;   <span class="comment">//定义一个自定义指令</span></span><br><span class="line">j2ee</span><br><span class="line">&lt;/#<span class="keyword">macro</span>&gt;</span><br><span class="line">&lt;<span class="keyword">@book</span> /&gt;    <span class="comment">//使用刚才定义的指令</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>上面的代码输出结果为:j2ee  </p>
+</blockquote>
+<p>在上面的代码中,可能很难看出自定义标签的用处,因为我们定义的book指令所包含的内容非常简单,实际上,自定义标签可包含非常多的内容,从而可以实现更好的代码复用.此外,还可以在定义自定义指令时,为自定义指令指定参数,看如下代码:<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">macro</span> book booklist&gt;     <span class="comment">//定义一个自定义指令booklist是参数</span></span><br><span class="line">&lt;#<span class="keyword">list</span> booklist <span class="keyword">as</span> book&gt;</span><br><span class="line">   <span class="variable">$&#123;book&#125;</span></span><br><span class="line">&lt;/#<span class="keyword">list</span>&gt;</span><br><span class="line">&lt;/#<span class="keyword">macro</span>&gt;</span><br><span class="line">&lt;@book booklist=[<span class="string">"spring"</span>,<span class="string">"j2ee"</span>] /&gt;   <span class="comment">//使用刚刚定义的指令</span></span><br></pre></td></tr></table></figure></p>
+<p>上面的代码为book指令传入了一个参数值,上面的代码的输出结果为:spring j2ee<br>不仅如此,还可以在自定义指令时使用nested指令来输出自定义指令的中间部分,看如下例子:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">#macro</span> <span class="attr">page</span> <span class="attr">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">title</span>&gt;</span>FreeMarker示例页面 - $&#123;title?html&#125;<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">h1</span>&gt;</span>$&#123;title?html&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">#nested</span>&gt;</span>      //用于引入用户自定义指令的标签体</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">#macro</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>上面的代码将一个HTML页面模板定义成一个page指令,则可以在其他页面中如此page指令:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">#import</span> "/<span class="attr">common.ftl</span>" <span class="attr">as</span> <span class="attr">com</span>&gt;</span>     //假设上面的模板页面名为common.ftl,导入页面</span><br><span class="line"><span class="tag">&lt;<span class="name">@com.page</span> <span class="attr">title</span>=<span class="string">"book list"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">u1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>spring<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>j2ee<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">@com.page</span> &gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>从上面的例子可以看出,使用macro和nested指令可以非常容易地实现页面装饰效果,此外,还可以在使用nested指令时,指定一个或多个循环变量,看如下代码:<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">&lt;#macro book&gt;</span></span><br><span class="line"><span class="params">&lt;#nested <span class="number">1</span>&gt;</span>      <span class="comment">//使用book指令时指定了一个循环变量值</span></span><br><span class="line"><span class="params">&lt;#nested <span class="number">2</span>&gt;</span></span><br><span class="line"><span class="params">&lt;/#macro&gt;</span></span><br><span class="line"><span class="params">&lt;@book ;x&gt;</span> $&#123;x&#125; .图书<span class="params">&lt;/@book &gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>当使用nested指令传入变量值时,在使用该自定义指令时,就需要使用一个占位符(如book指令后的;x).上面的代码输出文本如下:  </p>
+<blockquote>
+<p>1 .图书    2 .图书</p>
+</blockquote>
+<p>在nested指令中使用循环变量时,可以使用多个循环变量,看如下代码:<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">macro</span> <span class="keyword">repeat</span> <span class="keyword">count</span>&gt;</span><br><span class="line">&lt;#<span class="keyword">list</span> 1..<span class="keyword">count</span> <span class="keyword">as</span> x&gt;     <span class="comment">//使用nested指令时指定了三个循环变量</span></span><br><span class="line">   &lt;#nested x, x/2, x==<span class="keyword">count</span>&gt;</span><br><span class="line">&lt;/#<span class="keyword">list</span>&gt;</span><br><span class="line">&lt;/#<span class="keyword">macro</span>&gt;</span><br><span class="line">&lt;@<span class="keyword">repeat</span> <span class="keyword">count</span>=4 ; c halfc last&gt;</span><br><span class="line"><span class="variable">$&#123;c&#125;</span>. <span class="variable">$&#123;halfc&#125;</span>&lt;#<span class="keyword">if</span> last&gt; Last! &lt;/#<span class="keyword">if</span>&gt;</span><br><span class="line">&lt;/@<span class="keyword">repeat</span> &gt;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>上面的输出结果为:</p>
+<ol>
+<li>0.5   2. 1   3. 1.5   4. 2 Last;</li>
+</ol>
+</blockquote>
+<p>return指令用于结束macro指令,一旦在macro指令中执行了return指令,则FreeMarker不会继续处理macro指令里的内容,看如下代码:<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;#macro book&gt;</span></span><br><span class="line"><span class="attribute">spring</span></span><br><span class="line"><span class="section">&lt;#return&gt;</span></span><br><span class="line"><span class="attribute">j2ee</span></span><br><span class="line"><span class="section">&lt;/#macro&gt;</span></span><br><span class="line"><span class="section">&lt;@book /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>上面的代码输出:spring,而j2ee位于return指令之后,不会输出.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>, <span class="keyword">else</span>, elseif</span><br><span class="line"><span class="keyword">switch</span>, <span class="keyword">case</span>, <span class="keyword">default</span>, <span class="keyword">break</span></span><br><span class="line">list, <span class="keyword">break</span></span><br><span class="line">include</span><br><span class="line">Import</span><br><span class="line">compress</span><br><span class="line">escape, noescape</span><br><span class="line">assign</span><br><span class="line">global</span><br><span class="line">setting</span><br><span class="line">macro, nested, <span class="keyword">return</span></span><br><span class="line">t, lt, rt</span><br></pre></td></tr></table></figure></p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>最常用的3个概念  </p>
+<ul>
+<li>sequence  序列，对应java里的list、数组等非键值对的集合<br>hash      键值对的集合</li>
+<li>namespace 对一个ftl文件的引用,利用这个名字可以访问到该ftl文件的资源<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><h4 id="if-else-elseif"><a href="#if-else-elseif" class="headerlink" title="if, else, elseif"></a>if, else, elseif</h4>语法  <figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">if</span> condition&gt;</span><br><span class="line">  ...</span><br><span class="line">&lt;#elseif condition2&gt;</span><br><span class="line">  ...</span><br><span class="line">&lt;#elseif condition3&gt;</span><br><span class="line">  ...</span><br><span class="line">...</span><br><span class="line">&lt;#else&gt;</span><br><span class="line">  ...</span><br><span class="line">&lt;/#<span class="keyword">if</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>用例<br><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="meta">#<span class="meta-keyword">if</span> x = 1&gt;</span></span><br><span class="line">  x <span class="keyword">is</span> <span class="number">1</span></span><br><span class="line">&lt;/<span class="meta">#<span class="meta-keyword">if</span>&gt;</span></span><br><span class="line">&lt;<span class="meta">#<span class="meta-keyword">if</span> x = 1&gt;</span></span><br><span class="line">  x <span class="keyword">is</span> <span class="number">1</span></span><br><span class="line">&lt;<span class="meta">#<span class="meta-keyword">else</span>&gt;</span></span><br><span class="line">  x <span class="keyword">is</span> <span class="keyword">not</span> <span class="number">1</span></span><br><span class="line">&lt;/<span class="meta">#<span class="meta-keyword">if</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="switch-case-default-break"><a href="#switch-case-default-break" class="headerlink" title="switch, case, default, break"></a>switch, case, default, break</h4><p>语法<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;#switch value&gt;</span><br><span class="line">  &lt;#<span class="keyword">case</span> refValue1&gt;</span><br><span class="line">    ...</span><br><span class="line">    &lt;#break&gt;</span><br><span class="line">  &lt;#<span class="keyword">case</span> refValue2&gt;</span><br><span class="line">    ...</span><br><span class="line">    &lt;#break&gt;</span><br><span class="line">  ...</span><br><span class="line">  &lt;#<span class="keyword">case</span> refValueN&gt;</span><br><span class="line">    ...</span><br><span class="line">    &lt;#break&gt;</span><br><span class="line">  &lt;#default&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/#switch&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>用例</strong><br><strong> 字符串 </strong><br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="comment">#switch being.size&gt;</span></span><br><span class="line">  &lt;<span class="comment">#case "small"&gt;</span></span><br><span class="line">     This will be processed <span class="keyword">if</span> <span class="keyword">it</span> <span class="keyword">is</span> small</span><br><span class="line">     &lt;<span class="comment">#break&gt;</span></span><br><span class="line">  &lt;<span class="comment">#case "medium"&gt;</span></span><br><span class="line">     This will be processed <span class="keyword">if</span> <span class="keyword">it</span> <span class="keyword">is</span> medium</span><br><span class="line">     &lt;<span class="comment">#break&gt;</span></span><br><span class="line">  &lt;<span class="comment">#case "large"&gt;</span></span><br><span class="line">     This will be processed <span class="keyword">if</span> <span class="keyword">it</span> <span class="keyword">is</span> large</span><br><span class="line">     &lt;<span class="comment">#break&gt;</span></span><br><span class="line">  &lt;<span class="comment">#default&gt;</span></span><br><span class="line">     This will be processed <span class="keyword">if</span> <span class="keyword">it</span> <span class="keyword">is</span> neither</span><br><span class="line">&lt;/<span class="comment">#switch&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong> 数字</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">#switch</span> <span class="attr">x</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">#case</span> <span class="attr">x</span> = <span class="string">1</span>&gt;</span></span><br><span class="line">    1</span><br><span class="line">  <span class="tag">&lt;<span class="name">#case</span> <span class="attr">x</span> = <span class="string">2</span>&gt;</span></span><br><span class="line">    2</span><br><span class="line">  <span class="tag">&lt;<span class="name">#default</span>&gt;</span></span><br><span class="line">    d</span><br><span class="line"><span class="tag">&lt;/<span class="name">#switch</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>如果x=1 输出 1 2, x=2输出 2, x=3 输出d</p>
+</blockquote>
+<h4 id="list-break"><a href="#list-break" class="headerlink" title="list, break"></a>list, break</h4><p>语法<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;#list sequence <span class="keyword">as</span> item&gt;</span><br><span class="line">...</span><br><span class="line">&lt;#<span class="keyword">if</span> item = <span class="string">"spring"</span>&gt;&lt;#break&gt;&lt;/#<span class="keyword">if</span>&gt;</span><br><span class="line">...</span><br><span class="line">&lt;/#list&gt;</span><br></pre></td></tr></table></figure></p>
+<p>关键字<br>item_index:是list当前值的下标<br>item_has_next:判断list是否还有值<br>用例<br>&lt;#assign seq = [“winter”, “spring”, “summer”, “autumn”]&gt;<br>&lt;#list seq as x&gt;<br>  ${x_index + 1}. ${x}&lt;#if x_has_next&gt;,&lt;/#if&gt;<br>&lt;/#list&gt;<br>输出</p>
+<ol>
+<li>winter,</li>
+<li>spring,</li>
+<li>summer,</li>
+<li>autumn  </li>
+</ol>
+<h4 id="include"><a href="#include" class="headerlink" title="include"></a>include</h4><p><strong>语法</strong><br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="meta">#<span class="meta-keyword">include</span> filename&gt;</span></span><br><span class="line"><span class="literal">or</span></span><br><span class="line">&lt;<span class="meta">#<span class="meta-keyword">include</span> filename options&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>options包含两个属性  </p>
+<ul>
+<li>encoding=”GBK” 编码格式</li>
+<li>parse=true 是否作为ftl语法解析,默认是true，false就是以文本方式引入.注意在ftl文件里布尔值都是直接赋值的如parse=true,而不是parse=”true”<br>用例  <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; /common/<span class="keyword">copyright</span>.ftl包含内容</span><br><span class="line"><span class="keyword">Copyright</span> 2001-2002 <span class="variable">$&#123;me&#125;</span>&lt;<span class="keyword">br</span>&gt;</span><br><span class="line">All rights reserved.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>模板文件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">#assign</span> <span class="attr">me</span> = <span class="string">"Juila Smith"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Some test<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Yeah.</span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">#include</span> "/<span class="attr">common</span>/<span class="attr">copyright.ftl</span>" <span class="attr">encoding</span>=<span class="string">”GBK”</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输出结果</span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Some test<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Yeah.</span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">Copyright 2001-2002 Juila Smith</span><br><span class="line">All rights reserved.</span><br></pre></td></tr></table></figure>
+<h4 id="Import"><a href="#Import" class="headerlink" title="Import"></a>Import</h4><p>语法<br><code>&lt;#import path as hash&gt;</code><br>类似于java里的import,它导入文件，然后就可以在当前文件里使用被导入文件里的宏组件<br>用例<br>假设mylib.ftl里定义了宏copyright那么我们在其他模板页面里可以这样使用<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-id">#import</span> <span class="string">"/libs/mylib.ftl"</span> as my&gt;</span><br><span class="line">&lt;@my<span class="selector-class">.copyright</span> date=<span class="string">"1999-2002"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>“my”在freemarker里被称作namespace</p>
+</blockquote>
+<h4 id="compress"><a href="#compress" class="headerlink" title="compress"></a>compress</h4><p>语法<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;#compress&gt;</span><br><span class="line">  ...</span><br><span class="line">&lt;/#compress&gt;</span><br></pre></td></tr></table></figure></p>
+<p>用来压缩空白空间和空白的行<br>用例<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;#assign x = <span class="string">"    moo  <span class="subst">\n</span><span class="subst">\n</span>   "</span>&gt;</span><br><span class="line">(&lt;#compress&gt;</span><br><span class="line">  <span class="number">1</span> <span class="number">2</span>  <span class="number">3</span>   <span class="number">4</span>    <span class="number">5</span></span><br><span class="line">  $&#123;moo&#125;</span><br><span class="line">  test only</span><br><span class="line">  I said, test only</span><br><span class="line">&lt;/#compress&gt;)  </span><br><span class="line">输出</span><br><span class="line">(<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line">moo</span><br><span class="line">test only</span><br><span class="line">I said, test only)</span><br></pre></td></tr></table></figure></p>
+<h4 id="escape-noescape"><a href="#escape-noescape" class="headerlink" title="escape, noescape"></a>escape, noescape</h4><p>语法<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;#escape identifier <span class="keyword">as</span> expression&gt;</span><br><span class="line">  ...</span><br><span class="line">  &lt;#noescape&gt;...&lt;/#noescape&gt;</span><br><span class="line">  ...</span><br><span class="line">&lt;/#escape&gt;</span><br></pre></td></tr></table></figure></p>
+<p>用例<br>主要使用在相似的字符串变量输出，比如某一个模块的所有字符串输出都必须是html安全的，这个时候就可以使用该表达式<br><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">#escape</span> <span class="attr">x</span> <span class="attr">as</span> <span class="attr">x</span>?<span class="attr">html</span>&gt;</span></span></span><br><span class="line"><span class="xml">  First name: $</span><span class="template-variable">&#123;firstName&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">#noescape</span>&gt;</span>Last name: $</span><span class="template-variable">&#123;lastName&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">#noescape</span>&gt;</span></span></span><br><span class="line"><span class="xml">  Maiden name: $</span><span class="template-variable">&#123;maidenName&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">#escape</span>&gt;</span></span></span><br><span class="line"><span class="xml">相同表达式  </span></span><br><span class="line"><span class="xml">  First name: $</span><span class="template-variable">&#123;firstName?html&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">  Last name: $</span><span class="template-variable">&#123;lastName &#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">  Maiden name: $</span><span class="template-variable">&#123;maidenName?html&#125;</span><span class="xml"></span></span><br></pre></td></tr></table></figure></p>
+<h4 id="assign"><a href="#assign" class="headerlink" title="assign"></a>assign</h4><p>语法<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;#assign name=value&gt;</span><br><span class="line"><span class="literal">or</span></span><br><span class="line">&lt;#assign name1=value1 name2=value2 <span class="params">...</span> nameN=valueN&gt;</span><br><span class="line"><span class="literal">or</span></span><br><span class="line">&lt;#assign same as above<span class="params">...</span> <span class="keyword">in</span> namespacehash&gt;</span><br><span class="line"><span class="literal">or</span></span><br><span class="line">&lt;#assign name&gt;</span><br><span class="line">  capture this</span><br><span class="line">&lt;/#assign&gt;</span><br><span class="line"><span class="literal">or</span></span><br><span class="line">&lt;#assign name <span class="keyword">in</span> namespacehash&gt;</span><br><span class="line">  capture this</span><br><span class="line">&lt;/#assign&gt;</span><br></pre></td></tr></table></figure></p>
+<p>用例<br>生成变量,并且给变量赋值<br>给seasons赋予序列值<br><code>&lt;#assign seasons = [&quot;winter&quot;, &quot;spring&quot;, &quot;summer&quot;, &quot;autumn&quot;]&gt;</code><br>给变量test加1<br><code>&lt;#assign test = test + 1&gt;</code><br>给my namespage 赋予一个变量bgColor,下面可以通过my.bgColor来访问这个变量<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">import</span> <span class="string">"/mylib.ftl"</span> <span class="keyword">as</span> my&gt;</span><br><span class="line">&lt;#assign bgColor=<span class="string">"red"</span> <span class="keyword">in</span> my&gt;</span><br></pre></td></tr></table></figure></p>
+<p>将一段输出的文本作为变量保存在x里<br>下面的阴影部分输出的文本将被赋值给x<br><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">#assign</span> <span class="attr">x</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">#list</span> <span class="attr">1..3</span> <span class="attr">as</span> <span class="attr">n</span>&gt;</span></span></span><br><span class="line"><span class="xml">    $</span><span class="template-variable">&#123;n&#125;</span><span class="xml"> <span class="tag">&lt;<span class="name">@myMacro</span> /&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">#list</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">#assign</span>&gt;</span></span></span><br><span class="line"><span class="xml">Number of words: $</span><span class="template-variable">&#123;x?word_list?size&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">$</span><span class="template-variable">&#123;x&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">#assign</span> <span class="attr">x</span>&gt;</span>Hello $</span><span class="template-variable">&#123;user&#125;</span><span class="xml">!<span class="tag">&lt;/<span class="name">#assign</span>&gt;</span>     error</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">#assign</span> <span class="attr">x</span>=<span class="string">”</span> <span class="attr">Hello</span> $</span></span><span class="template-variable">&#123;user&#125;</span><span class="xml"><span class="tag">!”&gt;</span>         true</span></span><br></pre></td></tr></table></figure></p>
+<p>同时也支持中文赋值，如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="comment">#assign 语法&gt;</span></span><br><span class="line">  java</span><br><span class="line">&lt;/<span class="comment">#assign&gt;</span></span><br><span class="line"><span class="variable">$&#123;语法&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>打印输出:<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">java</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="global"><a href="#global" class="headerlink" title="global"></a>global</h4><p>语法<br><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="meta">#<span class="meta-keyword">global</span> name=value&gt;</span></span><br><span class="line"><span class="keyword">or</span></span><br><span class="line">&lt;<span class="meta">#<span class="meta-keyword">global</span> name1=value1 name2=value2 ... nameN=valueN&gt;</span></span><br><span class="line"><span class="keyword">or</span></span><br><span class="line">&lt;<span class="meta">#<span class="meta-keyword">global</span> name&gt;</span></span><br><span class="line">  capture this</span><br><span class="line">&lt;/<span class="meta">#<span class="meta-keyword">global</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>全局赋值语法，利用这个语法给变量赋值，那么这个变量在所有的namespace中是可见的,如果这个变量被当前的assign语法覆盖 如<code>&lt;#global x=2&gt; &lt;#assign x=1&gt;</code>在当前页面里x=2将被隐藏，或者通过${.global.x}来访问</p>
+<h4 id="setting"><a href="#setting" class="headerlink" title="setting"></a>setting</h4><p>语法<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">#setting</span> <span class="attr">name</span>=<span class="string">value</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>用来设置整个系统的一个环境<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">locale</span></span><br><span class="line"><span class="symbol">number_format</span></span><br><span class="line"><span class="keyword">boolean_format</span></span><br><span class="line"><span class="keyword">date_format, </span>time_format, datetime_format</span><br><span class="line"><span class="symbol">time_zone</span></span><br><span class="line"><span class="symbol">classic_compatible</span></span><br></pre></td></tr></table></figure></p>
+<p>用例<br>假如当前是匈牙利的设置，然后修改成美国<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$&#123;<span class="number">1.2</span>&#125;</span><br><span class="line">&lt;#setting locale=<span class="string">"en_US"</span>&gt;</span><br><span class="line">$&#123;<span class="number">1.2</span>&#125;  </span><br><span class="line">输出</span><br><span class="line"><span class="number">1</span>,<span class="number">2</span></span><br><span class="line"><span class="number">1.2</span></span><br></pre></td></tr></table></figure></p>
+<p>因为匈牙利是采用“,”作为十进制的分隔符，美国是用“.”</p>
+<h4 id="macro-nested-return"><a href="#macro-nested-return" class="headerlink" title="macro, nested, return"></a>macro, nested, return</h4><p>语法<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;#macro name param1 param2 ... paramN&gt;</span><br><span class="line">  ...</span><br><span class="line">  &lt;#nested loopvar1, loopvar2, ..., loopvarN&gt;</span><br><span class="line">  ...</span><br><span class="line">  &lt;#return&gt;</span><br><span class="line">  ...</span><br><span class="line">&lt;/#macro&gt;</span><br></pre></td></tr></table></figure></p>
+<p>用例<br><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">#macro</span> <span class="attr">test</span> <span class="attr">foo</span> <span class="attr">bar</span>=<span class="string">"Bar"</span> <span class="attr">baaz</span>=<span class="string">-1</span>&gt;</span></span></span><br><span class="line"><span class="xml">  Test text, and the params: $</span><span class="template-variable">&#123;foo&#125;</span><span class="xml">, $</span><span class="template-variable">&#123;bar&#125;</span><span class="xml">, $</span><span class="template-variable">&#123;baaz&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">#macro</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">@test</span> <span class="attr">foo</span>=<span class="string">"a"</span> <span class="attr">bar</span>=<span class="string">"b"</span> <span class="attr">baaz</span>=<span class="string">5*5-2/</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">@test</span> <span class="attr">foo</span>=<span class="string">"a"</span> <span class="attr">bar</span>=<span class="string">"b"</span>/&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">@test</span> <span class="attr">foo</span>=<span class="string">"a"</span> <span class="attr">baaz</span>=<span class="string">5*5-2/</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">@test</span> <span class="attr">foo</span>=<span class="string">"a"</span>/&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>输出<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Test </span>text, and the params: a, b, 23</span><br><span class="line"><span class="keyword">Test </span>text, and the params: a, b, <span class="string">-1</span></span><br><span class="line"><span class="keyword">Test </span>text, and the params: a, Bar, 23</span><br><span class="line"><span class="keyword">Test </span>text, and the params: a, Bar, <span class="string">-1</span></span><br></pre></td></tr></table></figure></p>
+<p>定义循环输出的宏<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">macro</span> <span class="keyword">list</span> title items&gt;</span><br><span class="line">  &lt;p&gt;<span class="variable">$&#123;title</span>?cap_first&#125;:</span><br><span class="line">  &lt;ul&gt;</span><br><span class="line">    &lt;#<span class="keyword">list</span> items <span class="keyword">as</span> x&gt;</span><br><span class="line">      &lt;<span class="keyword">li</span>&gt;<span class="variable">$&#123;x</span>?cap_first&#125;</span><br><span class="line">    &lt;/#<span class="keyword">list</span>&gt;</span><br><span class="line">  &lt;/ul&gt;</span><br><span class="line">&lt;/#<span class="keyword">macro</span>&gt;</span><br><span class="line">&lt;@<span class="keyword">list</span> items=[<span class="string">"mouse"</span>, <span class="string">"elephant"</span>, <span class="string">"python"</span>] title=<span class="string">"Animals"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+<p>输出结果<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;p&gt;</span><span class="attribute">Animals</span>:</span><br><span class="line">  <span class="section">&lt;ul&gt;</span></span><br><span class="line">      <span class="section">&lt;li&gt;</span><span class="attribute">Mouse</span></span><br><span class="line">      <span class="section">&lt;li&gt;</span><span class="attribute">Elephant</span></span><br><span class="line">      <span class="section">&lt;li&gt;</span><span class="attribute">Python</span></span><br><span class="line">  <span class="section">&lt;/ul&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>包含body的宏<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">macro</span> <span class="keyword">repeat</span> <span class="keyword">count</span>&gt;</span><br><span class="line">  &lt;#<span class="keyword">list</span> 1..<span class="keyword">count</span> <span class="keyword">as</span> x&gt;</span><br><span class="line">    &lt;#nested x, x/2, x==<span class="keyword">count</span>&gt;</span><br><span class="line">  &lt;/#<span class="keyword">list</span>&gt;</span><br><span class="line">&lt;/#<span class="keyword">macro</span>&gt;</span><br><span class="line">&lt;@<span class="keyword">repeat</span> <span class="keyword">count</span>=4 ; c halfc last&gt;</span><br><span class="line">  <span class="variable">$&#123;c&#125;</span>. <span class="variable">$&#123;halfc&#125;</span>&lt;#<span class="keyword">if</span> last&gt; Last!&lt;/#<span class="keyword">if</span>&gt;</span><br><span class="line">&lt;/@<span class="keyword">repeat</span> &gt;</span><br></pre></td></tr></table></figure></p>
+<p>输出<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="number">0.5</span></span><br><span class="line">  <span class="number">2.</span> <span class="number">1</span></span><br><span class="line">  <span class="number">3.</span> <span class="number">1.5</span></span><br><span class="line">  <span class="number">4.</span> <span class="number">2</span> Last!</span><br></pre></td></tr></table></figure></p>
+<h4 id="t-lt-rt"><a href="#t-lt-rt" class="headerlink" title="t, lt, rt"></a>t, lt, rt</h4><p>语法<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="comment">#t&gt; 去掉左右空白和回车换行</span></span><br><span class="line">&lt;<span class="comment">#lt&gt;去掉左边空白和回车换行</span></span><br><span class="line">&lt;<span class="comment">#rt&gt;去掉右边空白和回车换行</span></span><br><span class="line">&lt;<span class="comment">#nt&gt;取消上面的效果</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="一些常用方法或注意事项"><a href="#一些常用方法或注意事项" class="headerlink" title="一些常用方法或注意事项"></a>一些常用方法或注意事项</h2><h3 id="表达式转换类"><a href="#表达式转换类" class="headerlink" title="表达式转换类"></a>表达式转换类</h3><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$&#123;expression&#125;计算expression并输出</span><br><span class="line">#&#123;<span class="ruby"> expression &#125;</span>数字计算#&#123;<span class="ruby"> expression ;format&#125;</span>安格式输出数字format为M和m</span><br><span class="line">M表示小数点后最多的位数,m表示小数点后最少的位数如#&#123;<span class="ruby"><span class="number">121.2322</span>;m2M2&#125;</span>输出121.23</span><br></pre></td></tr></table></figure>
+<h3 id="数字循环"><a href="#数字循环" class="headerlink" title="数字循环"></a>数字循环</h3><p>1..5 表示从1到5，原型number..number</p>
+<h4 id="对浮点取整数"><a href="#对浮点取整数" class="headerlink" title="对浮点取整数"></a>对浮点取整数</h4><p>${123.23?int} 输出123</p>
+<h4 id="给变量默认值"><a href="#给变量默认值" class="headerlink" title="给变量默认值"></a>给变量默认值</h4><p>${var?default(“hello world<br>”)?html}如果var is null那么将会被hello world<br>替代</p>
+<h4 id="判断对象是不是null"><a href="#判断对象是不是null" class="headerlink" title="判断对象是不是null"></a>判断对象是不是null</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    &lt;<span class="meta">#<span class="meta-keyword">if</span> mouse?exists&gt;</span></span><br><span class="line">      <span class="built_in">Mouse</span> found</span><br><span class="line">&lt;<span class="meta">#<span class="meta-keyword">else</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>也可以直接${mouse?if_exists})输出布尔形</p>
+<h4 id="常用格式化日期"><a href="#常用格式化日期" class="headerlink" title="常用格式化日期"></a>常用格式化日期</h4><ul>
+<li>openingTime必须是Date型,详细查看freemarker文档 Reference-&gt;build-in -  - referece-&gt;build-in for date</li>
+<li>${openingTime?date}</li>
+<li>${openingTime?date_time}</li>
+<li>${openingTime?time}<h4 id="添加全局共享变量数据模型"><a href="#添加全局共享变量数据模型" class="headerlink" title="添加全局共享变量数据模型"></a>添加全局共享变量数据模型</h4>在代码里的实现<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cfg = Configuration.getDefaultConfiguration();</span><br><span class="line">cfg.setSharedVariable(<span class="string">"global"</span>, <span class="string">"you good"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>页面实现可以通过global指令,具体查看指令里的global部分<br>直接调用java对象的方法<br>${object.methed(args)}   </p>
+<h3 id="字符串处理-内置方法"><a href="#字符串处理-内置方法" class="headerlink" title="字符串处理(内置方法)"></a>字符串处理(内置方法)</h3><p>html安全输出<br><code>“abc&lt;table&gt;sdfsf”?html</code><br>返回安全的html输出,替换掉html代码<br>xml安全输出<br>var?xml     </p>
+<h4 id="substring的用法"><a href="#substring的用法" class="headerlink" title="substring的用法"></a>substring的用法</h4><figure class="highlight plain"><figcaption><span>user</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$&#123;user[0]&#125;$&#123;user[4]&#125;   </span><br><span class="line">$&#123;user[1..4]&#125;  </span><br><span class="line">输出 :</span><br><span class="line">ho</span><br><span class="line">ello</span><br></pre></td></tr></table></figure>
+<h4 id="类似String-split的用法"><a href="#类似String-split的用法" class="headerlink" title="类似String.split的用法"></a>类似String.split的用法</h4><p> “abc;def;ghi”?split(“;”)返回sequence<br>将字符串按空格转化成sequence,然后取sequence的长度<br> var?word_list  效果同 var?split(“ ”)<br> var?word_list?size  </p>
+<h4 id="取得字符串长度"><a href="#取得字符串长度" class="headerlink" title="取得字符串长度"></a>取得字符串长度</h4><p>var?length<br>大写输出字符<br>var?upper_case<br>小写输出字符<br>var?lower_case<br>首字符大写<br>var?cap_first<br>首字符小写<br>var?uncap_first<br>去掉字符串前后空格<br>var?trim<br>每个单词的首字符大写<br>var?capitalize<br>类似String.indexof:<br> “babcdabcd”?index_of(“abc”) 返回1<br> “babcdabcd”?index_of(“abc”,2) 返回5<br>类似String.lastIndexOf<br> last_index_of和String.lastIndexOf类似,同上<br>下面两个可能在代码生成的时候使用（在引号前加”\”）<br>j_string: 在字符串引号前加”\”  </p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="symbol">#assign</span> <span class="keyword">beanName </span>= <span class="string">'The "foo" bean.'</span>&gt;</span><br><span class="line"><span class="keyword">String </span><span class="keyword">BEAN_NAME </span>= <span class="string">"$&#123;beanName?j_string&#125;"</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>打印输出:  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> BEAN_NAME = <span class="string">"The \"foo\" bean."</span>;</span><br><span class="line">js_string:</span><br><span class="line"> &lt;#assign user = "Big Joe's \"right hand\"."&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  alert(<span class="string">"Welcome $&#123;user&#125;!"</span>);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>打印输出<br><code>alert(&quot;Welcome Big Joe\&#39;s \&quot;right hand\&quot;!&quot;);</code><br>替换字符串 replace<br>${s?replace(‘ba’, ‘XY’ )}<br>${s?replace(‘ba’, ‘XY’ , ‘规则参数’)}将s里的所有的ba替换成xy 规则参数包含: i r m s c f 具体含义如下:<br>· i: 大小写不区分.<br>· f: 只替换第一个出现被替换字符串的字符串<br>· r:  XY是正则表达式<br>· m: Multi-line mode for regular expressions. In multi-line mode the expressions ^ and $ match just after or just before, respectively, a line terminator or the end of the string. By default these expressions only match at the beginning and the end of the entire string.<br>· s: Enables dotall mode for regular expressions (same as Perl singe-line mode). In dotall mode, the expression . matches any character, including a line terminator. By default this expression does not match line terminators.<br>· c: Permits whitespace and comments in regular expressions.  </p>
+<p>在模板里对sequences和hashes初始化<br><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">sequences   </span></span><br><span class="line"><span class="xml">1. [“you”,”me”,”he”]</span></span><br><span class="line"><span class="xml">2. 1..100</span></span><br><span class="line"><span class="xml">3. [ </span><span class="template-variable">&#123;“Akey”:”Avalue”&#125;</span><span class="xml">,</span><span class="template-variable">&#123;“Akey1”:”Avalue1”&#125;</span><span class="xml">,</span></span><br><span class="line"><span class="xml"></span><span class="template-variable">&#123;“Bkey”:”Bvalue”&#125;</span><span class="xml">,</span><span class="template-variable">&#123;“Bkey1”:”Bvalue1”&#125;</span><span class="xml">,</span></span><br><span class="line"><span class="xml">]</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">hashes      </span><span class="template-variable">&#123;“you”:”a”,”me”:”b”,”he”:”c”&#125;</span><span class="xml"></span></span><br></pre></td></tr></table></figure></p>
+<p>注释标志<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="comment">--</span></span><br><span class="line">这里是注释</span><br><span class="line"><span class="comment">--&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>旧版本的freemarker采用的是&lt;#comment&gt; 注释 &lt;/#comment&gt;方法<br>sequences内置方法<br>sequence?first<br>返回sequence的第一个值;前提条件sequence不能是null<br>sequence?last<br> 返回sequence最后一个值<br>sequence?reverse<br> 反转sequence的值<br>sequence?size<br> 返回sequence的大小<br>sequence?sort<br> 对sequence按里面的对象toString()的结果进行排序<br>sequence?sort_by(value)<br>对sequence 按里面的对象的属性value进行排序<br>如: sequence里面放入的是10 个user对象，user对象里面包含name,age等属性<br>sequence?sort_by(name) 表示所有的user按user.name进行排序<br>hashes内置方法<br>hash?keys<br> 返回hash里的所有keys, 返回结果类型sequence<br>hash?values<br> 返回hash里的所有value, 返回结果类型sequence  </p>
+<h2 id="freemarker在web开发中注意事项"><a href="#freemarker在web开发中注意事项" class="headerlink" title="freemarker在web开发中注意事项"></a>freemarker在web开发中注意事项</h2><p>freemarker与webwork整合  </p>
+<h3 id="web中常用的几个对象"><a href="#web中常用的几个对象" class="headerlink" title="web中常用的几个对象"></a>web中常用的几个对象</h3><p>Freemarker的ftl文件中直接使用内部对象:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">&#123;Request [<span class="string">"a"</span>]&#125;  </span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;RequestParameters[<span class="string">"a"</span>]&#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;Session [<span class="string">"a"</span>]&#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;Application [<span class="string">"a"</span>]&#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;JspTaglibs [<span class="string">"a"</span>]&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>与webwork整合之后 通过配置的servlet 已经把request,session等对象置入了数据模型中<br>在view中存在下面的对象<br>我们可以在ftl中${req}来打印req对象<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">· req - the current HttpServletRequest</span><br><span class="line">· res - the current HttpServletResponse</span><br><span class="line">· stack - the current OgnlValueStack</span><br><span class="line">· ognl - the OgnlTool instance</span><br><span class="line">· webwork - an<span class="built_in"> instance </span>of FreemarkerWebWorkUtil</span><br><span class="line">· action - the current WebWork action</span><br><span class="line">· exception - optional the Exception instance, <span class="keyword">if</span> the view is a JSP exception <span class="keyword">or</span> Servlet exception view</span><br></pre></td></tr></table></figure></p>
+<p>view中值的搜索顺序<br>${name}将会以下面的顺序查找name值<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">· freemarker <span class="keyword">variables</span></span><br><span class="line">· value <span class="comment">stack</span></span><br><span class="line">· request <span class="comment">attributes</span></span><br><span class="line">· session <span class="comment">attributes</span></span><br><span class="line">· servlet <span class="comment">context attributes</span></span><br></pre></td></tr></table></figure></p>
+<p>在模板里ftl里使用标签<br>注意，如果标签的属性值是数字，那么必须采用nubmer=123方式给属性赋值<br>JSP页面<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@page</span> <span class="attr">contentType</span>=<span class="string">"text/html;charset=ISO-8859-2"</span> <span class="attr">language</span>=<span class="string">"java"</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%@taglib</span> <span class="attr">uri</span>=<span class="string">"/WEB-INF/struts-html.tld"</span> <span class="attr">prefix</span>=<span class="string">"html"</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%@taglib</span> <span class="attr">uri</span>=<span class="string">"/WEB-INF/struts-bean.tld"</span> <span class="attr">prefix</span>=<span class="string">"bean"</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">bean:message</span> <span class="attr">key</span>=<span class="string">"welcome.title"</span>/&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">html:errors</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">html:form</span> <span class="attr">action</span>=<span class="string">"/query"</span>&gt;</span></span><br><span class="line">      Keyword: <span class="tag">&lt;<span class="name">html:text</span> <span class="attr">property</span>=<span class="string">"keyword"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">      Exclude: <span class="tag">&lt;<span class="name">html:text</span> <span class="attr">property</span>=<span class="string">"exclude"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">html:submit</span> <span class="attr">value</span>=<span class="string">"Send"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">html:form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>模板ftl页面<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">#assign</span> <span class="attr">html</span>=<span class="string">JspTaglibs[</span>"/<span class="attr">WEB-INF</span>/<span class="attr">struts-html.tld</span>"]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">#assign</span> <span class="attr">bean</span>=<span class="string">JspTaglibs[</span>"/<span class="attr">WEB-INF</span>/<span class="attr">struts-bean.tld</span>"]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">@bean.message</span> <span class="attr">key</span>=<span class="string">"welcome.title"</span>/&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">@html.errors</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">@html.form</span> <span class="attr">action</span>=<span class="string">"/query"</span>&gt;</span></span><br><span class="line">      Keyword: <span class="tag">&lt;<span class="name">@html.text</span> <span class="attr">property</span>=<span class="string">"keyword"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">      Exclude: <span class="tag">&lt;<span class="name">@html.text</span> <span class="attr">property</span>=<span class="string">"exclude"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">@html.submit</span> <span class="attr">value</span>=<span class="string">"Send"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">@html.form</span> &gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>如何初始化共享变量<br>1． 初始化全局共享数据模型<br>freemark在web上使用的时候对共享数据的初始化支持的不够,不能在配置初始化的时候实现，而必须通过ftl文件来初始化全局变量。这是不能满主需求的，我们需要在servlet init的时候留出一个接口来初始化系统的共享数据<br>具体到和webwork整合,因为本身webwork提供了整合servlet,如果要增加全局共享变量，可以通过修改com.opensymphony.webwork.views.freemarker.FreemarkerServlet来实现,我们可以在这个servlet初始化的时候来初始化全局共享变量<br>与webwork整合配置<br>配置web.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>freemarker<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.opensymphony.webwork.views.freemarker.FreemarkerServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>TemplatePath<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param-value</span>&gt;</span>/<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>&lt;!—模板载入文件夹，这里相对context root，递归获取该文件夹下的所有模板–&gt;<br><figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    &lt;/init-<span class="built_in">param</span>&gt;</span><br><span class="line">    &lt;init-<span class="built_in">param</span>&gt;</span><br><span class="line">      &lt;<span class="built_in">param</span>-<span class="built_in">name</span>&gt;NoCache&lt;/<span class="built_in">param</span>-<span class="built_in">name</span>&gt; &lt;!—是否对模板缓存--&gt;</span><br><span class="line">      &lt;<span class="built_in">param</span>-value&gt;<span class="literal">true</span>&lt;/<span class="built_in">param</span>-value&gt;</span><br><span class="line">    &lt;/init-<span class="built_in">param</span>&gt;</span><br><span class="line">    &lt;init-<span class="built_in">param</span>&gt;</span><br><span class="line">      &lt;<span class="built_in">param</span>-<span class="built_in">name</span>&gt;ContentType&lt;/<span class="built_in">param</span>-<span class="built_in">name</span>&gt;</span><br><span class="line">      &lt;<span class="built_in">param</span>-value&gt;<span class="built_in">text</span>/html&lt;/<span class="built_in">param</span>-value&gt;</span><br><span class="line">    &lt;/init-<span class="built_in">param</span>&gt;</span><br><span class="line">    &lt;init-<span class="built_in">param</span>&gt;</span><br><span class="line">&lt;<span class="built_in">param</span>-<span class="built_in">name</span>&gt;template_update_delay&lt;/<span class="built_in">param</span>-<span class="built_in">name</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>&lt;!—模板更新时间,0表示每次都更新,这个适合开发时候–&gt;<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>0<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>default_encoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>GBK<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>number_format<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>0.##########<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span><span class="tag">&lt;<span class="name">!—数字显示格式--</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>freemarker<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.ftl<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>5高级方法<br>自定义方法<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">&#123;timer(<span class="string">"yyyy-MM-dd H:mm:ss"</span>, x)&#125;</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;timer(<span class="string">"yyyy-MM-dd "</span>, x)&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>在模板中除了可以通过对象来调用方法外（${object.methed(args)}）也可以直接调用java实现的方法，java类必须实现接口TemplateMethodModel的方法exec(List args). 下面以把毫秒的时间转换成按格式输出的时间为例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LongToDate</span> <span class="keyword">implements</span> <span class="title">TemplateMethodModel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> TemplateModel <span class="title">exec</span><span class="params">(List args)</span> <span class="keyword">throws</span> TemplateModelException </span>&#123;</span><br><span class="line">SimpleDateFormat mydate = <span class="keyword">new</span> SimpleDateFormat((String) args.get(<span class="number">0</span>)));</span><br><span class="line">        <span class="keyword">return</span> mydate.format(<span class="keyword">new</span> Date(Long.parseLong((String)args.get(<span class="number">1</span>)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>将LongToDate对象放入到数据模型中<br><code>root.put(&quot;timer&quot;, new IndexOfMethod());</code><br>ftl模板里使用<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;#<span class="keyword">assign</span> x = <span class="string">"123112455445"</span>&gt;</span><br><span class="line"><span class="symbol">$</span>&#123;timer(<span class="string">"yyyy-MM-dd H:mm:ss"</span>, x)&#125;</span><br><span class="line"><span class="symbol">$</span>&#123;timer(<span class="string">"yyyy-MM-dd "</span>, x)&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2001<span class="string">-10</span><span class="string">-12</span> 5:21:12</span><br><span class="line">2001<span class="string">-10</span><span class="string">-12</span></span><br></pre></td></tr></table></figure></p>
+<p>自定义 Transforms<br>实现自定义的&lt;@transform&gt;文本或表达式&lt;/@transform &gt;的功能,允许对中间的最终文本进行解析转换<br>例子：实现&lt;@upcase&gt;str&lt;/@upcase &gt; 将str转换成STR 的功能<br>代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> freemarker.template.TemplateTransformModel;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UpperCaseTransform</span> <span class="keyword">implements</span> <span class="title">TemplateTransformModel</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Writer <span class="title">getWriter</span><span class="params">(Writer out, Map args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> UpperCaseWriter(out);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">UpperCaseWriter</span> <span class="keyword">extends</span> <span class="title">Writer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> Writer out;</span><br><span class="line"></span><br><span class="line">        UpperCaseWriter (Writer out) &#123;</span><br><span class="line">            <span class="keyword">this</span>.out = out;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">char</span>[] cbuf, <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function">                <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">            out.write(<span class="keyword">new</span> String(cbuf, off, len).toUpperCase());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">            out.flush();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后将此对象put到数据模型中<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root.<span class="built_in">put</span>(<span class="string">"upcase"</span>, <span class="keyword">new</span> UpperCaseTransform());</span><br></pre></td></tr></table></figure></p>
+<p>在view(ftl)页面中可以如下方式使用<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;@upcase&gt;</span></span><br><span class="line"><span class="attribute">hello</span> world</span><br><span class="line"><span class="section">&lt;/@upcase &gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>打印输出:<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">HELLO WORLD</span></span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Java开发/">Java开发</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://kuailelai.com/2015/01/08/Freemarker-使用/" data-title="Freemarker 使用 | 一个程序员" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/01/09/Eclipse智能提示及快捷键/" title="Eclipse智能提示及快捷键">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Eclipse智能提示及快捷键</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/01/08/使用Maven导出工程依赖的jar包/"  title="使用Maven导出工程依赖的jar包">
+ <strong>下一篇：</strong><br/> 
+ <span>使用Maven导出工程依赖的jar包
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#FTL指令规则"><span class="toc-number">1.</span> <span class="toc-text">FTL指令规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插值规则"><span class="toc-number">2.</span> <span class="toc-text">插值规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通用插值"><span class="toc-number">2.1.</span> <span class="toc-text">通用插值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数字格式化插值"><span class="toc-number">2.2.</span> <span class="toc-text">数字格式化插值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表达式"><span class="toc-number">3.</span> <span class="toc-text">表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接指定值"><span class="toc-number">3.1.</span> <span class="toc-text">直接指定值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数值"><span class="toc-number">3.2.</span> <span class="toc-text">数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map对象"><span class="toc-number">3.3.</span> <span class="toc-text">Map对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出变量值"><span class="toc-number">4.</span> <span class="toc-text">输出变量值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顶层变量"><span class="toc-number">4.1.</span> <span class="toc-text">顶层变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输出集合元素"><span class="toc-number">4.2.</span> <span class="toc-text">输出集合元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输出Map元素"><span class="toc-number">4.3.</span> <span class="toc-text">输出Map元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串操作"><span class="toc-number">4.4.</span> <span class="toc-text">字符串操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合连接运算符"><span class="toc-number">4.5.</span> <span class="toc-text">集合连接运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map连接运算符"><span class="toc-number">4.6.</span> <span class="toc-text">Map连接运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算术运算符"><span class="toc-number">4.7.</span> <span class="toc-text">算术运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较运算符"><span class="toc-number">4.8.</span> <span class="toc-text">比较运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑运算符"><span class="toc-number">4.9.</span> <span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内建函数"><span class="toc-number">4.10.</span> <span class="toc-text">内建函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空值处理运算符"><span class="toc-number">4.11.</span> <span class="toc-text">空值处理运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运算符的优先级"><span class="toc-number">4.12.</span> <span class="toc-text">运算符的优先级</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FreeMarker的常用指令"><span class="toc-number">5.</span> <span class="toc-text">FreeMarker的常用指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if指令"><span class="toc-number">5.1.</span> <span class="toc-text">if指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#switch-case-default-break指令"><span class="toc-number">5.2.</span> <span class="toc-text">switch , case , default , break指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#list-break指令"><span class="toc-number">5.3.</span> <span class="toc-text">list, break指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#include指令"><span class="toc-number">5.4.</span> <span class="toc-text">include指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#import指令"><span class="toc-number">5.5.</span> <span class="toc-text">import指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#noparse指令"><span class="toc-number">5.6.</span> <span class="toc-text">noparse指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#escape-noescape指令"><span class="toc-number">5.7.</span> <span class="toc-text">escape , noescape指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#assign指令"><span class="toc-number">5.8.</span> <span class="toc-text">assign指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setting指令"><span class="toc-number">5.9.</span> <span class="toc-text">setting指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#macro-nested-return指令"><span class="toc-number">5.10.</span> <span class="toc-text">macro , nested , return指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">6.</span> <span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#指令"><span class="toc-number">6.1.</span> <span class="toc-text">指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#if-else-elseif"><span class="toc-number">6.1.1.</span> <span class="toc-text">if, else, elseif</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#switch-case-default-break"><span class="toc-number">6.1.2.</span> <span class="toc-text">switch, case, default, break</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#list-break"><span class="toc-number">6.1.3.</span> <span class="toc-text">list, break</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#include"><span class="toc-number">6.1.4.</span> <span class="toc-text">include</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Import"><span class="toc-number">6.1.5.</span> <span class="toc-text">Import</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#compress"><span class="toc-number">6.1.6.</span> <span class="toc-text">compress</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#escape-noescape"><span class="toc-number">6.1.7.</span> <span class="toc-text">escape, noescape</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#assign"><span class="toc-number">6.1.8.</span> <span class="toc-text">assign</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#global"><span class="toc-number">6.1.9.</span> <span class="toc-text">global</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#setting"><span class="toc-number">6.1.10.</span> <span class="toc-text">setting</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#macro-nested-return"><span class="toc-number">6.1.11.</span> <span class="toc-text">macro, nested, return</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#t-lt-rt"><span class="toc-number">6.1.12.</span> <span class="toc-text">t, lt, rt</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些常用方法或注意事项"><span class="toc-number">7.</span> <span class="toc-text">一些常用方法或注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表达式转换类"><span class="toc-number">7.1.</span> <span class="toc-text">表达式转换类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数字循环"><span class="toc-number">7.2.</span> <span class="toc-text">数字循环</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对浮点取整数"><span class="toc-number">7.2.1.</span> <span class="toc-text">对浮点取整数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#给变量默认值"><span class="toc-number">7.2.2.</span> <span class="toc-text">给变量默认值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#判断对象是不是null"><span class="toc-number">7.2.3.</span> <span class="toc-text">判断对象是不是null</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用格式化日期"><span class="toc-number">7.2.4.</span> <span class="toc-text">常用格式化日期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加全局共享变量数据模型"><span class="toc-number">7.2.5.</span> <span class="toc-text">添加全局共享变量数据模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串处理-内置方法"><span class="toc-number">7.3.</span> <span class="toc-text">字符串处理(内置方法)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#substring的用法"><span class="toc-number">7.3.1.</span> <span class="toc-text">substring的用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类似String-split的用法"><span class="toc-number">7.3.2.</span> <span class="toc-text">类似String.split的用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#取得字符串长度"><span class="toc-number">7.3.3.</span> <span class="toc-text">取得字符串长度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#freemarker在web开发中注意事项"><span class="toc-number">8.</span> <span class="toc-text">freemarker在web开发中注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web中常用的几个对象"><span class="toc-number">8.1.</span> <span class="toc-text">web中常用的几个对象</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/编程相关/" title="编程相关">编程相关<sup>5</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>17</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java开发/" title="Java开发">Java开发<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/fedora/" title="fedora">fedora<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日志/" title="日志">日志<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hbase/" title="hbase">hbase<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hive/" title="hive">hive<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 生当作人杰 <br/>
+			死亦为鬼雄</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1179900904" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="YuHaiTao">YuHaiTao</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

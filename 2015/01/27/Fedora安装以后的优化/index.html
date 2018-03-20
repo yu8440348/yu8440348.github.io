@@ -1,0 +1,560 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Fedora安装以后的优化 | 一个程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="YuHaiTao">
+    
+
+    
+    <meta name="description" content="1.安装gnome-tweak-tool设置工具Fedora 19自带的系统设置工具十分简单，一些重要的地方都不能设置。比如窗口默认没有最大化和最化小的按钮。 1sudo yum install gnome-tweak-tool 然后在左上角的“活动”里找到并打开“优化工具”，在左侧选择“窗口”，在右侧找到“Titlebar Buttons”，把下面的“Maximize”和“Minimize”打开">
+<meta name="keywords" content="linux,fedora">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fedora安装以后的优化">
+<meta property="og:url" content="http://kuailelai.com/2015/01/27/Fedora安装以后的优化/index.html">
+<meta property="og:site_name" content="一个程序员">
+<meta property="og:description" content="1.安装gnome-tweak-tool设置工具Fedora 19自带的系统设置工具十分简单，一些重要的地方都不能设置。比如窗口默认没有最大化和最化小的按钮。 1sudo yum install gnome-tweak-tool 然后在左上角的“活动”里找到并打开“优化工具”，在左侧选择“窗口”，在右侧找到“Titlebar Buttons”，把下面的“Maximize”和“Minimize”打开">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2016-08-17T07:26:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fedora安装以后的优化">
+<meta name="twitter:description" content="1.安装gnome-tweak-tool设置工具Fedora 19自带的系统设置工具十分简单，一些重要的地方都不能设置。比如窗口默认没有最大化和最化小的按钮。 1sudo yum install gnome-tweak-tool 然后在左上角的“活动”里找到并打开“优化工具”，在左侧选择“窗口”，在右侧找到“Titlebar Buttons”，把下面的“Maximize”和“Minimize”打开">
+
+    
+    <link rel="alternative" href="/atom.xml" title="一个程序员" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="一个程序员" title="一个程序员"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一个程序员">一个程序员</a></h1>
+				<h2 class="blog-motto">程序员是值得尊敬的，程序员的双手是魔术师的双手。他们把枯燥无味的代码变成了丰富多彩的软件</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:kuailelai.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/27/Fedora安装以后的优化/" title="Fedora安装以后的优化" itemprop="url">Fedora安装以后的优化</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-27T03:38:00.000Z" itemprop="datePublished"> 发表于 2015-01-27</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装gnome-tweak-tool设置工具"><span class="toc-number">1.</span> <span class="toc-text">1.安装gnome-tweak-tool设置工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-设置网易软件源设置最快软件源"><span class="toc-number">2.</span> <span class="toc-text">2.设置网易软件源设置最快软件源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-常用软件安装"><span class="toc-number">3.</span> <span class="toc-text">3.常用软件安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-安装五笔输入法（ibus）"><span class="toc-number">4.</span> <span class="toc-text">4.安装五笔输入法（ibus）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-安装多媒体播放器（vlc）"><span class="toc-number">5.</span> <span class="toc-text">5.安装多媒体播放器（vlc）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-安装音乐播放器"><span class="toc-number">6.</span> <span class="toc-text">6.安装音乐播放器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-设置桌面快捷方式"><span class="toc-number">7.</span> <span class="toc-text">7.设置桌面快捷方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-安装QQ2012"><span class="toc-number">8.</span> <span class="toc-text">8.安装QQ2012</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-字体设置"><span class="toc-number">9.</span> <span class="toc-text">9.字体设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-强大的Gnome-Shell插件"><span class="toc-number">10.</span> <span class="toc-text">10.强大的Gnome Shell插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-更换主题"><span class="toc-number">11.</span> <span class="toc-text">11.更换主题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-安装解压软件"><span class="toc-number">12.</span> <span class="toc-text">21.安装解压软件</span></a></li></ol>
+		
+		</div>
+		
+		<h4 id="1-安装gnome-tweak-tool设置工具"><a href="#1-安装gnome-tweak-tool设置工具" class="headerlink" title="1.安装gnome-tweak-tool设置工具"></a>1.安装gnome-tweak-tool设置工具</h4><p>Fedora 19自带的系统设置工具十分简单，一些重要的地方都不能设置。比如窗口默认没有最大化和最化小的按钮。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install gnome-tweak-tool</span><br></pre></td></tr></table></figure>
+<p>然后在左上角的“活动”里找到并打开“优化工具”，在左侧选择“窗口”，在右侧找到“Titlebar Buttons”，把下面的“Maximize”和“Minimize”打开，这样，窗口的右上角就有最大化和最小化按钮了。</p>
+<p>此外，还可以在左侧的“Shell”中，把“在日历中显示星期”打开。</p>
+<p>对于国内用户，肯定不习惯多个桌面的形式，打开“优化工具”，在左侧选择“Workspaces”，把右侧的“Workspaces Creation”设置为“Static”，下面的“Number of Workspaces”设置为1，这样就只有1个桌面了。</p>
+<a id="more"></a>
+<h4 id="2-设置网易软件源设置最快软件源"><a href="#2-设置网易软件源设置最快软件源" class="headerlink" title="2.设置网易软件源设置最快软件源"></a>2.设置网易软件源设置最快软件源</h4><p>把yum-plugin-fastestmirror插件装上就行了，没有必要安装网易的源。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install yum-plugin-fastestmirror</span><br></pre></td></tr></table></figure>
+<h4 id="3-常用软件安装"><a href="#3-常用软件安装" class="headerlink" title="3.常用软件安装"></a>3.常用软件安装</h4><p>安装FTP客户端(Filezilla)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install filezilla</span><br></pre></td></tr></table></figure>
+<p>安装flash插件(32位)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -ivh http://linuxdownload.adobe.com/adobe-release/adobe-release-i386-1.0-1.noarch.rpm</span><br><span class="line">sudo yum install flash-plugin</span><br></pre></td></tr></table></figure>
+<p>安装flash插件(64位)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -ivh http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm</span><br><span class="line">sudo yum install flash-plugin</span><br><span class="line"></span><br><span class="line">sudo yum install nautilus-open-terminal  <span class="comment">#为右键菜单添加“在终端中打开”选项</span></span><br><span class="line"></span><br><span class="line">sudo yum install libreoffice-langpack-zh-Hans <span class="comment">#给LibreOffice安装中文字体</span></span><br></pre></td></tr></table></figure>
+<p>Fedora 19自带了LibreOffice，可以打开一般Word、Excel、PPT文档。此外，系统还自带了一个“文档查看器”，可以打开PDF格式的文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install gnome-shell-extension-user-theme</span><br><span class="line">sudo yum list | grep gnome-shell-theme      <span class="comment">#查看系统可用的主题</span></span><br><span class="line">sudo yum install gnome-shell-theme-zukitwo  <span class="comment">#为系统安装zukitwo透明主题</span></span><br></pre></td></tr></table></figure>
+<p>安装完主题以后，打开“优化工具”，选择左侧“Extensions”，将“User themes”开启。然后选择左侧“Appearance”，将右侧的“Shell 主题”切换成“zukitwo”，然后就会发现，系统的状态栏变成透明了。如果这里的“Shell 主题”显示的是一个感叹号，重启一下就可以设置了。</p>
+<h4 id="4-安装五笔输入法（ibus）"><a href="#4-安装五笔输入法（ibus）" class="headerlink" title="4.安装五笔输入法（ibus）"></a>4.安装五笔输入法（ibus）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[bear@bogon ~]$ sudo yum list | grep wubi</span><br><span class="line">ibus-table-chinese-wubi-haifeng.noarch  1.4.6-2.fc19                     fedora</span><br><span class="line">ibus-table-chinese-wubi-jidian.noarch   1.4.6-2.fc19                     fedora</span><br><span class="line">[bear@bogon ~]$ sudo yum install ibus-table-chinese-wubi-haifeng</span><br></pre></td></tr></table></figure>
+<p>然后需要重启一下（不知道为什么需要重启），添加一个输入源。打开“设置”－“区域和语言”，点击“输入源”下面的加号，选择“汉语（中国）”，列表里会出现“汉语（海峰五笔86）”，然后点“添加”就可以了。<br>简单测试了一下，貌似海峰五笔比极点五笔好用一些。极点五笔把tfrc打出了“造反”，而海峰五笔可以同时打出为“造反”和“选择”。<br>（补充：发现极点五笔确实很差，ykkl无法打出“识别”）</p>
+<h4 id="5-安装多媒体播放器（vlc）"><a href="#5-安装多媒体播放器（vlc）" class="headerlink" title="5.安装多媒体播放器（vlc）"></a>5.安装多媒体播放器（vlc）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -ivh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm</span><br><span class="line">sudo yum install vlc</span><br></pre></td></tr></table></figure>
+<p>vlc这个万能播放器怎么能少呢？装完就可以播放常见的多媒体文件了。还可以把系统默认的播放器设置为vlc，这个就不用多说了。</p>
+<h4 id="6-安装音乐播放器"><a href="#6-安装音乐播放器" class="headerlink" title="6.安装音乐播放器"></a>6.安装音乐播放器</h4><p>百度了一下，比较好的音乐播放器有<br>Clenmentine，功能较为强大，有点儿像iTunes<br>audacious，界面简洁，比较像foobar<br>这里以安装audacious为例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install audacious</span><br><span class="line">yum install audacious-plugins-freeworld  <span class="comment">#安装mp3解码器，需要RPM Fusion，在本文第5步中已经安装</span></span><br></pre></td></tr></table></figure>
+<h4 id="7-设置桌面快捷方式"><a href="#7-设置桌面快捷方式" class="headerlink" title="7.设置桌面快捷方式"></a>7.设置桌面快捷方式</h4><p>将本文中第一步安装的“优化工具”打开，在左侧选择“桌面”，将右侧的“Icons on Desktop”打开，这样的话，桌面上就会出来图标了。</p>
+<p>如何将喜欢的应用程序建立桌面图标？<br>打开/usr/share/applications/，找到你喜欢的应用程序图标，右键选择“复制到…”，弹出的窗口中，左侧选择“Home”，再在右侧选“桌面”即可。</p>
+<h4 id="8-安装QQ2012"><a href="#8-安装QQ2012" class="headerlink" title="8.安装QQ2012"></a>8.安装QQ2012</h4><p>请参考教程：<a href="http://tieba.baidu.com/p/1839029331" target="_blank" rel="noopener">http://tieba.baidu.com/p/1839029331</a></p>
+<h4 id="9-字体设置"><a href="#9-字体设置" class="headerlink" title="9.字体设置"></a>9.字体设置</h4><p>Fedora 19默认的点阵字体感觉非常不好，尤其是在大屏幕的显示器上。所以我们需要换一种字体。<br>首先说一下字体的安装方法，这里以安装文泉驿微米黑为例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /usr/share/fonts/wqy-microhei  <span class="comment">#建立字体目录</span></span><br><span class="line">wget http://sourceforge.net/projects/wqy/files/wqy-microhei/0.2.0-beta/wqy-microhei-0.2.0-beta.tar.gz</span><br><span class="line">tar -zxvf wqy-microhei-0.2.0-beta.tar.gz  <span class="comment">#将下载的字体解压</span></span><br><span class="line"><span class="built_in">cd</span> wqy-microhei/</span><br><span class="line">sudo mv wqy-microhei.ttc /usr/share/fonts/wqy-microhei</span><br><span class="line"><span class="built_in">fc</span>-cache -fv    <span class="comment">#更新字体缓存</span></span><br></pre></td></tr></table></figure>
+<p>然后在“字体查看器”中已经可以找到这个字体了。<br>然后打开“优化工具”，选择左侧的“字体”，将“默认字体”改为“文泉驿微米黑”，然后，就会发现整个系统的字体变了。<br>我把Windows系统中常见的字体整理了一份，包括宋体，微软雅黑，黑体，仿宋，楷体，黑体等。下载地址请点击此处，安装方式不再多说。</p>
+<p>关于字体，2014.01.05补充：<br>发现了两个非常好看的字体：文泉驿正黑体和google-droid-sans-fonts，尤其对中文的支持近乎完美。我的Fedora 20 64bit已经自带了这两种字体。如果你的系统里没有，也可以使用如下方法安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install google-droid-sans-fonts</span><br><span class="line">sudp yum install wqy-zenhei-fonts</span><br></pre></td></tr></table></figure>
+<p>然后打开“优化工具”，将“字体”改为文泉驿正黑，然后，享受美观的中文字体吧。</p>
+<p>补充：发现由红帽支持的Liberation Fonts字体比较美观，十分接近windows XP的样子。Fedora19中已经自带了这种字体。这里给出字体方案：<br>默认字体：Liberation Sans 10<br>文档字体：Liberation Sans 10<br>等宽字体：Liberation Mono 10</p>
+<p>2014.04.25补充：<br>很多字体在fedora上显示的都很模糊，使用开源字体渲染软件Infinality来解决吧：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -Uvh http://www.infinality.net/fedora/linux/infinality-repo-1.0-1.noarch.rpm</span><br><span class="line">sudo yum install freetype-infinality fontconfig-infinality</span><br><span class="line">vim /etc/profile.d/infinality-settings.sh   <span class="comment">#设置渲染风格，默认的default就很清晰了</span></span><br><span class="line">USE_STYLE=<span class="string">"DEFAULT"</span></span><br></pre></td></tr></table></figure>
+<p>然后重启即可。</p>
+<p>关于Infinality的用法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/profile.d/infinality-settings.sh  <span class="comment">#设置渲染风格，有win7/winXP/linux/osx等</span></span><br><span class="line">sudo vim sudo vim /etc/fonts/infinality/styles.conf.avail/win7/20-aliases-default-win.conf <span class="comment">#修改win7风格下的字体</span></span><br></pre></td></tr></table></figure>
+<p>在Infinality配置文件中设置字体的时候，可能需要获得字体的名称，如果中文字体要怎么设置名称呢？首先安装fontconfig软件包，然后在程序中找到“字体查看器”，这时候就可以找到中文字体的英文名称了。</p>
+<h4 id="10-强大的Gnome-Shell插件"><a href="#10-强大的Gnome-Shell插件" class="headerlink" title="10.强大的Gnome Shell插件"></a>10.强大的Gnome Shell插件</h4><p>借助强大的Gnome Shell插件，可以实现很多特殊的功能，比如在顶部的状态栏显示所有已打开的应用程序。个人认为这个功能对于提升效率非常有帮助。简单查找了一下，找到以下3个插件可以实现这个功能：<br>Window List：这个貌似是最好的，但目前不支持最新的Gnome3.8。<br>TaskBar：很多小功能非常帖心，比如带有“显示桌面”的小图标，以及显示所有程序列表的小图标。推荐！<br>Yet Another Window List：功能一般，但据说速度比前者好，只是听说，本人在实际使用过程中觉得速度上没有差别，但前者的使用体验要优于它。</p>
+<p>Gnome Shell插件使用起来非常简单，在Fedora系统自带的Firefox中打开插件地址，页面左上角会出现一个OFF的图标，把点改成ON即可。</p>
+<h4 id="11-更换主题"><a href="#11-更换主题" class="headerlink" title="11.更换主题"></a>11.更换主题</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install faenza-icon-theme  <span class="comment">#安装faenza图标主题</span></span><br></pre></td></tr></table></figure>
+<p>然后打开“优化工具”，选择左侧的“主题”，将“图标主题”改为“Faenza”即可。</p>
+<h4 id="21-安装解压软件"><a href="#21-安装解压软件" class="headerlink" title="21.安装解压软件"></a>21.安装解压软件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm</span><br><span class="line">sudo rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm</span><br><span class="line">sudo yum install unrar</span><br></pre></td></tr></table></figure>
+<p>fedora 中怎么解压rar文件呢？很简单，就是 unrar e file_name.rar</p>
+<blockquote>
+<p>转载自 <a href="http://www.zhukun.net/archives/6614" target="_blank" rel="noopener">http://www.zhukun.net/archives/6614</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/">linux</a><a href="/tags/fedora/">fedora</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://kuailelai.com/2015/01/27/Fedora安装以后的优化/" data-title="Fedora安装以后的优化 | 一个程序员" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/01/27/Fedora-下-MySQL-的安装/" title="Fedora 下 MySQL 的安装">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Fedora 下 MySQL 的安装</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/01/27/geeknote的使用/"  title="geeknote的使用">
+ <strong>下一篇：</strong><br/> 
+ <span>geeknote的使用
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装gnome-tweak-tool设置工具"><span class="toc-number">1.</span> <span class="toc-text">1.安装gnome-tweak-tool设置工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-设置网易软件源设置最快软件源"><span class="toc-number">2.</span> <span class="toc-text">2.设置网易软件源设置最快软件源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-常用软件安装"><span class="toc-number">3.</span> <span class="toc-text">3.常用软件安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-安装五笔输入法（ibus）"><span class="toc-number">4.</span> <span class="toc-text">4.安装五笔输入法（ibus）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-安装多媒体播放器（vlc）"><span class="toc-number">5.</span> <span class="toc-text">5.安装多媒体播放器（vlc）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-安装音乐播放器"><span class="toc-number">6.</span> <span class="toc-text">6.安装音乐播放器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-设置桌面快捷方式"><span class="toc-number">7.</span> <span class="toc-text">7.设置桌面快捷方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-安装QQ2012"><span class="toc-number">8.</span> <span class="toc-text">8.安装QQ2012</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-字体设置"><span class="toc-number">9.</span> <span class="toc-text">9.字体设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-强大的Gnome-Shell插件"><span class="toc-number">10.</span> <span class="toc-text">10.强大的Gnome Shell插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-更换主题"><span class="toc-number">11.</span> <span class="toc-text">11.更换主题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-安装解压软件"><span class="toc-number">12.</span> <span class="toc-text">21.安装解压软件</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/编程相关/" title="编程相关">编程相关<sup>5</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>17</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java开发/" title="Java开发">Java开发<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/fedora/" title="fedora">fedora<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日志/" title="日志">日志<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hbase/" title="hbase">hbase<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hive/" title="hive">hive<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 生当作人杰 <br/>
+			死亦为鬼雄</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1179900904" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="YuHaiTao">YuHaiTao</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

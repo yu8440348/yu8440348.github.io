@@ -1,0 +1,526 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>ubuntu配置vsftp | 一个程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="YuHaiTao">
+    
+
+    
+    <meta name="description" content="最近想在自己的vps上搭建vsftp服务器，本以为是很简单的事，但网上铺天盖地的帖子和博客，没有一个能在我的ubuntu14.04 server版的服务器上安装成功。经过半天努力，终于搞定了在64位ubuntu14.04上安装vsftpd 3.0.2，实现了禁用匿名用户和虚拟用户，只启用本地用户登录。 首先安装vsftpd:1sudo apt-get install vsftpd">
+<meta name="keywords" content="Ubuntu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu配置vsftp">
+<meta property="og:url" content="http://kuailelai.com/2015/01/13/ubuntu配置vsftp/index.html">
+<meta property="og:site_name" content="一个程序员">
+<meta property="og:description" content="最近想在自己的vps上搭建vsftp服务器，本以为是很简单的事，但网上铺天盖地的帖子和博客，没有一个能在我的ubuntu14.04 server版的服务器上安装成功。经过半天努力，终于搞定了在64位ubuntu14.04上安装vsftpd 3.0.2，实现了禁用匿名用户和虚拟用户，只启用本地用户登录。 首先安装vsftpd:1sudo apt-get install vsftpd">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2015-12-02T15:59:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ubuntu配置vsftp">
+<meta name="twitter:description" content="最近想在自己的vps上搭建vsftp服务器，本以为是很简单的事，但网上铺天盖地的帖子和博客，没有一个能在我的ubuntu14.04 server版的服务器上安装成功。经过半天努力，终于搞定了在64位ubuntu14.04上安装vsftpd 3.0.2，实现了禁用匿名用户和虚拟用户，只启用本地用户登录。 首先安装vsftpd:1sudo apt-get install vsftpd">
+
+    
+    <link rel="alternative" href="/atom.xml" title="一个程序员" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="一个程序员" title="一个程序员"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一个程序员">一个程序员</a></h1>
+				<h2 class="blog-motto">程序员是值得尊敬的，程序员的双手是魔术师的双手。他们把枯燥无味的代码变成了丰富多彩的软件</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:kuailelai.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/13/ubuntu配置vsftp/" title="ubuntu配置vsftp" itemprop="url">ubuntu配置vsftp</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-13T09:43:00.000Z" itemprop="datePublished"> 发表于 2015-01-13</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>最近想在自己的vps上搭建vsftp服务器，本以为是很简单的事，但网上铺天盖地的帖子和博客，没有一个能在我的ubuntu14.04 server版的服务器上安装成功。经过半天努力，终于搞定了在64位ubuntu14.04上安装vsftpd 3.0.2，实现了禁用匿名用户和虚拟用户，只启用本地用户登录。</p>
+<p>首先安装vsftpd:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="builtin-name">get</span> install vsftpd</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>然后添加ftp用户，由于只拿来登录ftp，所以为了安全把shell设置为nologin，同时把对应的家目录设置为你要让该用户访问的目录，命令如下：<br>添加ftp用户<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -d <span class="regexp">/var/</span>ftp -s <span class="regexp">/usr/</span>sbin<span class="regexp">/nologin username</span></span><br></pre></td></tr></table></figure></p>
+<p>这样就添加了一个名为username的用户，该用户不能用作系统登陆。然后修改该用户密码：<br>修改密码<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">passwd username</span></span><br></pre></td></tr></table></figure></p>
+<p>根据提示，连续输入两次密码后就更改了username这个用户的密码。</p>
+<p>现在开始最关键的vsftp的配置，主要配置文件是/etc/vsftpd.conf,内容如下<br>/etc/vsftpd.conf<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#禁用匿名用户登陆</span></span><br><span class="line"><span class="attr">anonymous_enable</span>=<span class="literal">NO</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#允许本地用户登陆</span></span><br><span class="line"><span class="attr">local_enable</span>=<span class="literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#允许本地用户写入</span></span><br><span class="line"><span class="attr">write_enable</span>=<span class="literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#注意：这个地方如果不配置，就会出现只有root用户可以登陆，普通用户不可以</span></span><br><span class="line"><span class="attr">check_shell</span>=<span class="literal">NO</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#掩码，决定了上传上来的文件的权限。设置为000使之有最大权限</span></span><br><span class="line"><span class="attr">local_umask</span>=<span class="number">000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#允许记录日志</span></span><br><span class="line"><span class="attr">xferlog_enable</span>=<span class="literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#允许数据流从20端口传输</span></span><br><span class="line"><span class="attr">connect_from_port_20</span>=<span class="literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#日志路径</span></span><br><span class="line"><span class="attr">xferlog_file</span>=/var/log/vsftpd.log</span><br><span class="line"></span><br><span class="line"><span class="comment">#ftp欢迎语，可以随便设置</span></span><br><span class="line"><span class="attr">ftpd_banner</span>=hi,guys!</span><br><span class="line"></span><br><span class="line"><span class="comment">#注意：这个选项可以保证用户锁定在指定的家目录里，防止系统文件被修改。</span></span><br><span class="line"><span class="attr">chroot_local_user</span>=<span class="literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#注意：这个不配置有可能出现只能下载不能上传</span></span><br><span class="line"><span class="attr">allow_writeable_chroot</span>=<span class="literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#配置了可以以stand alone模式运行</span></span><br><span class="line"><span class="attr">listen</span>=<span class="literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#注意：该选项不配置可能导致莫名其妙的530问题</span></span><br><span class="line"><span class="attr">seccomp_sandbox</span>=<span class="literal">NO</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#说明我们要指定一个userlist，里边放的是允许ftp登陆的本地用户。如果设置为YES，则文件里设置的是不允许登陆的本地用户</span></span><br><span class="line"><span class="attr">userlist_deny</span>=<span class="literal">NO</span></span><br><span class="line"><span class="attr">userlist_enable</span>=<span class="literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#记录允许本地登陆用户名的文件</span></span><br><span class="line"><span class="attr">userlist_file</span>=/etc/vsftpd/allowed_users</span><br></pre></td></tr></table></figure></p>
+<p>最后一步就是在我们userlist_file选项指定的文件里添加允许ftp登陆的本地账户，一行写一个即可，如我的就是/etc/vsftpd/allowde_users，内容如下：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta-keyword">/etc/</span>vsftpd/allowed_users</span><br><span class="line">username</span><br><span class="line">root</span><br></pre></td></tr></table></figure></p>
+<p>该文件说明我们允许本地用户username和root账号从ftp登陆，其他账号不可以。</p>
+<p>好了，配置完成，下一步就是重启vsftpd服务：<br>重启vsftpd服务<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">service vsftpd restart</span></span><br></pre></td></tr></table></figure></p>
+<p>讲解的不详细，配置文件里标明注意的选项是关键选项，一定要配置正确才可以。祝大家成功。</p>
+<blockquote>
+<p>本文转载自 <a href="http://www.while0.com/36.html" target="_blank" rel="noopener">http://www.while0.com/36.html</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Ubuntu/">Ubuntu</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://kuailelai.com/2015/01/13/ubuntu配置vsftp/" data-title="ubuntu配置vsftp | 一个程序员" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/01/14/Ubuntu14-10下Hadoop-的安装/" title="Ubuntu14.10下Hadoop 单机的安装">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Ubuntu14.10下Hadoop 单机的安装</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/01/12/Eclipse安装Freemarker插件/"  title="Eclipse安装Freemarker插件">
+ <strong>下一篇：</strong><br/> 
+ <span>Eclipse安装Freemarker插件
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/编程相关/" title="编程相关">编程相关<sup>5</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>17</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java开发/" title="Java开发">Java开发<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/fedora/" title="fedora">fedora<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日志/" title="日志">日志<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hbase/" title="hbase">hbase<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hive/" title="hive">hive<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 生当作人杰 <br/>
+			死亦为鬼雄</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1179900904" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="YuHaiTao">YuHaiTao</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

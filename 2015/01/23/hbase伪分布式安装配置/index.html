@@ -1,0 +1,526 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>hbase伪分布式安装配置 | 一个程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="YuHaiTao">
+    
+
+    
+    <meta name="description" content="hbase伪分布式安装配置 java版本：jdk1.7hadoop版本：2.6.0hbase版本：hbase-0.98.9-hadoop2  hbase-env.sh里的配置12345678# java安装路径export JAVA_HOME=/usr/app/java/# hadoop配置文件路径export HBASE_CLASSPATH=/home/yuhaitao/hadoop/etc/h">
+<meta name="keywords" content="hbase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hbase伪分布式安装配置">
+<meta property="og:url" content="http://kuailelai.com/2015/01/23/hbase伪分布式安装配置/index.html">
+<meta property="og:site_name" content="一个程序员">
+<meta property="og:description" content="hbase伪分布式安装配置 java版本：jdk1.7hadoop版本：2.6.0hbase版本：hbase-0.98.9-hadoop2  hbase-env.sh里的配置12345678# java安装路径export JAVA_HOME=/usr/app/java/# hadoop配置文件路径export HBASE_CLASSPATH=/home/yuhaitao/hadoop/etc/h">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2015-12-02T15:57:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hbase伪分布式安装配置">
+<meta name="twitter:description" content="hbase伪分布式安装配置 java版本：jdk1.7hadoop版本：2.6.0hbase版本：hbase-0.98.9-hadoop2  hbase-env.sh里的配置12345678# java安装路径export JAVA_HOME=/usr/app/java/# hadoop配置文件路径export HBASE_CLASSPATH=/home/yuhaitao/hadoop/etc/h">
+
+    
+    <link rel="alternative" href="/atom.xml" title="一个程序员" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="一个程序员" title="一个程序员"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一个程序员">一个程序员</a></h1>
+				<h2 class="blog-motto">程序员是值得尊敬的，程序员的双手是魔术师的双手。他们把枯燥无味的代码变成了丰富多彩的软件</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:kuailelai.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/23/hbase伪分布式安装配置/" title="hbase伪分布式安装配置" itemprop="url">hbase伪分布式安装配置</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="YuHaiTao" target="_blank" itemprop="author">YuHaiTao</a>
+		
+  <p class="article-time">
+    <time datetime="2015-01-23T09:43:00.000Z" itemprop="datePublished"> 发表于 2015-01-23</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hbase伪分布式安装配置"><span class="toc-number">1.</span> <span class="toc-text">hbase伪分布式安装配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hbase-env-sh里的配置"><span class="toc-number">1.1.</span> <span class="toc-text">hbase-env.sh里的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置hbase-site-xml"><span class="toc-number">1.2.</span> <span class="toc-text">配置hbase-site.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动hbase"><span class="toc-number">1.3.</span> <span class="toc-text">启动hbase</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#habse简单操作"><span class="toc-number">1.4.</span> <span class="toc-text">habse简单操作</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="hbase伪分布式安装配置"><a href="#hbase伪分布式安装配置" class="headerlink" title="hbase伪分布式安装配置"></a>hbase伪分布式安装配置</h2><blockquote>
+<p>java版本：jdk1.7<br>hadoop版本：2.6.0<br>hbase版本：hbase-0.98.9-hadoop2</p>
+</blockquote>
+<h3 id="hbase-env-sh里的配置"><a href="#hbase-env-sh里的配置" class="headerlink" title="hbase-env.sh里的配置"></a>hbase-env.sh里的配置</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># java安装路径</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/usr/app/java/</span><br><span class="line"></span><br><span class="line"><span class="comment"># hadoop配置文件路径</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HBASE_CLASSPATH</span>=/home/yuhaitao/hadoop/etc/hadoop/</span><br><span class="line"></span><br><span class="line"><span class="comment"># The maximum amount of heap to use, in MB. Default is 1000.</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HBASE_HEAPSIZE</span>=1000</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="配置hbase-site-xml"><a href="#配置hbase-site-xml" class="headerlink" title="配置hbase-site.xml"></a>配置hbase-site.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://localhost:9000/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>数据库文件路径</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>此参数指定Hlog和Hfile的副本个数，由于时伪分布式，所以只能时1个节点，不能大于1个节点</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>   </span><br><span class="line"><span class="comment">&lt;!-- hbase 的 tmp 目录 --&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span>   </span><br><span class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/yuhaitao/hadoop/hbase-tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span>     </span><br><span class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.master<span class="tag">&lt;/<span class="name">name</span>&gt;</span>   </span><br><span class="line">	<span class="tag">&lt;<span class="name">value</span>&gt;</span>localhost:60000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="启动hbase"><a href="#启动hbase" class="headerlink" title="启动hbase"></a>启动hbase</h3><ul>
+<li>先启动 hadoop ，然后启动habse<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">~/hadoop/sbin$ ./start-all.sh</span><br><span class="line">~/hadoop/hbase-hadoop2/bin$ ./start-hbase.sh</span><br><span class="line">jps</span><br><span class="line"><span class="number">13437</span> DataNode</span><br><span class="line"><span class="number">13662</span> SecondaryNameNode</span><br><span class="line"><span class="number">14488</span> Jps</span><br><span class="line"><span class="number">13953</span> NodeManager</span><br><span class="line"><span class="number">13821</span> ResourceManager</span><br><span class="line"><span class="number">14396</span> HMaster</span><br><span class="line"><span class="number">13301</span> NameNode</span><br><span class="line">#打开HBase命令行客户端访问Hbase</span><br><span class="line">bin/hbase shell</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>启动成功后可以打开web管理页面 <a href="http://localhost:60010/" target="_blank" rel="noopener">http://localhost:60010/</a></p>
+</blockquote>
+<h3 id="habse简单操作"><a href="#habse简单操作" class="headerlink" title="habse简单操作"></a>habse简单操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建一个新表student</span></span><br><span class="line">hbase(main):003:0&gt; create <span class="string">'student'</span>,<span class="string">'info'</span></span><br><span class="line">0 row(s) <span class="keyword">in</span> 1.2680 seconds</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看所有的表</span></span><br><span class="line">hbase(main):004:0&gt; list</span><br><span class="line">TABLE</span><br><span class="line">student</span><br><span class="line">1 row(s) <span class="keyword">in</span> 0.0330 seconds</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看student的表结构</span></span><br><span class="line">hbase(main):005:0&gt; describe <span class="string">'student'</span></span><br><span class="line">DESCRIPTION                                                 ENABLED</span><br><span class="line"> <span class="string">'student'</span>, &#123;NAME =&gt; <span class="string">'info'</span>, DATA_BLOCK_ENCODING =&gt; <span class="string">'NONE'</span>, <span class="literal">true</span></span><br><span class="line">  BLOOMFILTER =&gt; <span class="string">'NONE'</span>, REPLICATION_SCOPE =&gt; <span class="string">'0'</span>, VERSIONS</span><br><span class="line">  =&gt; <span class="string">'3'</span>, COMPRESSION =&gt; <span class="string">'NONE'</span>, MIN_VERSIONS =&gt; <span class="string">'0'</span>, TTL =</span><br><span class="line"> &gt; <span class="string">'2147483647'</span>, KEEP_DELETED_CELLS =&gt; <span class="string">'false'</span>, BLOCKSIZE =</span><br><span class="line"> &gt; <span class="string">'65536'</span>, IN_MEMORY =&gt; <span class="string">'false'</span>, ENCODE_ON_DISK =&gt; <span class="string">'true'</span>,</span><br><span class="line">  BLOCKCACHE =&gt; <span class="string">'true'</span>&#125;</span><br><span class="line">1 row(s) <span class="keyword">in</span> 0.1100 seconds</span><br><span class="line"></span><br><span class="line"><span class="comment">#同student表中插入一条数据</span></span><br><span class="line">hbase(main):007:0&gt; put <span class="string">'student'</span>,<span class="string">'mary'</span>,<span class="string">'info:age'</span>,<span class="string">'19'</span></span><br><span class="line">0 row(s) <span class="keyword">in</span> 0.0490 seconds</span><br><span class="line"></span><br><span class="line"><span class="comment">#从student表中取出mary的数据</span></span><br><span class="line">hbase(main):008:0&gt; get <span class="string">'student'</span>,<span class="string">'mary'</span></span><br><span class="line">COLUMN                   CELL</span><br><span class="line"> info:age                timestamp=1396366643298, value=19</span><br><span class="line">1 row(s) <span class="keyword">in</span> 0.0190 seconds</span><br><span class="line"></span><br><span class="line"><span class="comment">#让student表失效</span></span><br><span class="line">hbase(main):009:0&gt; <span class="built_in">disable</span> <span class="string">'student'</span></span><br><span class="line">0 row(s) <span class="keyword">in</span> 1.2400 seconds</span><br><span class="line"></span><br><span class="line"><span class="comment">#列出所有表</span></span><br><span class="line">hbase(main):010:0&gt; list</span><br><span class="line">TABLE</span><br><span class="line">student</span><br><span class="line">1 row(s) <span class="keyword">in</span> 0.0310 seconds</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除student表</span></span><br><span class="line">hbase(main):013:0&gt;  drop <span class="string">'student'</span></span><br><span class="line">0 row(s) <span class="keyword">in</span> 1.1100 seconds</span><br><span class="line"></span><br><span class="line"><span class="comment">#列出所有表</span></span><br><span class="line">hbase(main):014:0&gt; list</span><br><span class="line">TABLE</span><br><span class="line">0 row(s) <span class="keyword">in</span> 0.0400 seconds</span><br></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/hbase/">hbase</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://kuailelai.com/2015/01/23/hbase伪分布式安装配置/" data-title="hbase伪分布式安装配置 | 一个程序员" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/01/27/geeknote的使用/" title="geeknote的使用">
+  <strong>上一篇：</strong><br/>
+  <span>
+  geeknote的使用</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/01/22/hive与mysql的安装配置/"  title="hive与mysql的安装配置">
+ <strong>下一篇：</strong><br/> 
+ <span>hive与mysql的安装配置
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hbase伪分布式安装配置"><span class="toc-number">1.</span> <span class="toc-text">hbase伪分布式安装配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hbase-env-sh里的配置"><span class="toc-number">1.1.</span> <span class="toc-text">hbase-env.sh里的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置hbase-site-xml"><span class="toc-number">1.2.</span> <span class="toc-text">配置hbase-site.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动hbase"><span class="toc-number">1.3.</span> <span class="toc-text">启动hbase</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#habse简单操作"><span class="toc-number">1.4.</span> <span class="toc-text">habse简单操作</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/编程相关/" title="编程相关">编程相关<sup>5</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Ubuntu/" title="Ubuntu">Ubuntu<sup>17</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java开发/" title="Java开发">Java开发<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/fedora/" title="fedora">fedora<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日志/" title="日志">日志<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hbase/" title="hbase">hbase<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hive/" title="hive">hive<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 生当作人杰 <br/>
+			死亦为鬼雄</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1179900904" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="YuHaiTao">YuHaiTao</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
